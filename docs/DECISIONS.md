@@ -5,3 +5,6 @@
 - UI primitives share the design tokens from AGENTS.md.
 - next-intl reads NEXT_LOCALE without URL prefixes; all three dictionaries have identical keys.
 - Disable optional cacheComponents so cookie-based auth and locale remain request-scoped.
+- Restrict database column grants as well as RLS; clients cannot award points, rate answers or book slots directly.
+- Booking and one-time demo initialization use service-role-only transactions; explicit PUBLIC revokes close default function execution grants.
+- Seed IDs are stable for safe reruns; slots are relative to seed time. Demo history has an is_sample flag.
