@@ -6,8 +6,9 @@ export const DEFAULT_GEMINI_MODEL = "gemini-3.8-flash";
 // Judges may test at any moment, so a single overloaded model must not break
 // the tutor. Try the configured model first, then widely available fallbacks.
 export const FALLBACK_GEMINI_MODELS = [
-  "gemini-3.5-flash",
-  "gemini-2.5-flash",
+  "gemini-3.7-flash",
+  "gemini-3.6-flash",
+  "gemini-3.1-flash-lite",
 ] as const;
 function isRetryable(error: unknown) {
   const text = error instanceof Error ? error.message : String(error);
