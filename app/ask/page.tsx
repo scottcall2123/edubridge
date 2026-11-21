@@ -7,6 +7,8 @@ import { ownedQuestion } from "@/lib/questions";
 import { findSimilar } from "@/app/actions/questions";
 import { AskWizard } from "@/components/ask/AskWizard";
 import { SimilarQuestions } from "@/components/ask/SimilarQuestions";
+import {PhotoRetry} from '@/components/ask/PhotoRetry';
+import {QuestionImage} from '@/components/ask/QuestionImage';
 import type { Subject, Topic } from "@/lib/types";
 export async function generateMetadata() {
   return { title: (await getTranslations("nav"))("ask") };
@@ -14,10 +16,10 @@ export async function generateMetadata() {
 export default async function Ask({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string;imageError?:string }>;
 }) {
   const { user } = await requireUser(),
-    { q } = await searchParams;
+    { q,imageError } = await searchParams;
   if (q) {
     if (!z.uuid().safeParse(q).success) notFound();
     const question = await ownedQuestion(q, user.id).catch(() => null);
@@ -29,6 +31,8 @@ export default async function Ask({
       redirect(`/ask/success?q=${q}`);
     return (
       <main className="container max-w-3xl py-8">
+        {imageError&&!question.image_url&&<PhotoRetry questionId={q}/>}
+        <QuestionImage path={question.image_url} userId={user.id} questionId={q}/>
         <SimilarQuestions questionId={q} questions={await findSimilar(q)} />
       </main>
     );

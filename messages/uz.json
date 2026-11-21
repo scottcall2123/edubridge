@@ -138,7 +138,14 @@
     "saved": "Natija saqlandi",
     "savedText": "Tushunganingiz saqlandi, ballaringiz yangilandi.",
     "again": "Yana savol berish",
-    "toProfile": "Profilga o‘tish"
+    "toProfile": "Profilga o‘tish",
+    "image": "Rasm yuklash (ixtiyoriy)",
+    "imageHint": "JPG yoki PNG, ko‘pi bilan 5 MB. Rasm shaxsiy saqlanadi. AI uchun masala matnini ham yozing.",
+    "imageInvalid": "5 MB gacha bo‘lgan haqiqiy JPG yoki PNG rasmini tanlang.",
+    "imageUpload": "Savol saqlandi, lekin rasm yuklanmadi. Qayta yuklang yoki rasmsiz davom eting.",
+    "uploadImage": "Rasmni qayta yuklash",
+    "imageUnavailable": "Rasmni hozir ko‘rsatib bo‘lmadi. Sahifani yangilang.",
+    "imageAlt": "Savolga biriktirilgan rasm"
   },
   "tutor": {
     "understood": "Ha, tushundim",

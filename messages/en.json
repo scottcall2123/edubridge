@@ -138,7 +138,14 @@
     "saved": "Result saved",
     "savedText": "Your progress is saved and your points are updated.",
     "again": "Ask another question",
-    "toProfile": "Go to profile"
+    "toProfile": "Go to profile",
+    "image": "Upload an image (optional)",
+    "imageHint": "JPG or PNG, up to 5 MB. Your image is private. Also type the problem text for the AI.",
+    "imageInvalid": "Choose a valid JPG or PNG image up to 5 MB.",
+    "imageUpload": "Your question is saved, but the image upload failed. Retry or continue without it.",
+    "uploadImage": "Retry image upload",
+    "imageUnavailable": "Could not display the image. Please refresh the page.",
+    "imageAlt": "Image attached to your question"
   },
   "tutor": {
     "understood": "Yes, I understood",

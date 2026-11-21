@@ -8,6 +8,7 @@ import { ownedQuestion } from "@/lib/questions";
 import { createClient } from "@/lib/supabase/server";
 import { Card, Tag } from "@/components/ui";
 import { TutorChat } from "@/components/tutor/TutorChat";
+import {QuestionImage} from '@/components/ask/QuestionImage';
 import type { Locale } from "@/lib/i18n";
 import type { Subject, Topic, TutorMessage } from "@/lib/types";
 export async function generateMetadata() {
@@ -60,6 +61,7 @@ export default async function TutorPage({
         </div>
         <p className="whitespace-pre-wrap break-words">{q.text}</p>
       </Card>
+      <QuestionImage path={q.image_url} userId={user.id} questionId={q.id}/>
       <TutorChat
         key={q.id}
         questionId={q.id}

@@ -4,7 +4,7 @@ The code builds without keys, but real login needs your Supabase project. Never 
 
 ## Supabase
 
-**New for steps 11–12: run `supabase/migrations/005_forum.sql` once after your existing 001–004 migrations.** It adds public forum visibility plus atomic answer/rating/report functions. A separate private-image storage migration will be listed below when added. No existing migration or seed needs rerunning.
+**New for steps 11–12: run `supabase/migrations/005_forum.sql`, then `supabase/migrations/006_question_images.sql` once after your existing 001–004 migrations.** 005 adds public forum visibility plus atomic answer/rating/report functions. 006 creates/configures the PRIVATE `question-images` bucket (5 MB, JPEG/PNG) and owner-folder policies. No existing migration or seed needs rerunning. Registration and leaderboard require no extra SQL.
 
 **New for steps 8–10: run `supabase/migrations/004_booking.sql` once in Supabase SQL Editor.** It makes booking + question status + the +3 points award atomic and retry-safe. Steps 9 and 10 need no additional migration. Keep migrations 001–003 applied; do not rerun them on your deployed project. Future sample slots are now refreshed automatically by the app; no seed rerun is needed.
 

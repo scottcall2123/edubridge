@@ -4,6 +4,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Sigma, Atom, FlaskConical, ArrowLeft } from "lucide-react";
 import { createQuestion } from "@/app/actions/questions";
+import {uploadQuestionImage} from '@/lib/upload-image';
+import {MAX_IMAGE_BYTES} from '@/lib/image-input';
 import { Button, Card } from "@/components/ui";
 import type { Subject, Topic } from "@/lib/types";
 import type { Locale } from "@/lib/i18n";
@@ -42,6 +44,7 @@ export function AskWizard({
     [text, setText] = useState(""),
     [error, setError] = useState(""),
     [pending, start] = useTransition();
+  const [file,setFile]=useState<File|null>(null);
   const requestId = useRef("");
   const icons: Record<string, typeof Sigma> = {
     algebra: Sigma,
@@ -108,7 +111,7 @@ export function AskWizard({
                     isPublic:publicMode,
                   });
                   if (result.error) setError(result.error);
-                  else router.push(publicMode?`/forum/${result.questionId}`:`/ask?q=${result.questionId}`);
+                  else {let imageError=false;if(file&&!publicMode){try{await uploadQuestionImage(result.questionId!,file);}catch{imageError=true;}}router.push(publicMode?`/forum/${result.questionId}`:`/ask?q=${result.questionId}${imageError?'&imageError=1':''}`);}
                 } catch {
                   setError("save");
                 }
@@ -150,6 +153,7 @@ export function AskWizard({
               </p>
               <p className="mt-2 text-xs text-muted">{t(publicMode?"forum.publicNotice":"ask.private")}</p>
             </div>
+            {!publicMode&&<div className="space-y-2"><label htmlFor="question-image">{t('ask.image')}</label><input id="question-image" type="file" accept="image/jpeg,image/png" disabled={pending} onChange={e=>{const f=e.target.files?.[0]??null;if(f&&(f.size>MAX_IMAGE_BYTES||!['image/jpeg','image/png'].includes(f.type))){setError('imageInvalid');setFile(null);e.target.value='';}else{setFile(f);setError('');}}}/><p className="text-xs text-muted">{t('ask.imageHint')}</p></div>}
             {error && (
               <p role="alert" className="text-danger">
                 {t(`ask.${error}`)}
