@@ -92,6 +92,56 @@ export function ProgressRing({
     </svg>
   );
 }
+export function PageHeader({
+  eyebrow,
+  title,
+  subtitle,
+  action,
+}: {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  action?: ReactNode;
+}) {
+  return (
+    <header className="page-header">
+      <div>
+        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+        <h1>{title}</h1>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
+      {action}
+    </header>
+  );
+}
+export function StatTile({
+  icon,
+  figure,
+  label,
+  gold = false,
+  children,
+}: {
+  icon: ReactNode;
+  figure: ReactNode;
+  label: string;
+  gold?: boolean;
+  children?: ReactNode;
+}) {
+  return (
+    <Card className="space-y-3">
+      <div className="stat">
+        <span className={clsx("stat-icon", gold && "stat-icon-gold")}>
+          {icon}
+        </span>
+        <div className="min-w-0">
+          <p className="stat-figure">{figure}</p>
+          <p className="stat-label">{label}</p>
+        </div>
+      </div>
+      {children}
+    </Card>
+  );
+}
 export function Spinner({ label }: { label: string }) {
   return (
     <span role="status" className="inline-flex items-center gap-2">

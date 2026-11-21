@@ -85,11 +85,67 @@ h2 {
 .card {
   background: white;
   border: 1px solid var(--color-line);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 16px;
   box-shadow:
-    0 1px 2px #0a1a3f0a,
-    0 8px 24px #0a1a3f0f;
+    0 1px 1px #0a1a3f08,
+    0 6px 18px #0a1a3f0d;
+}
+/* A page starts with a heading on the page background, not inside a card, so
+   the eye reaches the content before it reaches a box. */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.page-header h1 {
+  margin: 4px 0 0;
+}
+.page-header p {
+  color: var(--color-muted);
+  margin: 6px 0 0;
+  max-width: 54ch;
+}
+/* Compact figures sit in one even row instead of tall ragged cards. */
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stat-figure {
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-muted);
+}
+.stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: var(--color-sky-50);
+  color: var(--color-royal);
+}
+.stat-icon-gold {
+  background: var(--color-gold-50);
+  color: var(--color-gold);
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 .button {
   display: inline-flex;
@@ -158,8 +214,11 @@ svg.lucide {
 }
 @media (min-width: 768px) {
   h1 {
-    font-size: 32px;
-    line-height: 40px;
+    font-size: 34px;
+    line-height: 42px;
+  }
+  .stat-figure {
+    font-size: 34px;
   }
   .card {
     padding: 24px;

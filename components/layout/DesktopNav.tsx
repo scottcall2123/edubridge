@@ -38,10 +38,13 @@ export function DesktopNav({ teacher }: { teacher?: boolean }) {
           aria-current={path.startsWith(href) ? "page" : undefined}
           className={`flex min-h-11 min-w-11 items-center justify-center rounded-lg px-2 text-sm ${path.startsWith(href) ? "bg-white/15" : "hover:bg-white/10"}`}
         >
-          <span className="xl:hidden">
+          <span className="lg:hidden">
             <Icon />
           </span>
-          <span className="hidden xl:inline">{t(key)}</span>
+          <span className="hidden items-center gap-2 lg:inline-flex">
+            <Icon />
+            {t(key)}
+          </span>
         </Link>
       ))}
     </nav>

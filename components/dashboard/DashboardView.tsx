@@ -2,6 +2,7 @@ import Link from "next/link";
 import {
   Flame,
   Star,
+  Target,
   MessageCircleQuestion,
   ArrowRight,
   History,
@@ -9,7 +10,7 @@ import {
 } from "lucide-react";
 import { getLocale, getTranslations, getFormatter } from "next-intl/server";
 import type { loadDashboard } from "@/lib/dashboard";
-import { Card, Tag, ProgressRing, Avatar } from "@/components/ui";
+import { Card, Tag, Avatar, PageHeader, StatTile } from "@/components/ui";
 export async function DashboardView({
   profile,
   recent,
@@ -21,32 +22,36 @@ export async function DashboardView({
     locale = await getLocale(),
     now = new Date();
   return (
-    <main className="container py-8">
-      <div className="grid gap-6 md:grid-cols-3">
-        <Card className="space-y-5 md:col-span-2">
-          <p className="eyebrow">{t("common.tagline")}</p>
-          <h1>
-            {t("dashboard.hello", { name: profile.full_name.split(" ")[0] })}
-          </h1>
-          <p className="text-muted">{t("dashboard.subtitle")}</p>
+    <main className="container space-y-8 py-8">
+      <PageHeader
+        eyebrow={t("common.tagline")}
+        title={t("dashboard.hello", {
+          name: profile.full_name.split(" ")[0],
+        })}
+        subtitle={t("dashboard.subtitle")}
+        action={
           <Link href="/ask" className="button button-primary">
             <MessageCircleQuestion />
             {t("nav.ask")}
           </Link>
-        </Card>
-        <Card className="space-y-3">
-          <Flame className="text-gold" />
-          <p className="text-4xl font-extrabold">{profile.streak_days}</p>
-          <h2>{t("dashboard.streak")}</h2>
-          {profile.is_demo && <Tag>{t("common.sample")}</Tag>}
+        }
+      />
+      <section className="grid gap-4 sm:grid-cols-3">
+        <StatTile
+          gold
+          icon={<Flame />}
+          figure={profile.streak_days}
+          label={t("dashboard.streak")}
+        >
           <p className="text-sm text-muted">{t("dashboard.streakHint")}</p>
-        </Card>
-        <Card className="space-y-3">
-          <Star className="text-gold" />
-          <p className="text-4xl font-extrabold">
-            {format.number(profile.points)}
-          </p>
-          <h2>{t("dashboard.points")}</h2>
+          {profile.is_demo && <Tag>{t("common.sample")}</Tag>}
+        </StatTile>
+        <StatTile
+          gold
+          icon={<Star />}
+          figure={format.number(profile.points)}
+          label={t("dashboard.points")}
+        >
           <Link
             href="/profile#points"
             className="inline-flex min-h-11 items-center gap-2 font-bold text-royal"
@@ -54,23 +59,20 @@ export async function DashboardView({
             <History />
             {t("dashboard.history")}
           </Link>
-        </Card>
-        <Card className="space-y-4">
-          <h2>{t("dashboard.goal")}</h2>
-          <ProgressRing
-            value={goalDone ? 1 : 0}
-            label={t("dashboard.goalLabel", { value: goalDone ? 1 : 0 })}
-          />
+        </StatTile>
+        <StatTile
+          icon={<Target />}
+          figure={t("dashboard.goalLabel", { value: goalDone ? 1 : 0 })}
+          label={t("dashboard.goal")}
+        >
           <p className="text-sm text-muted">{t("dashboard.goalText")}</p>
-        </Card>
-        <Card className="space-y-4">
-          <BookOpen />
-          <h2>{t("dashboard.lessons")}</h2>
-          <Tag>{t("common.soon")}</Tag>
-          <p className="text-sm text-muted">{t("dashboard.lessonsText")}</p>
-        </Card>
-        <Card className="space-y-5 md:col-span-2">
-          <h2>{t("dashboard.activity")}</h2>
+        </StatTile>
+      </section>
+      <div className="grid gap-6 lg:grid-cols-3">
+        <Card className="lg:col-span-2">
+          <div className="section-title">
+            <h2>{t("dashboard.activity")}</h2>
+          </div>
           {recent.length ? (
             <ul className="divide-y divide-line">
               {recent.map((e) => (
@@ -103,8 +105,17 @@ export async function DashboardView({
             <p className="text-muted">{t("dashboard.noActivity")}</p>
           )}
         </Card>
-        <Card className="space-y-4">
-          <h2>{t("dashboard.top5")}</h2>
+        <Card>
+          <div className="section-title">
+            <h2>{t("dashboard.top5")}</h2>
+            <Link
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-royal"
+              href="/leaderboard"
+            >
+              {t("nav.leaderboard")}
+              <ArrowRight />
+            </Link>
+          </div>
           {leaders.length ? (
             <ol className="space-y-4">
               {leaders.map((p, i) => (
@@ -131,20 +142,23 @@ export async function DashboardView({
           ) : (
             <p>{t("dashboard.noLeaders")}</p>
           )}
-          <Link
-            className="inline-flex min-h-11 items-center gap-2 font-bold text-royal"
-            href="/leaderboard"
-          >
-            {t("nav.leaderboard")}
-            <ArrowRight />
-          </Link>
         </Card>
-        <Card className="md:col-span-3">
+        <Card className="flex items-start gap-4 lg:col-span-2">
+          <span className="stat-icon">
+            <BookOpen />
+          </span>
+          <div className="space-y-2">
+            <h2>{t("dashboard.lessons")}</h2>
+            <Tag>{t("common.soon")}</Tag>
+            <p className="text-sm text-muted">{t("dashboard.lessonsText")}</p>
+          </div>
+        </Card>
+        <Card>
           <details>
-            <summary className="min-h-11 cursor-pointer text-lg font-bold">
+            <summary className="min-h-11 cursor-pointer font-bold">
               {t("dashboard.rules")}
             </summary>
-            <ul className="mt-4 grid gap-3 text-sm text-muted md:grid-cols-2">
+            <ul className="mt-4 grid gap-3 text-sm text-muted">
               {[
                 "daily_visit",
                 "question_asked",
