@@ -62,7 +62,7 @@ export async function DashboardView({
         </StatTile>
         <StatTile
           icon={<Target />}
-          figure={t("dashboard.goalLabel", { value: goalDone ? 1 : 0 })}
+          figure={`${goalDone ? 1 : 0}/1`}
           label={t("dashboard.goal")}
         >
           <p className="text-sm text-muted">{t("dashboard.goalText")}</p>
@@ -109,10 +109,10 @@ export async function DashboardView({
           <div className="section-title">
             <h2>{t("dashboard.top5")}</h2>
             <Link
-              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-royal"
+              className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-bold text-royal"
               href="/leaderboard"
+              aria-label={t("nav.leaderboard")}
             >
-              {t("nav.leaderboard")}
               <ArrowRight />
             </Link>
           </div>
