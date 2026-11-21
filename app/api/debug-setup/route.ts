@@ -1,37 +1,103 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient } from "@/lib/supabase/server";
 
 // TEMPORARY diagnostic route. Delete after setup is verified.
 export const dynamic = "force-dynamic";
 
+function describe(v: string | undefined) {
+  if (!v) return "missing";
+  return { length: v.length, trimmedLength: v.trim().length };
+}
+
 export async function GET() {
-  const env = {
-    NEXT_PUBLIC_SUPABASE_URL: Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL),
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: Boolean(
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    ),
-    SUPABASE_SERVICE_ROLE_KEY: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
-    DEMO_EMAIL: Boolean(process.env.DEMO_EMAIL),
-    DEMO_PASSWORD: Boolean(process.env.DEMO_PASSWORD),
-    GEMINI_API_KEY: Boolean(process.env.GEMINI_API_KEY),
+  const out: Record<string, unknown> = {
+    demoEmail: describe(process.env.DEMO_EMAIL),
+    demoEmailValue: process.env.DEMO_EMAIL ?? null,
+    demoPassword: describe(process.env.DEMO_PASSWORD),
+    supabaseUrl: describe(process.env.NEXT_PUBLIC_SUPABASE_URL),
+    anonKey: describe(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
+    serviceKey: describe(process.env.SUPABASE_SERVICE_ROLE_KEY),
   };
-  let adminCheck = "not-run";
+
+  const email = (process.env.DEMO_EMAIL ?? "").trim();
+  const password = (process.env.DEMO_PASSWORD ?? "").trim();
+
+  let userId: string | undefined;
   try {
     const admin = createAdminClient();
-    const { error } = await admin.auth.admin.listUsers({ page: 1, perPage: 1 });
-    adminCheck = error ? `error: ${error.message}` : "ok";
+    const { data, error } = await admin.auth.admin.listUsers({
+      page: 1,
+      perPage: 1000,
+    });
+    if (error) out.listUsers = `error: ${error.message}`;
+    else {
+      out.listUsers = `ok: ${data.users.length} users`;
+      userId = data.users.find(
+        (u) => u.email?.toLowerCase() === email.toLowerCase(),
+      )?.id;
+      out.demoUserExists = Boolean(userId);
+    }
   } catch (e) {
-    adminCheck = `threw: ${e instanceof Error ? e.message : String(e)}`;
+    out.listUsers = `threw: ${e instanceof Error ? e.message : String(e)}`;
   }
-  let dbCheck = "not-run";
+
+  if (!userId) {
+    try {
+      const admin = createAdminClient();
+      const { data, error } = await admin.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+      });
+      if (error)
+        out.createUser = `error(${error.code ?? "?"}): ${error.message}`;
+      else {
+        out.createUser = "ok";
+        userId = data.user.id;
+      }
+    } catch (e) {
+      out.createUser = `threw: ${e instanceof Error ? e.message : String(e)}`;
+    }
+  }
+
+  if (userId) {
+    try {
+      const admin = createAdminClient();
+      const { error } = await admin.from("profiles").upsert(
+        {
+          id: userId,
+          full_name: "Aziza Karimova",
+          grade: 8,
+          school: "12-maktab",
+          district: "Farg‘ona sh.",
+          is_demo: true,
+        },
+        { onConflict: "id", ignoreDuplicates: true },
+      );
+      out.profileUpsert = error ? `error: ${error.message}` : "ok";
+    } catch (e) {
+      out.profileUpsert = `threw: ${e instanceof Error ? e.message : String(e)}`;
+    }
+    try {
+      const admin = createAdminClient();
+      const { error } = await admin.rpc("initialize_demo", { p_user: userId });
+      out.initializeDemo = error ? `error: ${error.message}` : "ok";
+    } catch (e) {
+      out.initializeDemo = `threw: ${e instanceof Error ? e.message : String(e)}`;
+    }
+  }
+
   try {
-    const admin = createAdminClient();
-    const { error, count } = await admin
-      .from("subjects")
-      .select("id", { count: "exact", head: true });
-    dbCheck = error ? `error: ${error.message}` : `ok: ${count} subjects`;
+    const supabase = await createClient();
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    out.signIn = error ? `error(${error.code ?? "?"}): ${error.message}` : "ok";
   } catch (e) {
-    dbCheck = `threw: ${e instanceof Error ? e.message : String(e)}`;
+    out.signIn = `threw: ${e instanceof Error ? e.message : String(e)}`;
   }
-  return NextResponse.json({ env, adminCheck, dbCheck });
+
+  return NextResponse.json(out);
 }
