@@ -1,5 +1,8 @@
 # Decisions
 
+- Step 6: question creation, its +2 award, and profile totals share one transaction; a stable request UUID makes retries idempotent. Solves compare open status in the same transaction as the award.
+- Similar answers are loaded through user-scoped RLS, sorted by stars then newest. The helped action accepts only an answer returned by that question’s similar search.
+
 - Step 5: lib/points.ts owns all point and Tashkent date/streak rules; commit_progress locks the profile and uses an expected snapshot to retry concurrent updates without lost points or duplicate daily awards.
 - Ask-flow questions are private by default, so solving homework does not publish student text automatically.
 
