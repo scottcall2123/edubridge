@@ -1,5 +1,9 @@
 # Decisions
 
+- Step 8: migration 004 retains book_slot and wraps it in a profile-locked transaction with the booking points from lib/points.ts; retrying the same user/slot/question returns the saved booking without another award.
+- Future slots are generated relative to Asia/Tashkent at 09:00, 14:00, 17:00 and inserted only until each teacher has three future free slots. Unique teacher/time keys handle concurrent refreshes.
+- Booking links preserve the originating question; both application checks and SQL enforce ownership and matching teacher subject. Payment/offline-course requests are explicitly simulated; meeting text is not a link.
+
 - Next dev automatically appends its framework guidance block to AGENTS.md; retained it and consulted the installed Next.js guides for server mutations, fetching and route handlers.
 
 - Step 7: use the official @google/genai SDK on the server, with gemini-3.8-flash as the env-overridable default, checked at https://ai.google.dev/gemini-api/docs/models and https://ai.google.dev/gemini-api/docs/pricing.

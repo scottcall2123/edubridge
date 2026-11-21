@@ -115,12 +115,36 @@
   },
   "teachers": {
     "title": "Teachers in Fergana",
-    "connect": "Connect online"
+    "connect": "Connect online",
+    "all": "All",
+    "notice": "Sample data: teachers, ratings and prices are examples for this MVP.",
+    "price": "{price} UZS / 15 minutes",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "timezone": "Times: Uzbekistan time (UTC+5)",
+    "noSlots": "No free slots right now. Please check again later.",
+    "empty": "No teachers for this subject yet.",
+    "center": "Offline center: {name}",
+    "slots": "Choose a lesson time",
+    "back": "Back to teachers",
+    "rating": "Rating: {rating} / 5"
   },
   "booking": {
     "pay": "Confirm payment (simulated)",
     "done": "Booked!",
-    "offline": "Join the teacher’s offline course"
+    "offline": "Join the teacher’s offline course",
+    "summary": "Lesson summary",
+    "paymentTitle": "Simulated payment",
+    "notice": "This is an MVP: no real payment is made.",
+    "duration": "15 minutes",
+    "meeting": "Meeting link: (sample)",
+    "offlineSent": "Your request was sent (simulated)",
+    "slotTaken": "This slot was just taken. Choose another time.",
+    "invalidQuestion": "The question does not match this teacher or is already closed. Try another question.",
+    "save": "Could not save your booking. Please try again.",
+    "back": "Change time",
+    "confirmed": "Confirmed",
+    "cancelled": "Cancelled"
   },
   "profile": {
     "title": "Profile"

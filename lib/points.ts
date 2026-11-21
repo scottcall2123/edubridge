@@ -150,3 +150,15 @@ export async function touchStreak(userId: string) {
     events: [],
   }));
 }
+
+export async function bookWithPoints(userId:string,slotId:string,questionId?:string){
+ const admin=createAdminClient();
+ for(let attempt=0;attempt<8;attempt++){
+  const {data,error}=await admin.from('profiles').select('points,streak_days,last_streak_date,last_visit_date').eq('id',userId).single();if(error||!data)throw new Error('Progress unavailable');
+  const expected=progressOf(data),next={...expected,points:expected.points+POINTS.booking_made};
+  const result=await admin.rpc('book_slot_with_points',{p_slot:slotId,p_user:userId,p_question:questionId??null,p_expected:expected,p_next:next,p_points:POINTS.booking_made});
+  if(result.error){if(result.error.message.includes('SLOT_TAKEN'))throw new Error('slotTaken');if(result.error.message.includes('INVALID_QUESTION'))throw new Error('invalidQuestion');throw new Error('save');}
+  if(result.data.state==='conflict')continue;return result.data.booking_id as string;
+ }
+ throw new Error('save');
+}

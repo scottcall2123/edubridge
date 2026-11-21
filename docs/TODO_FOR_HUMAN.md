@@ -4,6 +4,8 @@ The code builds without keys, but real login needs your Supabase project. Never 
 
 ## Supabase
 
+**New for steps 8–10: run `supabase/migrations/004_booking.sql` once in Supabase SQL Editor.** It makes booking + question status + the +3 points award atomic and retry-safe. Steps 9 and 10 need no additional migration. Keep migrations 001–003 applied; do not rerun them on your deployed project. Future sample slots are now refreshed automatically by the app; no seed rerun is needed.
+
 For an existing steps 1–4 project: run `supabase/migrations/002_progress.sql`, then `supabase/migrations/003_tutor.sql` in SQL Editor. These enable atomic points/question saves and the tutor’s daily limit/retry protection. Do not rerun 001 on an existing database.
 
 1. Open https://supabase.com and sign in with GitHub. Create project `edubridge` in Singapore. Save the database password privately.

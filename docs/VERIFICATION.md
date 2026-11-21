@@ -1,5 +1,9 @@
 # Verification — steps 1–7
 
+## Step 8
+
+Build, lint and 12 tests passed. Migration 004 ran successfully in local PostgreSQL 17. Transaction checks passed: saved booking and +3 once on retries, question status saved, second user cannot take the slot, foreign/mismatched questions rejected, past slots rejected, failed writes rolled back and booking RLS isolates users. Slot tests cover Tashkent day boundaries, future-only times and labels. Live Supabase keys are not available in this workspace.
+
 ## Step 7
 
 Production build, lint and all 9 automated tests passed. Tutor tests cover request validation, question validation, last-12-turn context, trusted action markers, prompt requirements and exactly one localized final check question with a 120-word cap.

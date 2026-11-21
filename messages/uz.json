@@ -115,12 +115,36 @@
   },
   "teachers": {
     "title": "Farg‘onadagi ustozlar",
-    "connect": "Onlayn bog‘lanish"
+    "connect": "Onlayn bog‘lanish",
+    "all": "Barchasi",
+    "notice": "Namunaviy ma’lumot: ustozlar, reytinglar va narxlar MVP uchun namunaviy.",
+    "price": "{price} so‘m / 15 daqiqa",
+    "today": "Bugun",
+    "tomorrow": "Ertaga",
+    "timezone": "Vaqtlar: O‘zbekiston vaqti (UTC+5)",
+    "noSlots": "Hozircha bo‘sh vaqt yo‘q. Keyinroq qayta tekshiring.",
+    "empty": "Bu fan bo‘yicha ustozlar hozircha yo‘q.",
+    "center": "Oflayn markaz: {name}",
+    "slots": "Dars vaqtini tanlang",
+    "back": "Ustozlarga qaytish",
+    "rating": "Reyting: {rating} / 5"
   },
   "booking": {
     "pay": "To‘lovni tasdiqlash (simulyatsiya)",
     "done": "Band qilindi!",
-    "offline": "Ustozning oflayn kurslariga yozilish"
+    "offline": "Ustozning oflayn kurslariga yozilish",
+    "summary": "Dars haqida",
+    "paymentTitle": "Namunaviy to‘lov",
+    "notice": "Bu MVP: haqiqiy to‘lov amalga oshirilmaydi.",
+    "duration": "15 daqiqa",
+    "meeting": "Uchrashuv havolasi: (namunaviy)",
+    "offlineSent": "So‘rovingiz yuborildi (simulyatsiya)",
+    "slotTaken": "Bu vaqt hozirgina band qilindi. Boshqa vaqtni tanlang.",
+    "invalidQuestion": "Savol bu ustozga mos emas yoki allaqachon yopilgan. Boshqa savol bilan qayta urinib ko‘ring.",
+    "save": "Bandlov saqlanmadi. Qayta urinib ko‘ring.",
+    "back": "Vaqtni o‘zgartirish",
+    "confirmed": "Tasdiqlangan",
+    "cancelled": "Bekor qilingan"
   },
   "profile": {
     "title": "Profil"
