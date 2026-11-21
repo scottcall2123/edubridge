@@ -1,0 +1,101 @@
+{
+  "common": {
+    "tagline": "Bridge to knowledge",
+    "demoLogin": "Log in with demo",
+    "register": "Sign up",
+    "login": "Log in",
+    "logout": "Log out",
+    "sample": "Sample",
+    "simulated": "Simulated",
+    "loading": "Loading…",
+    "soon": "Coming soon",
+    "back": "Go home",
+    "language": "Language",
+    "continue": "Continue"
+  },
+  "nav": {
+    "home": "Home",
+    "ask": "Ask a question",
+    "teachers": "Teachers",
+    "profile": "Profile",
+    "leaderboard": "Leaderboard",
+    "forum": "Forum",
+    "question": "Question",
+    "menu": "User menu"
+  },
+  "landing": {
+    "title": "Hard topics are no longer a barrier",
+    "subtitle": "For students in Fergana: learn from peers, work step by step with AI Ustoz, then connect with a teacher if needed. Understand instead of copying.",
+    "team": "UzHack 2026 · Team Renessans",
+    "notice": "MVP with sample data",
+    "privacy": "Your data is used only for learning.",
+    "step1": "Step by step",
+    "step2": "AI Ustoz",
+    "step3": "Live teachers",
+    "free": "Free",
+    "last": "Final step"
+  },
+  "auth": {
+    "title": "Log in",
+    "demoTitle": "Demo account for judges",
+    "email": "Email",
+    "password": "Password",
+    "welcome": "Welcome to your account",
+    "setup": "Set up Supabase to enable login.",
+    "sampleHistory": "The demo account’s past activity is sample data.",
+    "signedIn": "You are signed in.",
+    "next": "This page will be built in the next steps."
+  },
+  "dashboard": {
+    "hello": "Hello, {name}!",
+    "streak": "day streak",
+    "points": "points",
+    "goal": "Today’s goal"
+  },
+  "ask": {
+    "chooseSubject": "Choose a subject",
+    "writeQuestion": "Write your question",
+    "similar": "Similar questions — step by step",
+    "helped": "This helped me",
+    "toAi": "Work with AI Ustoz"
+  },
+  "tutor": {
+    "understood": "Yes, I understood",
+    "simpler": "No, explain more simply",
+    "solved": "Problem solved",
+    "banner": "Still stuck? Connect with teachers in Fergana",
+    "busy": "AI Ustoz is busy. Please try again in a minute."
+  },
+  "teachers": {
+    "title": "Teachers in Fergana",
+    "connect": "Connect online"
+  },
+  "booking": {
+    "pay": "Confirm payment (simulated)",
+    "done": "Booked!",
+    "offline": "Join the teacher’s offline course"
+  },
+  "profile": {
+    "title": "Profile"
+  },
+  "forum": {
+    "title": "Forum"
+  },
+  "leaderboard": {
+    "title": "Fergana Top 100 students"
+  },
+  "errors": {
+    "invalid": "Check your email and password.",
+    "login": "Login failed. Check your email and password and try again.",
+    "setup": "The service is not configured yet. Please try again later.",
+    "general": "Something went wrong. Please try again.",
+    "retry": "Try again"
+  },
+  "tags": {
+    "sample": "Sample",
+    "simulated": "Simulated"
+  },
+  "success": {
+    "points": "Well done! +{n} points"
+  }
+}

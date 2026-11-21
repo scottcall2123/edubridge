@@ -1,0 +1,4 @@
+import Link from 'next/link';
+import {getTranslations} from 'next-intl/server';
+import {Avatar} from '@/components/ui';
+export async function UserMenu({name,logout}:{name?:string;logout?:()=>Promise<void>}) {const t=await getTranslations();return name?<details className="relative"><summary aria-label={t('nav.menu')} className="cursor-pointer list-none rounded-full p-1"><Avatar name={name}/></summary><div className="absolute right-0 z-30 mt-3 w-48 rounded-xl border border-line bg-white p-2 text-navy shadow-lg"><Link className="block rounded-lg p-3" href="/profile">{t('nav.profile')}</Link>{logout&&<form action={logout}><button className="w-full rounded-lg p-3 text-left">{t('common.logout')}</button></form>}</div></details>:<Link className="hidden min-h-11 items-center px-3 text-sm font-bold sm:inline-flex" href="/login">{t('common.login')}</Link>;}
