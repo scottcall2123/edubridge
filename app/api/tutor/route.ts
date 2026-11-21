@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { ownedQuestion } from "@/lib/questions";
-import { tutorInput, tutorContents } from "@/lib/tutor";
+import { tutorInput, tutorContents, loadQuestionImage } from "@/lib/tutor";
 import { generateTutorReply } from "@/lib/gemini";
 import type { Subject, Topic, TutorMessage } from "@/lib/types";
 export const runtime = "nodejs";
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ reply, ...saved });
     }
     reserved = true;
-    const [s, tp, profile, history] = await Promise.all([
+    const [s, tp, profile, history, image] = await Promise.all([
       client
         .from("subjects")
         .select("*")
@@ -125,6 +125,7 @@ export async function POST(request: NextRequest) {
         : Promise.resolve({ data: null, error: null }),
       client.from("profiles").select("grade").eq("id", user.id).single(),
       snapshot(),
+      loadQuestionImage(question.image_url),
     ]);
     if (s.error || tp.error || profile.error)
       throw new Error("Context unavailable");
@@ -135,7 +136,13 @@ export async function POST(request: NextRequest) {
       subject,
       topic,
       grade: profile.data!.grade,
-      contents: tutorContents(question, history.messages, subject, topic),
+      contents: tutorContents(
+        question,
+        history.messages,
+        subject,
+        topic,
+        image,
+      ),
     });
     const saved = await admin.rpc("finish_tutor_turn", {
       p_request: requestId,
