@@ -12,14 +12,20 @@ Supabase URL and anon key are public. Service-role key, Gemini key and demo pass
 
 ## Status
 
-Steps 1–4 are implemented: scaffold and shared UI, responsive navigation, UZ/EN/RU cookie-based languages, full database schema and seed files, email/password login, one-click demo login, logout and protected routes.
+Steps 1–7 are implemented: shared UI, UZ/EN/RU languages, Supabase schema/auth/demo login, dashboard with points and streaks, ask wizard with similar worked answers, and Gemini-powered AI Ustoz.
 
-The dashboard is an authenticated welcome page for now. Learning, points logic, tutor, booking, profile and registration features are later steps; unfinished pages show a coming-soon card.
+The learning paths save questions, chat history, counters, points and solved results. AI Ustoz works one step at a time, supports simpler explanations, unlocks the teacher option after two simpler requests and limits each student to 30 AI replies per Tashkent day. Teachers/booking, the full profile and registration are later steps and still show coming-soon cards.
 
 ## Database and hosting
 
-Follow [docs/TODO_FOR_HUMAN.md](docs/TODO_FOR_HUMAN.md). Run `supabase/migrations/001_init.sql` once on a new Supabase project, then `supabase/seed.sql`. The seed is safe to rerun. Demo user creation and sample history happen on first demo login and are never reset automatically.
+Follow [docs/TODO_FOR_HUMAN.md](docs/TODO_FOR_HUMAN.md). On a new project run migrations `001_init.sql`, `002_progress.sql`, `003_tutor.sql` in order, then `supabase/seed.sql`. On an existing steps 1–4 project apply only the new migrations 002 and 003. The seed is safe to rerun. Demo history is initialized once and never reset automatically.
 
 No project secrets were provided, so hosted Supabase authentication has not been tested. Local PostgreSQL schema/seed checks and build results are recorded in docs/VERIFICATION.md. Next.js supports the requested middleware.ts file but reports a deprecation warning in favor of proxy.ts; the spec filename is retained.
 
-Steps 5–6 are complete: the dashboard uses saved data and atomic daily points; `/ask` is a three-step wizard with saved questions, similar worked answers and a saved +5 success result. Apply migration 002 before using them. Run `npm test` for Tashkent date and streak tests. Next: section 19 step 7, AI Ustoz.
+## AI setup and verification
+
+Set server-only `GEMINI_API_KEY` from Google AI Studio. `GEMINI_MODEL` defaults to `gemini-3.8-flash`, checked against Google’s official model/pricing documentation. It can be overridden without code changes. No model call runs during build; missing keys produce the friendly busy state at runtime.
+
+Run `npm test` for date/streak, input, history and tutor-prompt checks. Local PostgreSQL tests also exercised transaction idempotency, retry counters and the daily cap. Screen fixtures were tested at 375/768/1280 with synthetic tutor responses; fixtures are not included in production. Live Supabase/Gemini integration still requires your keys; see docs/VERIFICATION.md.
+
+Next: section 19 step 8, teachers and booking, then step 9, the full saved-results profile.

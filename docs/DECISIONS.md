@@ -1,5 +1,12 @@
 # Decisions
 
+- Next dev automatically appends its framework guidance block to AGENTS.md; retained it and consulted the installed Next.js guides for server mutations, fetching and route handlers.
+
+- Step 7: use the official @google/genai SDK on the server, with gemini-3.8-flash as the env-overridable default, checked at https://ai.google.dev/gemini-api/docs/models and https://ai.google.dev/gemini-api/docs/pricing.
+- Tutor turns reserve a per-user database lease and durable request ID. Retries reuse saved student turns/counters and completed replies; parallel tabs cannot bypass the 30-reply daily cap.
+- Failed model calls keep the student turn but release the lease. No fabricated tutor answer is returned; the localized busy state offers retry and a teacher link.
+- Keep the exact Socratic prompt and enforce a single localized final check question and short output in code. Real model behavior still requires live-key acceptance tests.
+
 - Step 6: question creation, its +2 award, and profile totals share one transaction; a stable request UUID makes retries idempotent. Solves compare open status in the same transaction as the award.
 - Similar answers are loaded through user-scoped RLS, sorted by stars then newest. The helped action accepts only an answer returned by that question’s similar search.
 

@@ -100,7 +100,18 @@
     "simpler": "Yo‘q, soddaroq tushuntiring",
     "solved": "Masala hal bo‘ldi",
     "banner": "Hali ham tushunmadingizmi? Farg‘onadagi ustozlarga ulanish",
-    "busy": "AI Ustoz hozir band. Bir daqiqadan so‘ng qayta urinib ko‘ring."
+    "busy": "AI Ustoz hozir band. Bir daqiqadan so‘ng qayta urinib ko‘ring.",
+    "title": "AI Ustoz",
+    "history": "Suhbat tarixi",
+    "you": "Siz",
+    "thinking": "AI Ustoz o‘ylamoqda…",
+    "replyLabel": "Javobingiz yoki savolingiz",
+    "placeholder": "Javobingiz yoki savolingiz…",
+    "send": "Yuborish",
+    "limit": "Bugungi AI limitiga yetdingiz. Ertaga davom eting yoki ustoz bilan bog‘laning.",
+    "closed": "Bu savol bo‘yicha natija allaqachon saqlangan.",
+    "save": "Natija saqlanmadi. Qayta urinib ko‘ring.",
+    "refresh": "Natijani yangilash"
   },
   "teachers": {
     "title": "Farg‘onadagi ustozlar",

@@ -1,4 +1,14 @@
-# Verification — steps 1–4
+# Verification — steps 1–7
+
+## Step 7
+
+Production build, lint and all 9 automated tests passed. Tutor tests cover request validation, question validation, last-12-turn context, trusted action markers, prompt requirements and exactly one localized final check question with a 120-word cap.
+
+Migration 003 executed successfully against local PostgreSQL 17. SQL checks passed for per-user parallel-request exclusion, repeat-start deduplication, idempotent completion, failed-request retry without duplicate messages/counters, two simpler requests, understood counts, a hard 30-AI-reply limit and service-only function permissions.
+
+Headless Chromium checked actual dashboard/ask/similar/tutor components through temporary local fixtures at 375/768/1280. Checked subject/topic selection, automatic tutor start, two-simpler banner and preserved subject/question link, understood enabling solve, retry reusing its request ID, and limit UI. The real unconfigured API returned 401. No uncaught browser errors. Mobile screenshots reviewed. Fixtures used synthetic responses, were removed before the final build, and do not substitute for live integration tests.
+
+No Supabase or Gemini keys were available. Real model quality (including refusal to reveal final answers), hosted auth/session behavior and the entire live saved-data flow require the acceptance steps in TODO_FOR_HUMAN.md.
 
 ## Step 5
 

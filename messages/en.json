@@ -100,7 +100,18 @@
     "simpler": "No, explain more simply",
     "solved": "Problem solved",
     "banner": "Still stuck? Connect with teachers in Fergana",
-    "busy": "AI Ustoz is busy. Please try again in a minute."
+    "busy": "AI Ustoz is busy. Please try again in a minute.",
+    "title": "AI Ustoz",
+    "history": "Chat history",
+    "you": "You",
+    "thinking": "AI Ustoz is thinking…",
+    "replyLabel": "Your answer or question",
+    "placeholder": "Your answer or question…",
+    "send": "Send",
+    "limit": "You reached today’s AI limit. Continue tomorrow or connect with a teacher.",
+    "closed": "This question’s result has already been saved.",
+    "save": "Could not save your result. Please try again.",
+    "refresh": "Refresh result"
   },
   "teachers": {
     "title": "Teachers in Fergana",

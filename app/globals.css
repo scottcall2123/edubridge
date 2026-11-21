@@ -1,4 +1,9 @@
 @import "tailwindcss";
+
+@keyframes chat-appear {from {opacity:0;transform:translateY(4px)} to {opacity:1;transform:translateY(0)}}
+@keyframes points-rise {from {opacity:0;transform:translateY(10px)} to {opacity:1;transform:translateY(0)}}
+.chat-message {animation:chat-appear 150ms ease-out;}
+.earned-points {animation:points-rise 500ms ease-out;}
 @theme inline {
   --font-sans: var(--font-manrope);
   --color-navy: #0a1a3f;
