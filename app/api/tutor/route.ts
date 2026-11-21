@@ -144,13 +144,25 @@ export async function POST(request: NextRequest) {
     });
     if (saved.error) throw new Error("Reply could not be saved");
     return NextResponse.json({ reply, ...(await snapshot()) });
-  } catch {
+  } catch (debugError) {
     if (reserved)
       await admin.rpc("release_tutor_turn", {
         p_request: requestId,
         p_user: user.id,
       });
     const saved = await snapshot().catch(() => ({}));
-    return NextResponse.json({ error: "busy", ...saved }, { status: 503 });
+    return NextResponse.json(
+      {
+        error: "busy",
+        // TEMPORARY: remove before submission.
+        debugDetail: (debugError instanceof Error
+          ? debugError.message
+          : String(debugError)
+        ).slice(0, 300),
+        debugReserved: reserved,
+        ...saved,
+      },
+      { status: 503 },
+    );
   }
 }
