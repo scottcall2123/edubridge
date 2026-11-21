@@ -55,9 +55,11 @@ export async function loadTeachers(): Promise<{
   teachers: TeacherWithSlots[];
   subjects: Subject[];
 }> {
-  await ensureFutureSlots();
   const client = await createClient();
-  const [teachers, subjects, slots] = await Promise.all([
+  // The top-up runs beside the reads rather than before them, so a visitor
+  // waits for the slowest query instead of the sum of all of them.
+  const [, teachers, subjects, slots] = await Promise.all([
+    ensureFutureSlots(),
     client.from("teachers").select("*").order("rating", { ascending: false }),
     client.from("subjects").select("*").order("sort"),
     client
