@@ -20,11 +20,11 @@ import { Footer } from "@/components/layout/Footer";
 import { demoLogin } from "@/app/actions/auth";
 import { DemoButton } from "@/components/auth/DemoButton";
 import { Card } from "@/components/ui";
-async function StartAction({ signedIn }: { signedIn: boolean }) {
+async function StartAction({ home }: { home?: "/dashboard" | "/teacher" }) {
   const t = await getTranslations();
-  return signedIn ? (
-    <Link href="/dashboard" className="button button-primary">
-      {t("landing.dashboard")}
+  return home ? (
+    <Link href={home} className="button button-primary">
+      {t(home === "/teacher" ? "nav.teacherHome" : "landing.dashboard")}
       <ArrowRight />
     </Link>
   ) : (
@@ -40,6 +40,7 @@ export async function generateMetadata() {
 export default async function Home() {
   const t = await getTranslations(),
     current = await getCurrentUser();
+  const home = current?.teacher ? "/teacher" : current ? "/dashboard" : undefined;
   const problems = [
       { key: "class", Icon: School },
       { key: "groups", Icon: MessagesSquare },
@@ -63,7 +64,7 @@ export default async function Home() {
               <h1 className="max-w-lg">{t("landing.title")}</h1>
               <p className="max-w-xl text-muted">{t("landing.subtitle")}</p>
               <div className="flex flex-wrap gap-3">
-                <StartAction signedIn={Boolean(current)} />
+                <StartAction home={home} />
                 <Link href="/register" className="button button-secondary">
                   {t("common.register")}
                 </Link>
@@ -192,7 +193,7 @@ export default async function Home() {
               {t("landing.finalText")}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <StartAction signedIn={Boolean(current)} />
+              <StartAction home={home} />
               <Link href="/register" className="button button-secondary">
                 {t("common.register")}
               </Link>

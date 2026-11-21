@@ -128,6 +128,7 @@ Do not add other big libraries (no UI kits like MUI/Chakra, no Redux, no Prisma)
   dashboard/page.tsx
   ask/page.tsx
   tutor/[questionId]/page.tsx
+  teacher/page.tsx              ← teacher-only lesson preparation and public forum
   teachers/page.tsx
   teachers/[id]/page.tsx        ← profile + slots + free booking review + confirmation
   profile/page.tsx
@@ -153,7 +154,7 @@ Do not add other big libraries (no UI kits like MUI/Chakra, no Redux, no Prisma)
 /middleware.ts                  ← Supabase session refresh + protect private routes
 ```
 
-Protected routes (redirect to `/login` if not logged in): `/dashboard`, `/ask`, `/tutor/*`, `/teachers/*` (booking), `/profile`, `/forum/*` posting. `/`, `/login`, `/register`, `/leaderboard` are public.
+Protected routes (redirect to `/login` if not logged in): `/dashboard`, `/ask`, `/tutor/*`, `/teachers/*` (booking), `/teacher`, `/profile`, `/forum/*` posting. Linked teachers go to `/teacher` from student pages and can still reply in the public forum. `/`, `/login`, `/register`, `/leaderboard` are public.
 
 ---
 
@@ -260,9 +261,16 @@ Landing is public. If the user is logged in, the header shows "Dashboard" instea
 ### 9.2 Login `/login` (P0)
 
 - Centered card with the seal (96px), title "Kirish", email + password fields, "Kirish" button, link to register.
-- **Demo box** above the form (sky-50 card): "Hakamlar uchun demo hisob" + the demo email and password shown as text + button **"Demo bilan kirish"**.
+- **Demo box** above the form (sky-50 card): show both demo emails and the shared demo password. Put **"O‘quvchi sifatida kirish"** and **"O‘qituvchi sifatida kirish"** side by side. Keep the landing page’s one-click student demo.
 - Demo login = server action `demoLogin()`: calls `ensureDemoUser()` (section 13.4) then signs in with `DEMO_EMAIL` / `DEMO_PASSWORD` and redirects to `/dashboard`.
 - Errors in plain language in the current locale.
+
+### Teacher dashboard `/teacher`
+
+- A teacher account is identified by `teachers.user_id = auth.uid()` after authentication. Run `007_teachers.sql` to add the link. The teacher demo creates `ustoz.demo@edubridge.app` with `DEMO_PASSWORD` and links it to seeded algebra teacher Dilnoza Rahimova.
+- Show the teacher’s subject, district and rating, plus upcoming confirmed bookings in Uzbekistan time. Include student first name, grade, school, booking status and the sample meeting placeholder.
+- The question card shows the linked question, subject/topic, last AI Ustoz step, simpler-request count, expandable chat history and a signed private photo URL valid for five minutes. All private reads are scoped to the verified teacher’s own bookings. The shared teacher demo can see demo student bookings only.
+- Show booking-based stats and recent open public questions in the teacher’s subject. Teachers answer through the existing forum under their linked name.
 
 ### 9.3 Register `/register` (P1)
 

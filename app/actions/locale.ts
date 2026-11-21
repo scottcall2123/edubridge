@@ -2,6 +2,7 @@
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { getTeacherRole } from "@/lib/auth";
 export async function setLocale(value: string) {
   const locale = z.enum(["uz", "en", "ru"]).parse(value);
   if (isSupabaseConfigured()) {
@@ -10,10 +11,10 @@ export async function setLocale(value: string) {
       data: { user },
     } = await supabase.auth.getUser();
     if (user) {
-      const { error } = await supabase
-        .from("profiles")
-        .update({ locale })
-        .eq("id", user.id);
+      const teacher = await getTeacherRole(user.id);
+      const { error } = teacher
+        ? await supabase.auth.updateUser({ data: { edubridge_locale: locale } })
+        : await supabase.from("profiles").update({ locale }).eq("id", user.id);
       if (error) throw new Error("Could not save language");
     }
   }

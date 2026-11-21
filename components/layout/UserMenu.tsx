@@ -4,9 +4,11 @@ import { Avatar } from "@/components/ui";
 import { LogIn } from "lucide-react";
 export async function UserMenu({
   name,
+  teacher,
   logout,
 }: {
   name?: string;
+  teacher?: boolean;
   logout?: () => Promise<void>;
 }) {
   const t = await getTranslations();
@@ -19,18 +21,25 @@ export async function UserMenu({
         <Avatar name={name} />
       </summary>
       <div className="absolute right-0 z-30 mt-3 w-48 rounded-xl border border-line bg-white p-2 text-navy shadow-lg">
-        <Link className="block min-h-11 rounded-lg p-3" href="/dashboard">
-          {t("nav.home")}
+        <Link
+          className="block min-h-11 rounded-lg p-3"
+          href={teacher ? "/teacher" : "/dashboard"}
+        >
+          {t(teacher ? "nav.teacherHome" : "nav.home")}
         </Link>
-        <Link className="block rounded-lg p-3" href="/profile">
-          {t("nav.profile")}
-        </Link>
+        {!teacher && (
+          <Link className="block rounded-lg p-3" href="/profile">
+            {t("nav.profile")}
+          </Link>
+        )}
         <Link className="block min-h-11 rounded-lg p-3" href="/forum">
           {t("nav.forum")}
         </Link>
-        <Link className="block min-h-11 rounded-lg p-3" href="/leaderboard">
-          {t("nav.leaderboard")}
-        </Link>
+        {!teacher && (
+          <Link className="block min-h-11 rounded-lg p-3" href="/leaderboard">
+            {t("nav.leaderboard")}
+          </Link>
+        )}
         {logout && (
           <form action={logout}>
             <button className="w-full rounded-lg p-3 text-left">

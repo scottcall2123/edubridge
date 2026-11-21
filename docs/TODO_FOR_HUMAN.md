@@ -2,6 +2,14 @@
 
 Steps 1–10 are already deployed and live-tested according to the team. Keep the existing working environment variables and seed data.
 
+## Enable and test the teacher dashboard
+
+1. Wait for Vercel to deploy the teacher dashboard update. Open **Supabase → SQL Editor → New query**, paste the full contents of [007_teachers.sql](../supabase/migrations/007_teachers.sql), and click **Run** once. Apply 005 and 006 first if they are still pending. Keep the existing seed and `DEMO_PASSWORD`. The first teacher demo login creates and links `ustoz.demo@edubridge.app` to the seeded algebra teacher Dilnoza Rahimova.
+2. In one private browser window, open [/login](https://edubridge-seven-alpha.vercel.app/login) and choose **O‘quvchi sifatida kirish**. Ask an algebra question with a sample photo, start AI Ustoz, request a simpler explanation twice, and book a free time with **Dilnoza Rahimova** using the teacher link from the chat. Check that the booking appears in Profile.
+3. In a separate browser profile or after logging out, open [/login](https://edubridge-seven-alpha.vercel.app/login) and choose **O‘qituvchi sifatida kirish**. Open the upcoming booking and check the student’s first name, UTC+5 time, homework photo, last AI step, simpler-request count and expandable chat. Use sample homework only in the shared demos.
+4. Check that `/dashboard` and `/ask` send the teacher back to `/teacher`, and that the student account cannot open `/teacher`. A demo booking with a different teacher should stay out of Dilnoza’s dashboard. A booking by a regular student should also stay out of the shared teacher demo.
+5. Publish a sample public algebra question as the demo student. Open it from the teacher’s forum section and save a reply with at least two steps. Confirm that the reply uses the linked teacher name. Try UZ, EN and RU and check the layout on a phone.
+
 ## Language switching speed update
 
 No new SQL or environment settings are needed. After deployment, switch UZ/EN/RU from the header and Profile while logged in. Confirm the selected control reacts immediately, translated content follows, and any typed draft remains intact. Refresh, then log out and back in: the saved account language should return. Clicking the current language should not reload the page. Local network checks cover request count and simulated slow/failing switches; production account round-trip timing still depends on the connection and server/database region.
@@ -46,7 +54,7 @@ The temporary debug-setup endpoint was removed by upstream commits and is not re
 
 ## For a brand-new project only
 
-Create Supabase project `edubridge` in Singapore; keep its database password private. Copy the project URL, anon key and service-role key into the environment. Turn OFF Email → Confirm email. Run migrations 001–006 in order, then `supabase/seed.sql`.
+Create Supabase project `edubridge` in Singapore. Keep its database password private. Copy the project URL, anon key and service-role key into the environment. Turn OFF Email → Confirm email. Run migrations 001–007 in order, then `supabase/seed.sql`.
 
 Import the repository into Vercel using detected Next.js settings. Set all variables from `.env.example` in Production and Preview. Keep secret keys server-only. Set dedicated demo email/password; the demo credentials are intentionally displayed for judges, so never reuse a personal password.
 

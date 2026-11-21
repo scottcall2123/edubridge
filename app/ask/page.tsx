@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { z } from "zod";
 import { getTranslations } from "next-intl/server";
-import { requireUser } from "@/lib/auth";
+import { requireStudent } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { ownedQuestion } from "@/lib/questions";
 import { findSimilar } from "@/app/actions/questions";
@@ -18,7 +18,7 @@ export default async function Ask({
 }: {
   searchParams: Promise<{ q?: string; imageError?: string }>;
 }) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     { q, imageError } = await searchParams;
   if (q) {
     if (!z.uuid().safeParse(q).success) notFound();

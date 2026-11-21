@@ -3,8 +3,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getCurrentUser } from "@/lib/auth";
-import { getDemoCredentials } from "@/lib/demo";
-import { demoLogin } from "@/app/actions/auth";
+import { DEMO_TEACHER_EMAIL, getDemoCredentials } from "@/lib/demo";
+import { demoLogin, demoTeacherLogin } from "@/app/actions/auth";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { DemoButton } from "@/components/auth/DemoButton";
 import { Tag } from "@/components/ui";
@@ -17,7 +17,8 @@ export default async function LoginPage({
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
-  if (await getCurrentUser()) redirect("/dashboard");
+  const current = await getCurrentUser();
+  if (current) redirect(current.teacher ? "/teacher" : "/dashboard");
   const t = await getTranslations(),
     params = await searchParams;
   let demo: ReturnType<typeof getDemoCredentials> | null = null;
@@ -28,7 +29,7 @@ export default async function LoginPage({
   }
   return (
     <main className="container py-10">
-      <div className="card mx-auto max-w-md space-y-6">
+      <div className="card mx-auto max-w-lg space-y-6">
         <Image
           className="mx-auto"
           src="/brand/edubridge-seal.svg"
@@ -46,16 +47,21 @@ export default async function LoginPage({
             <>
               <dl className="space-y-2 break-words text-sm">
                 <div>
-                  <dt className="text-muted">{t("auth.email")}</dt>
+                  <dt className="text-muted">{t("auth.studentDemoEmail")}</dt>
                   <dd>{demo.email}</dd>
+                </div>
+                <div>
+                  <dt className="text-muted">{t("auth.teacherDemoEmail")}</dt>
+                  <dd>{DEMO_TEACHER_EMAIL}</dd>
                 </div>
                 <div>
                   <dt className="text-muted">{t("auth.password")}</dt>
                   <dd>{demo.password}</dd>
                 </div>
               </dl>
-              <form action={demoLogin}>
-                <DemoButton />
+              <form action={demoLogin} className="grid grid-cols-2 gap-2">
+                <DemoButton role="student" />
+                <DemoButton role="teacher" formAction={demoTeacherLogin} />
               </form>
             </>
           ) : (
@@ -66,7 +72,13 @@ export default async function LoginPage({
         </section>
         {params.error && (
           <p role="alert" className="text-sm text-danger">
-            {t(params.error === "setup" ? "errors.setup" : "errors.login")}
+            {t(
+              params.error === "teacherSetup"
+                ? "auth.teacherSetup"
+                : params.error === "setup"
+                  ? "errors.setup"
+                  : "errors.login",
+            )}
           </p>
         )}
         <LoginForm />

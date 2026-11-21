@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { z } from "zod";
 import { getTranslations } from "next-intl/server";
-import { requireUser } from "@/lib/auth";
+import { requireStudent } from "@/lib/auth";
 import { ownedQuestion } from "@/lib/questions";
 import { createClient } from "@/lib/supabase/server";
 import { Card } from "@/components/ui";
@@ -15,7 +15,7 @@ export default async function Success({
 }: {
   searchParams: Promise<{ q?: string }>;
 }) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     { q } = await searchParams;
   if (!z.uuid().safeParse(q).success) notFound();
   const question = await ownedQuestion(q!, user.id).catch(() => null);

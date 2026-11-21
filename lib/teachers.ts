@@ -60,7 +60,12 @@ export async function loadTeachers(): Promise<{
   // waits for the slowest query instead of the sum of all of them.
   const [, teachers, subjects, slots] = await Promise.all([
     ensureFutureSlots(),
-    client.from("teachers").select("*").order("rating", { ascending: false }),
+    client
+      .from("teachers")
+      .select(
+        "id,full_name,initials,subject_id,district,rating,price_uzs_15min,bio_uz,bio_en,bio_ru,offline_center,is_sample",
+      )
+      .order("rating", { ascending: false }),
     client.from("subjects").select("*").order("sort"),
     client
       .from("teacher_slots")

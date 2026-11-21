@@ -12,14 +12,14 @@ Checks: `npm run build`, `npm run lint`, `npm test`.
 
 ## Database setup
 
-For the existing deployed steps 1–10 database, run only these NEW migrations in order:
+On the deployed project, run [007_teachers.sql](supabase/migrations/007_teachers.sql) in Supabase SQL Editor after the teacher dashboard deploys. If 005 or 006 is still pending, apply it first:
 
 1. `supabase/migrations/005_forum.sql`
 2. `supabase/migrations/006_question_images.sql`
 
 No seed rerun or new environment variables are needed. 006 creates/configures the private image bucket and owner-only policies.
 
-For a brand-new project, run migrations 001 through 006 in numeric order, then `supabase/seed.sql`. See [human setup and acceptance checks](docs/TODO_FOR_HUMAN.md).
+For a brand-new project, run migrations 001 through 007 in numeric order, then `supabase/seed.sql`. See [human setup and acceptance checks](docs/TODO_FOR_HUMAN.md).
 
 ## Environment
 
@@ -31,7 +31,9 @@ The Supabase URL and anon key are public. Service-role key, Gemini key and demo 
 
 Steps 1–12 are implemented: responsive UZ/EN/RU layout, real Supabase auth and demo login, dashboard/points/streaks, ask and similar answers, Gemini tutor, teachers/booking, profile histories, landing, public forum with answers/stars/reports, Top-100 leaderboard, registration with simulated parent code, and private JPEG/PNG uploads up to 5 MB.
 
-Forum posts are explicitly public. Homework from /ask and its images stay private. Student text and team-written sample answers are not automatically translated; all interface text, subjects, topics and teacher bios support UZ/EN/RU.
+Forum posts are explicitly public. Private homework and images are available to the student and, for upcoming confirmed bookings with a linked question, the booked teacher. Student text and team-written sample answers keep their original language. Interface text, subjects, topics and teacher bios support UZ/EN/RU.
+
+The login page offers student and teacher demo buttons. The teacher demo uses `ustoz.demo@edubridge.app` and the existing `DEMO_PASSWORD`. The first login links it to Dilnoza Rahimova. Her shared demo shows the demo student’s bookings only. The teacher dashboard shows upcoming lessons, AI Ustoz preparation cards with a five-minute homework photo URL, booking-based stats, and public forum questions in the teacher’s subject.
 
 Language switching uses one server action to save the cookie/account preference and return the translated page, without a second forced page fetch. The selected language responds immediately while saving, and selecting the current language sends no request. No SQL or environment changes are needed for this optimization.
 

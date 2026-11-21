@@ -181,14 +181,16 @@ export async function rateHelper(
       .from("profiles")
       .select("points,streak_days,last_streak_date,last_visit_date")
       .eq("id", answer.author_id)
-      .single();
-    if (error || !data) throw new Error("Helper unavailable");
-    const expected = progressOf(data),
-      points = POINTS.helper_star * stars,
-      next = streakAfter(
-        { ...expected, points: expected.points + points },
-        tashkentDay(),
-      );
+      .maybeSingle();
+    if (error) throw new Error("Helper unavailable");
+    const expected = data ? progressOf(data) : null,
+      points = expected ? POINTS.helper_star * stars : 0,
+      next = expected
+        ? streakAfter(
+            { ...expected, points: expected.points + points },
+            tashkentDay(),
+          )
+        : null;
     const result = await admin.rpc("rate_forum_answer", {
       p_answer: answerId,
       p_owner: ownerId,

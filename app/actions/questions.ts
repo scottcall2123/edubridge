@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { getLocale } from "next-intl/server";
 import { revalidatePath } from "next/cache";
-import { requireUser } from "@/lib/auth";
+import { requireStudent } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import {
   ownedQuestion,
@@ -14,7 +14,7 @@ import type { Answer, Subject, Topic } from "@/lib/types";
 import type { Locale } from "@/lib/i18n";
 
 export async function createQuestion(input: unknown) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     parsed = questionInput.safeParse(input);
   if (!parsed.success) return { error: "validation" as const };
   const { requestId, subjectId, topicId, text, isPublic } = parsed.data;
@@ -42,7 +42,7 @@ export async function createQuestion(input: unknown) {
 export async function findSimilar(
   questionId: string,
 ): Promise<SimilarQuestion[]> {
-  const { user } = await requireUser();
+  const { user } = await requireStudent();
   const question = await ownedQuestion(z.uuid().parse(questionId), user.id),
     client = await createClient(),
     locale = (await getLocale()) as Locale;
@@ -96,7 +96,7 @@ export async function findSimilar(
   });
 }
 export async function markHelped(input: unknown) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     parsed = z
       .object({ questionId: z.uuid(), answerId: z.uuid() })
       .safeParse(input);

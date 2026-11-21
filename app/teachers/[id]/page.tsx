@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { z } from "zod";
 import { getTranslations } from "next-intl/server";
-import { requireUser } from "@/lib/auth";
+import { requireStudent } from "@/lib/auth";
 import { ownedQuestion } from "@/lib/questions";
 import { loadTeachers, ownedBooking } from "@/lib/teachers";
 import { createClient } from "@/lib/supabase/server";
@@ -18,7 +18,7 @@ export default async function TeacherPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ q?: string; booking?: string }>;
 }) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     { id } = await params,
     query = await searchParams;
   if (

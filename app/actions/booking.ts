@@ -1,10 +1,10 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { requireUser } from "@/lib/auth";
+import { requireStudent } from "@/lib/auth";
 import { bookingInput } from "@/lib/booking";
 import { bookWithPoints } from "@/lib/points";
 export async function bookSlot(slotId: string, questionId?: string) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     parsed = bookingInput.safeParse({ slotId, questionId });
   if (!parsed.success) return { error: "invalidQuestion" as const };
   try {

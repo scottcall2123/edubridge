@@ -1,7 +1,7 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { z } from "zod";
 import { getTranslations } from "next-intl/server";
-import { requireUser } from "@/lib/auth";
+import { getCurrentUser, requireStudent } from "@/lib/auth";
 import { ownedQuestion } from "@/lib/questions";
 import { loadTeachers } from "@/lib/teachers";
 import { TeacherList } from "@/components/teachers/TeacherList";
@@ -14,9 +14,10 @@ export default async function Teachers({
   searchParams: Promise<{ subject?: string; q?: string }>;
 }) {
   const params = await searchParams;
+  if ((await getCurrentUser())?.teacher) redirect("/teacher");
   if (params.q) {
     if (!z.uuid().safeParse(params.q).success) notFound();
-    const { user } = await requireUser();
+    const { user } = await requireStudent();
     if (!(await ownedQuestion(params.q, user.id).catch(() => null))) notFound();
   }
   const data = await loadTeachers();

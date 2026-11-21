@@ -8,7 +8,11 @@ export async function ForumList({
   subjects,
   topics,
   selected = "",
-}: Awaited<ReturnType<typeof loadForum>> & { selected?: string }) {
+  hideNewQuestion = false,
+}: Awaited<ReturnType<typeof loadForum>> & {
+  selected?: string;
+  hideNewQuestion?: boolean;
+}) {
   const t = await getTranslations(),
     locale = (await getLocale()) as Locale;
   const rows = questions.filter(
@@ -20,9 +24,11 @@ export async function ForumList({
     <main className="container space-y-6 py-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h1>{t("forum.title")}</h1>
-        <Link href="/forum/new" className="button button-primary">
-          {t("forum.newQuestion")}
-        </Link>
+        {!hideNewQuestion && (
+          <Link href="/forum/new" className="button button-primary">
+            {t("forum.newQuestion")}
+          </Link>
+        )}
       </div>
       <nav aria-label={t("ask.chooseSubject")} className="flex flex-wrap gap-2">
         {[
@@ -73,9 +79,11 @@ export async function ForumList({
       {!rows.length && (
         <Card>
           <p>{t("forum.empty")}</p>
-          <Link href="/forum/new" className="button button-primary mt-4">
-            {t("forum.newQuestion")}
-          </Link>
+          {!hideNewQuestion && (
+            <Link href="/forum/new" className="button button-primary mt-4">
+              {t("forum.newQuestion")}
+            </Link>
+          )}
         </Card>
       )}
     </main>

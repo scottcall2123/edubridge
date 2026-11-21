@@ -7,7 +7,8 @@ export async function generateMetadata() {
   return { title: (await getTranslations("common"))("register") };
 }
 export default async function Register() {
-  if (await getCurrentUser()) redirect("/dashboard");
+  const current = await getCurrentUser();
+  if (current) redirect(current.teacher ? "/teacher" : "/dashboard");
   const t = await getTranslations();
   return (
     <main className="container py-10">

@@ -17,6 +17,7 @@
     "languageError": "Til saqlanmadi. Qayta urinib ko‘ring."
   },
   "nav": {
+    "teacherHome": "O‘qituvchi sahifasi",
     "home": "Bosh sahifa",
     "ask": "Savol berish",
     "teachers": "Ustozlar",
@@ -65,6 +66,11 @@
     "finalText": "Bitta savol bering. Bitta kichik qadamni tushuning. Bilimga ko‘prik shu yerdan boshlanadi."
   },
   "auth": {
+    "demo_student": "O‘quvchi sifatida kirish",
+    "demo_teacher": "O‘qituvchi sifatida kirish",
+    "studentDemoEmail": "O‘quvchi demo pochtasi",
+    "teacherDemoEmail": "O‘qituvchi demo pochtasi",
+    "teacherSetup": "O‘qituvchi demo hisobi hozircha mavjud emas. Keyinroq qayta urinib ko‘ring.",
     "title": "Kirish",
     "demoTitle": "Hakamlar uchun demo hisob",
     "email": "Elektron pochta",
@@ -167,6 +173,24 @@
     "closed": "Bu savol bo‘yicha natija allaqachon saqlangan.",
     "save": "Natija saqlanmadi. Qayta urinib ko‘ring.",
     "refresh": "Natijani yangilash"
+  },
+  "teacherDashboard": {
+    "upcoming": "Yaqin darslar",
+    "lessonsThisWeek": "Bu hafta darslar",
+    "studentsHelped": "Yordam berilgan o‘quvchilar",
+    "helpedHint": "Vaqti o‘tgan tasdiqlangan darslardagi noyob o‘quvchilar.",
+    "rating": "Reyting",
+    "noLessons": "Hozircha yaqin darslar yo‘q.",
+    "demoScope": "Bu demo hisobda faqat demo o‘quvchining bandlovlari ko‘rinadi.",
+    "student": "O‘quvchi",
+    "questionCard": "Savol kartasi",
+    "struggled": "O‘quvchi shu qadamda qiynaldi",
+    "simplerCount": "Soddaroq tushuntirish so‘rovlari: {count} ta",
+    "lastStep": "AI Ustozning oxirgi qadami",
+    "noStep": "AI Ustoz qadami hali saqlanmagan.",
+    "forum": "Forumdagi savollar",
+    "openForum": "Forumni ochish",
+    "noForum": "Bu fan bo‘yicha ochiq savollar hozircha yo‘q."
   },
   "teachers": {
     "title": "Farg‘onadagi ustozlar",

@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 function isProtected(path: string) {
   return (
-    ["/dashboard", "/ask", "/tutor", "/profile"].some(
+    ["/dashboard", "/ask", "/tutor", "/profile", "/teacher"].some(
       (p) => path === p || path.startsWith(p + "/"),
     ) ||
     /^\/teachers\/.+/.test(path) ||

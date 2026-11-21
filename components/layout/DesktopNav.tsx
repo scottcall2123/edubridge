@@ -9,7 +9,7 @@ import {
   MessagesSquare,
   Trophy,
 } from "lucide-react";
-export function DesktopNav() {
+export function DesktopNav({ teacher }: { teacher?: boolean }) {
   const t = useTranslations("nav"),
     path = usePathname();
   return (
@@ -17,13 +17,19 @@ export function DesktopNav() {
       aria-label={t("navigation")}
       className="hidden items-center gap-1 md:flex xl:gap-3"
     >
-      {[
-        { key: "home", href: "/dashboard", Icon: Home },
-        { key: "ask", href: "/ask", Icon: MessageCircleQuestion },
-        { key: "teachers", href: "/teachers", Icon: Users },
-        { key: "forum", href: "/forum", Icon: MessagesSquare },
-        { key: "leaderboard", href: "/leaderboard", Icon: Trophy },
-      ].map(({ key, href, Icon }) => (
+      {(teacher
+        ? [
+            { key: "teacherHome", href: "/teacher", Icon: Home },
+            { key: "forum", href: "/forum", Icon: MessagesSquare },
+          ]
+        : [
+            { key: "home", href: "/dashboard", Icon: Home },
+            { key: "ask", href: "/ask", Icon: MessageCircleQuestion },
+            { key: "teachers", href: "/teachers", Icon: Users },
+            { key: "forum", href: "/forum", Icon: MessagesSquare },
+            { key: "leaderboard", href: "/leaderboard", Icon: Trophy },
+          ]
+      ).map(({ key, href, Icon }) => (
         <Link
           key={key}
           href={href}

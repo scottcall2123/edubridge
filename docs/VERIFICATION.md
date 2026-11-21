@@ -1,5 +1,11 @@
 # Verification — steps 1–12
 
+## Teacher dashboard
+
+Migrations 001–007 and the seed applied to an isolated PostgreSQL 17 database. SQL tests verified teacher-only lookup and unique account links, disconnection on Auth user deletion, private role linkage, service-only dashboard execution, same-booking question and chat ownership, exclusion of cancelled bookings, and isolation between teachers. The shared demo returned only its demo student’s booking, even when a regular student had booked the same teacher. The existing student booking and forum SQL regressions passed, including one-time point awards. Teachers could save and report forum posts and receive stars.
+
+Chromium checked both demo login buttons, first teacher account creation and repeat login, student/teacher redirects, the upcoming lesson and preparation card, the five-minute signing request and photo rendering, expandable chat, and a saved teacher forum answer. UZ/EN/RU screens passed at 375, 768 and 1280 pixels. These checks used synthetic Auth and Storage endpoints with local PostgreSQL. Hosted Supabase verification follows the migration and demo walkthrough in TODO_FOR_HUMAN.md. Build, lint and all 26 unit tests passed.
+
 ## Language switching performance — 21 November 2026
 
 Production build, lint and all 26 unit tests passed. A browser trace of the previous production build showed a locale-action POST followed by a redundant current-page RSC GET. The final production build switched UZ/EN/RU with only the action POST for the current page; automatic link prefetches were excluded from that comparison. Clicking the current language produced no page update request. Localized title/HTML language and cookie persistence after reload passed. This measures avoided work, not a production latency percentage.

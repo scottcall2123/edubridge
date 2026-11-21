@@ -1,13 +1,13 @@
 "use server";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { requireUser } from "@/lib/auth";
+import { requireStudent } from "@/lib/auth";
 import { ownedQuestion } from "@/lib/questions";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { imageMime, MAX_IMAGE_BYTES, validImagePath } from "@/lib/image-input";
 export async function attachQuestionImage(input: unknown) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     parsed = z
       .object({ questionId: z.uuid(), path: z.string().max(200) })
       .safeParse(input);

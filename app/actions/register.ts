@@ -9,6 +9,7 @@ import {
   PARENT_DEMO_CODE,
 } from "@/lib/registration";
 import { signParentCheck, verifyParentCheck } from "@/lib/parent-check";
+import { DEMO_TEACHER_EMAIL } from "@/lib/demo";
 export async function startParentCheck(phone: string) {
   const parsed = phoneInput.safeParse(phone);
   if (!parsed.success) return { error: "phone" as const };
@@ -49,6 +50,8 @@ export async function register(
     ),
   );
   if (!parsed.success) return { error: "invalid" };
+  if (parsed.data.email.toLowerCase() === DEMO_TEACHER_EMAIL)
+    return { error: "exists" };
   const p = parsed.data,
     phone = p.grade <= 7 ? phoneInput.parse(p.parentPhone) : null,
     jar = await cookies();

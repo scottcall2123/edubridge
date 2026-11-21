@@ -4,10 +4,12 @@ EduBridge — working MVP
 
 Link: https://edubridge-seven-alpha.vercel.app
 
-Demo login: click **Demo bilan kirish** on the home or login page. The dedicated demo email/password are also displayed on the login page; no account request or installation is needed.
+Demo login: click **Demo bilan kirish** on the home page for the student demo. On the login page, choose **O‘quvchi sifatida kirish** for the student demo or **O‘qituvchi sifatida kirish** for the teacher demo. Both demo emails and the shared demo password are shown there.
 
 Main flow to test:
 Dashboard → Savol berish → choose subject and topic → write a question → see similar questions explained step by step → AI Ustoz bilan ishlash. The AI explains one step at a time and asks Tushundingmi? Press the simpler button twice to see the teacher option → choose a Fergana teacher and time → review the free lesson → confirm booking → Profile. Online lessons are free for school students, with no payment step. Alternatively, press understood, then problem solved, and open Profile to see saved points, questions and chat history. Log out and in again to verify persistence.
+
+Teacher demo: book an algebra lesson with Dilnoza Rahimova as the demo student, then sign in with the teacher demo. Open the booking’s question card to see the AI Ustoz chat, where the student got stuck, and the attached homework image. The teacher can answer public algebra questions from the forum section.
 
 P1 extras:
 Register a student; grades 5–7 have a clearly simulated parent-code check (4821 shown on screen; no SMS). Post a public forum question, answer in steps from another account, and let the owner rate it once. Each star awards the helper four points. Reports are saved for manual moderation. Browse the sample-labeled Top-100 leaderboard. Attach a private JPEG/PNG image up to 5 MB to homework; type the question text for the AI too.

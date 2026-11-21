@@ -1,5 +1,8 @@
 # Decisions
 
+- Teacher access comes from a unique `teachers.user_id` link. The service-only dashboard query checks the link again and scopes each question and chat to a confirmed booking and its student. The shared demo is additionally limited to demo student bookings.
+- Teacher forum replies use the linked teacher name and accept stars without adding a teacher to the student points system. Dashboard helped counts use distinct students with elapsed confirmed lessons because attendance is not tracked.
+
 - Language switching: rely on Next.js cookie-mutation re-rendering instead of calling router.refresh again. This removes a measured extra RSC GET and its repeated page queries. Both language controls use an optimistic selection with pending/error feedback; same-language clicks do nothing. Keep authenticated profile persistence awaited before cookie success so errors remain retryable and preference saves are not moved to unordered background writes.
 
 - 21 November product update: free online teacher lessons for school students, with planned Farg‘ona hokimiyat compensation for teachers. Replace student prices/payment simulation with free lesson review/confirmation in UZ/EN/RU, including Profile and landing. Actual payouts/attendance reporting are future work. Keep legacy database rate/payment fields without changing stored bookings; no new SQL is required. This supersedes earlier simulated-payment UI decisions below.

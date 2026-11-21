@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { z } from "zod";
 import { getLocale, getTranslations } from "next-intl/server";
-import { requireUser } from "@/lib/auth";
+import { requireStudent } from "@/lib/auth";
 import { ownedQuestion } from "@/lib/questions";
 import { createClient } from "@/lib/supabase/server";
 import { Card, Tag } from "@/components/ui";
@@ -19,7 +19,7 @@ export default async function TutorPage({
 }: {
   params: Promise<{ questionId: string }>;
 }) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     { questionId } = await params;
   if (!z.uuid().safeParse(questionId).success) notFound();
   const q = await ownedQuestion(questionId, user.id).catch(() => null);

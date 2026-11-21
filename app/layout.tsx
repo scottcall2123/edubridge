@@ -46,17 +46,22 @@ export default async function RootLayout({
             {t("common.skipContent")}
           </a>
           <TopBar
-            name={current?.profile?.full_name ?? (current ? "—" : undefined)}
+            name={
+              current?.teacher?.full_name ??
+              current?.profile?.full_name ??
+              (current ? "—" : undefined)
+            }
+            teacher={Boolean(current?.teacher)}
             logout={logout}
           />
           <div
             id="main-content"
             tabIndex={-1}
-            className={current ? "pb-20 md:pb-0" : ""}
+            className={current && !current.teacher ? "pb-20 md:pb-0" : ""}
           >
             {children}
           </div>
-          {current && <BottomTabs />}
+          {current && !current.teacher && <BottomTabs />}
         </NextIntlClientProvider>
       </body>
     </html>

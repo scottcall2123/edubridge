@@ -1,11 +1,11 @@
 "use server";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { requireUser } from "@/lib/auth";
+import { requireStudent } from "@/lib/auth";
 import { ownedQuestion } from "@/lib/questions";
 import { awardPoints, POINTS } from "@/lib/points";
 export async function markSolvedByAI(input: unknown) {
-  const { user } = await requireUser(),
+  const { user } = await requireStudent(),
     parsed = z.uuid().safeParse(input);
   if (!parsed.success) return { error: "validation" as const };
   try {

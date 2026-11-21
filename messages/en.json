@@ -17,6 +17,7 @@
     "languageError": "Could not save the language. Try again."
   },
   "nav": {
+    "teacherHome": "Teacher dashboard",
     "home": "Home",
     "ask": "Ask a question",
     "teachers": "Teachers",
@@ -65,6 +66,11 @@
     "finalText": "Ask one question. Understand one small step. Your bridge to knowledge starts here."
   },
   "auth": {
+    "demo_student": "Sign in as a student",
+    "demo_teacher": "Sign in as a teacher",
+    "studentDemoEmail": "Student demo email",
+    "teacherDemoEmail": "Teacher demo email",
+    "teacherSetup": "The teacher demo is temporarily unavailable. Please try again later.",
     "title": "Log in",
     "demoTitle": "Demo account for judges",
     "email": "Email",
@@ -167,6 +173,24 @@
     "closed": "This question’s result has already been saved.",
     "save": "Could not save your result. Please try again.",
     "refresh": "Refresh result"
+  },
+  "teacherDashboard": {
+    "upcoming": "Upcoming lessons",
+    "lessonsThisWeek": "Lessons this week",
+    "studentsHelped": "Students helped",
+    "helpedHint": "Counts distinct students whose confirmed lesson time has passed.",
+    "rating": "Rating",
+    "noLessons": "There are no upcoming lessons yet.",
+    "demoScope": "This shared demo shows bookings from the demo student only.",
+    "student": "Student",
+    "questionCard": "Question card",
+    "struggled": "The student got stuck at this step",
+    "simplerCount": "Simpler explanations requested: {count}",
+    "lastStep": "Last AI Ustoz step",
+    "noStep": "AI Ustoz has no saved step yet.",
+    "forum": "Forum questions",
+    "openForum": "Open forum",
+    "noForum": "There are no open forum questions for this subject yet."
   },
   "teachers": {
     "title": "Teachers in Fergana",
