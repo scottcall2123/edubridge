@@ -2,6 +2,10 @@
 
 Steps 1–10 are already deployed and live-tested according to the team. Keep the existing working environment variables and seed data.
 
+## Language switching speed update
+
+No new SQL or environment settings are needed. After deployment, switch UZ/EN/RU from the header and Profile while logged in. Confirm the selected control reacts immediately, translated content follows, and any typed draft remains intact. Refresh, then log out and back in: the saved account language should return. Clicking the current language should not reload the page. Local network checks cover request count and simulated slow/failing switches; production account round-trip timing still depends on the connection and server/database region.
+
 ## Free online lesson update
 
 No new SQL, environment variables or payment provider is needed for this change. After the app deployment, check teacher cards, teacher details, free lesson review, booking confirmation, saved Profile and landing in UZ/EN/RU. They must show that online lessons are free for school students, with no student price or payment step. Book a time and confirm that the booking and +3 points still persist after refresh/login.

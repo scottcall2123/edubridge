@@ -232,7 +232,7 @@ Use `next/image` or plain `<img>` with width/height; never stretch the logo.
 
 ## 8. Global layout and navigation
 
-- **TopBar (all pages):** navy background, height 64. Left: horizontal logo (on-dark version), height 36. Center (desktop only, logged in): links Bosh sahifa (`/dashboard`), Savol berish (`/ask`), Ustozlar (`/teachers`), Forum (`/forum`, P1), Reyting (`/leaderboard`, P1). Right: **LanguageSwitcher** `UZ | EN | RU` (three small segmented buttons, active = white bg + navy text, inactive = transparent + white text), then user avatar menu (Profil, Chiqish) or "Kirish" button if logged out.
+- **TopBar (all pages):** navy background, height 64. Left: horizontal logo (on-dark version), height 36. Center (desktop only, logged in): links Bosh sahifa (`/dashboard`), Savol berish (`/ask`), Ustozlar (`/teachers`), Forum (`/forum`, P1), Reyting (`/leaderboard`, P1). Right: **LanguageSwitcher** `UZ | EN | RU` (three small segmented buttons, active = white bg + navy text, inactive = transparent + white text), then user avatar menu (Profil, Chiqish) or "Kirish" button if logged out. Highlight the requested language immediately while saving; clicking the current language is a no-op.
 - **BottomTabs (mobile < 768px, logged in):** fixed bottom bar, 4 tabs with icons + labels: Bosh sahifa, Savol, Ustozlar, Profil. Content gets bottom padding so nothing is hidden.
 - **Footer (landing only):** navy, logo, tagline, "UzHack 2026 · Renessans jamoasi", small text "Namunaviy ma’lumotlar bilan ishlaydigan MVP".
 - Page background `paper`.
@@ -347,7 +347,7 @@ Server action `bookSlot(slotId, questionId?)`: verify user; in one transaction/R
 ## 10. Languages (UZ / EN / RU)
 
 - Default locale **uz**. Cookie `NEXT_LOCALE` (values `uz`, `en`, `ru`), 1 year. When logged in, also save `profiles.locale`; on login, if profile has a locale, set the cookie.
-- next-intl **without** i18n routing: `i18n/request.ts` reads the cookie; `NextIntlClientProvider` in root layout. LanguageSwitcher calls a server action `setLocale(locale)` then `router.refresh()`.
+- next-intl **without** i18n routing: `i18n/request.ts` reads the cookie; `NextIntlClientProvider` in root layout. LanguageSwitcher calls a server action `setLocale(locale)`. Next.js returns updated server components after the cookie mutation in the same request; do not add a redundant `router.refresh()`. Apply this to the Profile language select too.
 - **No hard-coded UI text.** Every string in `messages/*.json`, nested by page: `common.*`, `nav.*`, `landing.*`, `auth.*`, `dashboard.*`, `ask.*`, `tutor.*`, `teachers.*`, `booking.*`, `profile.*`, `forum.*`, `leaderboard.*`, `errors.*`, `tags.*`.
 - DB content has `_uz`, `_en`, `_ru` columns; helper `pickLocale(row, 'title', locale)`.
 - **AI Ustoz replies in the current locale** (pass locale to `/api/tutor`).

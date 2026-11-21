@@ -1,28 +1,29 @@
 "use client";
-import { useState, useTransition } from "react";
+import { useOptimistic, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { setLocale } from "@/app/actions/locale";
 export function LocaleSelect() {
   const locale = useLocale(),
     t = useTranslations(),
-    router = useRouter(),
     [pending, start] = useTransition(),
     [error, setError] = useState(false);
+  const [selectedLocale, selectLocale] = useOptimistic(locale);
   return (
     <div className="max-w-sm space-y-2">
       <label htmlFor="profile-locale">{t("profile.language")}</label>
       <select
         id="profile-locale"
-        value={locale}
+        value={selectedLocale}
         disabled={pending}
         onChange={(e) => {
           const value = e.target.value;
+          if (value === locale) return;
           setError(false);
           start(async () => {
+            selectLocale(value);
             try {
+              // The cookie mutation already refreshes the translated server components.
               await setLocale(value);
-              router.refresh();
             } catch {
               setError(true);
             }

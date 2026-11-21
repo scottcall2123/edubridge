@@ -1,5 +1,13 @@
 # Verification — steps 1–12
 
+## Language switching performance — 21 November 2026
+
+Production build, lint and all 26 unit tests passed. A browser trace of the previous production build showed a locale-action POST followed by a redundant current-page RSC GET. The final production build switched UZ/EN/RU with only the action POST for the current page; automatic link prefetches were excluded from that comparison. Clicking the current language produced no page update request. Localized title/HTML language and cookie persistence after reload passed. This measures avoided work, not a production latency percentage.
+
+At 375/768/1280, temporary local fixtures also checked both the header buttons and Profile language select. Each used one action without the extra page GET. With a simulated 400 ms action delay, the requested selection appeared immediately, controls stayed disabled while pending, and a typed form draft survived the translation update. A simulated HTTP 503 rolled the selected button back to the current locale, displayed a translated error and allowed a successful retry. No horizontal overflow or uncaught browser errors appeared. Fixtures were removed before the final build.
+
+Checks were unauthenticated and local. The existing server action still verifies the Supabase user and awaits the profile preference write before setting the cookie; its account persistence behavior was not changed. Live account logout/login and timing checks remain in TODO_FOR_HUMAN.md. No new SQL or environment variables are required.
+
 ## Free online lessons update — 21 November 2026
 
 Production build, lint and all 26 existing tests passed, including UZ/EN/RU key/ICU checks. Headless Chromium checked landing, teacher list, slot selection → free review → back, booking confirmation and saved Profile presentation in all three languages at 375/768/1280. It verified free lesson labels, planned funding copy, no displayed legacy rate or student payment simulation, preserved question links, retained slot selection, and the separate simulated offline-course request. No horizontal page overflow or uncaught browser errors appeared. Mobile teacher-list screenshot reviewed.
