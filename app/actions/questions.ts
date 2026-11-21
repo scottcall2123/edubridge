@@ -17,14 +17,14 @@ export async function createQuestion(input: unknown) {
   const { user } = await requireUser(),
     parsed = questionInput.safeParse(input);
   if (!parsed.success) return { error: "validation" as const };
-  const { requestId, subjectId, topicId, text } = parsed.data;
+  const { requestId, subjectId, topicId, text,isPublic } = parsed.data;
   try {
     await awardPoints(
       user.id,
       "question_asked",
       POINTS.question_asked,
       requestId,
-      { newQuestion: { subject_id: subjectId, topic_id: topicId, text } },
+      { newQuestion: { subject_id: subjectId, topic_id: topicId, text,is_public:isPublic } },
     );
     revalidatePath("/dashboard");
     return { questionId: requestId };

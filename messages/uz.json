@@ -205,7 +205,28 @@
     "viewBooking": "Bandlovni ko‘rish"
   },
   "forum": {
-    "title": "Forum"
+    "title": "Forum",
+    "newQuestion": "Ommaviy savol berish",
+    "publicNotice": "Bu savol forumda hammaga ko‘rinadi. Shaxsiy ma’lumot yozmang.",
+    "answers": "{count} ta javob",
+    "empty": "Hali savollar yo‘q. Birinchi bo‘lib savol bering.",
+    "noAnswers": "Hali javob yo‘q. Qadam-ma-qadam tushuntirib yordam bering.",
+    "answerTitle": "Javobni qadamlar bilan yozing",
+    "step": "{n}-qadam",
+    "addStep": "Qadam qo‘shish",
+    "removeStep": "{n}-qadamni olib tashlash",
+    "submit": "Javobni saqlash",
+    "invalid": "Kamida 2 ta qadam yozing. Har biri 3–1000 belgi bo‘lsin.",
+    "save": "Saqlanmadi. Huquqlaringizni tekshirib, qayta urinib ko‘ring.",
+    "saved": "Javob saqlandi.",
+    "rate": "{n} yulduz berish",
+    "rating": "{n}/5 yulduz",
+    "rateHint": "Savol egasi javobni bir marta baholashi mumkin. Har bir yulduz yordamchiga +4 ball beradi.",
+    "report": "Shikoyat qilish",
+    "reportThanks": "Rahmat, moderatorlar tekshiradi.",
+    "loginToAnswer": "Javob yozish uchun kiring",
+    "back": "Forumga qaytish",
+    "unrated": "Hali baholanmagan"
   },
   "leaderboard": {
     "title": "Farg‘ona Top-100 o‘quvchilari"

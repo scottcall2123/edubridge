@@ -78,7 +78,7 @@ export function dailyProgress(
 type Effect = {
   questionId?: string;
   status?: "solved_by_forum" | "solved_by_ai";
-  newQuestion?: { subject_id: string; topic_id: string; text: string };
+  newQuestion?: { subject_id: string; topic_id: string; text: string;is_public?:boolean };
 };
 async function commit(
   userId: string,
@@ -149,6 +149,12 @@ export async function touchStreak(userId: string) {
     next: streakAfter(p, tashkentDay()),
     events: [],
   }));
+}
+
+export async function rateHelper(ownerId:string,answerId:string,stars:number){
+ if(!Number.isInteger(stars)||stars<1||stars>5)throw new Error('Invalid stars');
+ const admin=createAdminClient();const {data:answer,error:answerError}=await admin.from('answers').select('author_id,question_id,is_sample').eq('id',answerId).single();if(answerError||!answer?.author_id||answer.author_id===ownerId||answer.is_sample)throw new Error('Invalid answer');
+ for(let attempt=0;attempt<8;attempt++){const {data,error}=await admin.from('profiles').select('points,streak_days,last_streak_date,last_visit_date').eq('id',answer.author_id).single();if(error||!data)throw new Error('Helper unavailable');const expected=progressOf(data),points=POINTS.helper_star*stars,next=streakAfter({...expected,points:expected.points+points},tashkentDay());const result=await admin.rpc('rate_forum_answer',{p_answer:answerId,p_owner:ownerId,p_stars:stars,p_expected:expected,p_next:next,p_points:points});if(result.error)throw new Error('Rating unavailable');if(result.data==='conflict')continue;return result.data==='applied';}throw new Error('Rating busy');
 }
 
 export async function bookWithPoints(

@@ -1,5 +1,8 @@
 # Decisions
 
+- P1 forum: open public posts are readable, while /ask questions remain private. Public page loaders query only public rows and return a limited projection; private answer/chat data remains behind ownership checks.
+- Forum stars use a service-only transaction with the helper profile lock and expected snapshot. Only the question owner can rate another real author once; points/streak amounts stay in lib/points.ts.
+
 - Preserved concurrent upstream Gemini fallback/diagnostic commits by rebasing the final landing commit onto updated main and rebuilding the combined state.
 
 - Use deterministic numeric booking prices/dates and a server-provided reference time: Node and Chromium disagree on Uzbek ICU number grouping, which caused a hydration mismatch during screen tests. Canonical formatting fixes it without hiding hydration warnings.

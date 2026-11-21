@@ -19,6 +19,7 @@ export const questionInput = z.object({
   subjectId: z.uuid(),
   topicId: z.uuid(),
   text: z.string().trim().min(10).max(1000),
+  isPublic:z.boolean().optional().default(false),
 });
 export interface SimilarQuestion {
   id: string;

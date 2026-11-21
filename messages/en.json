@@ -205,7 +205,28 @@
     "viewBooking": "View booking"
   },
   "forum": {
-    "title": "Forum"
+    "title": "Forum",
+    "newQuestion": "Post a public question",
+    "publicNotice": "This question is public. Do not include personal information.",
+    "answers": "{count} answers",
+    "empty": "No questions yet. Be the first to ask.",
+    "noAnswers": "No answers yet. Help with a step-by-step explanation.",
+    "answerTitle": "Write a step-by-step answer",
+    "step": "Step {n}",
+    "addStep": "Add a step",
+    "removeStep": "Remove step {n}",
+    "submit": "Save answer",
+    "invalid": "Write at least 2 steps, each 3–1000 characters.",
+    "save": "Could not save. Check your access and try again.",
+    "saved": "Answer saved.",
+    "rate": "Give {n} stars",
+    "rating": "{n}/5 stars",
+    "rateHint": "The question owner can rate an answer once. Each star gives the helper +4 points.",
+    "report": "Report",
+    "reportThanks": "Thank you. Moderators will review it.",
+    "loginToAnswer": "Log in to answer",
+    "back": "Back to forum",
+    "unrated": "Not rated yet"
   },
   "leaderboard": {
     "title": "Fergana Top 100 students"

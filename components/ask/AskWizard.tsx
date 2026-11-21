@@ -27,9 +27,11 @@ export function Steps({ step }: { step: number }) {
 export function AskWizard({
   subjects,
   topics,
+  publicMode=false,
 }: {
   subjects: Subject[];
   topics: Topic[];
+  publicMode?:boolean;
 }) {
   const t = useTranslations(),
     locale = useLocale() as Locale,
@@ -103,9 +105,10 @@ export function AskWizard({
                     subjectId: subject,
                     topicId: topic,
                     text,
+                    isPublic:publicMode,
                   });
                   if (result.error) setError(result.error);
-                  else router.push(`/ask?q=${result.questionId}`);
+                  else router.push(publicMode?`/forum/${result.questionId}`:`/ask?q=${result.questionId}`);
                 } catch {
                   setError("save");
                 }
@@ -145,7 +148,7 @@ export function AskWizard({
               <p className="mt-2 text-xs text-muted">
                 {t("ask.length", { count: text.length })}
               </p>
-              <p className="mt-2 text-xs text-muted">{t("ask.private")}</p>
+              <p className="mt-2 text-xs text-muted">{t(publicMode?"forum.publicNotice":"ask.private")}</p>
             </div>
             {error && (
               <p role="alert" className="text-danger">
