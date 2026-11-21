@@ -147,7 +147,36 @@
     "cancelled": "Cancelled"
   },
   "profile": {
-    "title": "Profile"
+    "title": "Profile",
+    "grade": "Grade {grade}",
+    "joined": "Joined: {date}",
+    "badges": "Badges",
+    "firstQuestion": "First question",
+    "firstAI": "First problem with AI",
+    "streak3": "3-day streak",
+    "streak7": "7-day streak",
+    "firstBooking": "First teacher lesson",
+    "earned": "Earned",
+    "notEarned": "Not earned yet",
+    "sections": "Profile sections",
+    "points": "Points history",
+    "questions": "My questions",
+    "chats": "AI chat history",
+    "bookings": "Bookings",
+    "portfolio": "Portfolio (Barkamol-Raqamli)",
+    "portfolioText": "A digital portfolio for your learning achievements.",
+    "date": "Date",
+    "activity": "Activity",
+    "status_open": "Open",
+    "status_solved_by_forum": "Forum helped",
+    "status_solved_by_ai": "Solved with AI",
+    "status_sent_to_teacher": "Sent to teacher",
+    "noQuestions": "No questions yet. Ask your first question.",
+    "noChats": "No AI chats yet.",
+    "noBookings": "No bookings yet.",
+    "language": "Language preference",
+    "openChat": "Open chat",
+    "viewBooking": "View booking"
   },
   "forum": {
     "title": "Forum"

@@ -147,7 +147,36 @@
     "cancelled": "Отменено"
   },
   "profile": {
-    "title": "Профиль"
+    "title": "Профиль",
+    "grade": "{grade}-й класс",
+    "joined": "Дата регистрации: {date}",
+    "badges": "Достижения",
+    "firstQuestion": "Первый вопрос",
+    "firstAI": "Первая задача с AI",
+    "streak3": "3 дня подряд",
+    "streak7": "7 дней подряд",
+    "firstBooking": "Первый урок с учителем",
+    "earned": "Получено",
+    "notEarned": "Ещё не получено",
+    "sections": "Разделы профиля",
+    "points": "История баллов",
+    "questions": "Мои вопросы",
+    "chats": "История чатов с AI",
+    "bookings": "Записи на уроки",
+    "portfolio": "Портфолио (Barkamol-Raqamli)",
+    "portfolioText": "Цифровое портфолио учебных достижений.",
+    "date": "Дата",
+    "activity": "Действие",
+    "status_open": "Открыт",
+    "status_solved_by_forum": "Помощь форума",
+    "status_solved_by_ai": "Решён с AI",
+    "status_sent_to_teacher": "Направлен учителю",
+    "noQuestions": "Вопросов пока нет. Задайте первый вопрос.",
+    "noChats": "Чатов с AI пока нет.",
+    "noBookings": "Записей пока нет.",
+    "language": "Предпочитаемый язык",
+    "openChat": "Открыть чат",
+    "viewBooking": "Посмотреть запись"
   },
   "forum": {
     "title": "Форум"

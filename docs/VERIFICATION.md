@@ -1,5 +1,9 @@
 # Verification — steps 1–7
 
+## Step 9
+
+Profile build and lint passed; all 14 unit tests passed, including computed badge conditions and a new profile having no invented achievements. Saved histories are explicitly filtered to the authenticated user. No SQL migration is needed for step 9. Full hosted logout/login persistence checks still require live project configuration.
+
 ## Step 8
 
 Build, lint and 12 tests passed. Migration 004 ran successfully in local PostgreSQL 17. Transaction checks passed: saved booking and +3 once on retries, question status saved, second user cannot take the slot, foreign/mismatched questions rejected, past slots rejected, failed writes rolled back and booking RLS isolates users. Slot tests cover Tashkent day boundaries, future-only times and labels. Live Supabase keys are not available in this workspace.

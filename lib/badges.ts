@@ -1,0 +1,2 @@
+import type {Profile,Question,Booking} from './types';
+export function earnedBadges(profile:Pick<Profile,'streak_days'>,questions:Pick<Question,'status'>[],bookings:Pick<Booking,'status'>[]){return {firstQuestion:questions.length>0,firstAI:questions.some(q=>q.status==='solved_by_ai'),streak3:profile.streak_days>=3,streak7:profile.streak_days>=7,firstBooking:bookings.some(b=>b.status==='confirmed')};}

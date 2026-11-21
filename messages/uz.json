@@ -147,7 +147,36 @@
     "cancelled": "Bekor qilingan"
   },
   "profile": {
-    "title": "Profil"
+    "title": "Profil",
+    "grade": "{grade}-sinf",
+    "joined": "Qo‘shilgan sana: {date}",
+    "badges": "Yutuqlar",
+    "firstQuestion": "Birinchi savol",
+    "firstAI": "AI bilan 1 ta masala",
+    "streak3": "3 kunlik olov",
+    "streak7": "7 kunlik olov",
+    "firstBooking": "Birinchi ustoz darsi",
+    "earned": "Qo‘lga kiritilgan",
+    "notEarned": "Hali olinmagan",
+    "sections": "Profil bo‘limlari",
+    "points": "Ballar tarixi",
+    "questions": "Savollarim",
+    "chats": "AI suhbatlar tarixi",
+    "bookings": "Bandlovlar",
+    "portfolio": "Portfolio (Barkamol-Raqamli)",
+    "portfolioText": "O‘quv yutuqlaringiz uchun raqamli portfolio.",
+    "date": "Sana",
+    "activity": "Faoliyat",
+    "status_open": "Ochiq",
+    "status_solved_by_forum": "Forum yordam berdi",
+    "status_solved_by_ai": "AI bilan hal qilindi",
+    "status_sent_to_teacher": "Ustozga yuborildi",
+    "noQuestions": "Hali savollar yo‘q. Birinchi savolingizni bering.",
+    "noChats": "Hali AI bilan suhbat yo‘q.",
+    "noBookings": "Hali bandlovlar yo‘q.",
+    "language": "Til tanlovi",
+    "openChat": "Suhbatni ochish",
+    "viewBooking": "Bandlovni ko‘rish"
   },
   "forum": {
     "title": "Forum"

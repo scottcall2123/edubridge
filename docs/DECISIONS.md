@@ -1,5 +1,8 @@
 # Decisions
 
+- Step 9: profile histories use user-scoped RLS plus explicit user IDs and paged reads so Supabase’s default row limit does not silently truncate saved results. Badges are computed from saved questions/bookings/current streak, not invented activity.
+- Profile language selection reuses the existing validated server action to save both profiles.locale and NEXT_LOCALE. Step 9 needs no SQL migration.
+
 - Step 8: migration 004 retains book_slot and wraps it in a profile-locked transaction with the booking points from lib/points.ts; retrying the same user/slot/question returns the saved booking without another award.
 - Future slots are generated relative to Asia/Tashkent at 09:00, 14:00, 17:00 and inserted only until each teacher has three future free slots. Unique teacher/time keys handle concurrent refreshes.
 - Booking links preserve the originating question; both application checks and SQL enforce ownership and matching teacher subject. Payment/offline-course requests are explicitly simulated; meeting text is not a link.

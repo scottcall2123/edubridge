@@ -28,4 +28,4 @@ Set server-only `GEMINI_API_KEY` from Google AI Studio. `GEMINI_MODEL` defaults 
 
 Run `npm test` for date/streak, input, history and tutor-prompt checks. Local PostgreSQL tests also exercised transaction idempotency, retry counters and the daily cap. Screen fixtures were tested at 375/768/1280 with synthetic tutor responses; fixtures are not included in production. Live Supabase/Gemini integration still requires your keys; see docs/VERIFICATION.md.
 
-Step 8 adds teacher filters, future slots, a simulated payment flow and a persisted booking confirmation with an atomic +3 award. Apply `004_booking.sql` once on the existing deployed database. Next: section 19 step 9, the saved-results profile.
+Steps 8–9 add teacher filters, future slots, simulated payment, persisted booking confirmation with an atomic +3 award, and the full saved-results profile (points, questions, chat history, bookings, computed badges and language preference). Apply `004_booking.sql` once on the existing database; step 9 needs no SQL. Next: section 19 step 10, the full landing page.
