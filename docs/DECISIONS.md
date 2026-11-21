@@ -1,5 +1,7 @@
 # Decisions
 
+- 21 November product update: free online teacher lessons for school students, with planned Farg‘ona hokimiyat compensation for teachers. Replace student prices/payment simulation with free lesson review/confirmation in UZ/EN/RU, including Profile and landing. Actual payouts/attendance reporting are future work. Keep legacy database rate/payment fields without changing stored bookings; no new SQL is required. This supersedes earlier simulated-payment UI decisions below.
+
 - Step 12: complete UZ/EN/RU key and ICU parity, localized metadata/errors, keyboard skip link and tablet icon navigation. Student-authored text and existing Uzbek sample answers retain their original language.
 - P1 images use direct authenticated uploads to a private owner-folder bucket, avoiding the hosting request-body limit. Server attachment validates ownership, bytes, MIME and a conditional image update; signed URLs expire after five minutes. AI uses the typed question, without OCR.
 - Registration uses real Supabase Auth. The simulated parent check is bound to the normalized phone and a ten-minute signed httpOnly cookie; it sends no SMS and does not claim parental identity verification.

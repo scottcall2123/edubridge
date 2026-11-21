@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Star, MapPin, Clock } from "lucide-react";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Avatar, Card, Tag } from "@/components/ui";
-import { slotLabel, formatUzs } from "@/lib/booking";
+import { slotLabel } from "@/lib/booking";
 import type { TeacherWithSlots } from "@/lib/teachers";
 import type { Subject } from "@/lib/types";
 import type { Locale } from "@/lib/i18n";
@@ -27,6 +27,10 @@ export async function TeacherList({
   return (
     <main className="container space-y-6 py-8">
       <h1>{t("teachers.title")}</h1>
+      <div className="space-y-2 rounded-xl bg-sky-50 p-4">
+        <p className="font-bold text-royal">{t("teachers.freeForStudents")}</p>
+        <p className="text-sm text-muted">{t("teachers.fundingPlan")}</p>
+      </div>
       <p className="rounded-xl bg-sky-50 p-4 text-sm text-royal">
         {t("teachers.notice")}
       </p>
@@ -72,9 +76,7 @@ export async function TeacherList({
               {teacher.is_sample && <Tag>{t("common.sample")}</Tag>}
             </div>
             <p className="font-bold">
-              {t("teachers.price", {
-                price: formatUzs(teacher.price_uzs_15min),
-              })}
+              {t("teachers.freeSession")}
             </p>
             <div className="flex flex-wrap gap-2">
               {teacher.slots.slice(0, 3).map((slot) => (

@@ -206,9 +206,7 @@ export async function ProfileView({
                 <div className="flex flex-wrap gap-2">
                   <Tag>{t(`booking.${b.status}`)}</Tag>
                   {b.teacher?.is_sample && <Tag>{t("common.sample")}</Tag>}
-                  {b.payment_simulated && (
-                    <Tag simulated>{t("common.simulated")}</Tag>
-                  )}
+                  <Tag>{t("teachers.freeForStudents")}</Tag>
                 </div>
                 <p className="text-sm text-muted">{t("booking.meeting")}</p>
                 <Link

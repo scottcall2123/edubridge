@@ -33,7 +33,9 @@ Steps 1–12 are implemented: responsive UZ/EN/RU layout, real Supabase auth and
 
 Forum posts are explicitly public. Homework from /ask and its images stay private. Student text and team-written sample answers are not automatically translated; all interface text, subjects, topics and teacher bios support UZ/EN/RU.
 
-Payment, parent SMS and offline-course requests are clearly simulated. Teachers, ratings, prices, slots, example questions, sample leaderboard entries and demo history are labeled sample data. No real video meeting is created.
+Online teacher lessons are free for school students. Teacher cards and booking/profile screens show free lessons; booking uses a review and confirmation with no payment step. Planned compensation for teachers’ extra online teaching comes from Farg‘ona hokimiyat. No approved funding agreement or actual payout is claimed. This update needs no new SQL or environment variables; existing database rate/payment fields remain only for compatibility.
+
+Parent SMS and offline-course requests are clearly simulated. Teachers, ratings, slots, example questions, sample leaderboard entries and demo history are labeled sample data. No real video meeting is created. Offline courses are separate offers with terms set by the learning center.
 
 Lessons and the Barkamol-Raqamli portfolio remain intentional P2 coming-soon cards.
 

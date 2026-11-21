@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { CheckCircle, Star } from "lucide-react";
 import { Card, Tag, Avatar, Button } from "@/components/ui";
 import { bookSlot } from "@/app/actions/booking";
-import { slotLabel, localDay, slotDate, formatUzs } from "@/lib/booking";
+import { slotLabel, localDay, slotDate } from "@/lib/booking";
 import type { TeacherWithSlots } from "@/lib/teachers";
 import type { Locale } from "@/lib/i18n";
 import type { TeacherSlot, Booking } from "@/lib/types";
@@ -25,15 +25,12 @@ export function BookingFlow({
     locale = useLocale() as Locale,
     router = useRouter(),
     [selected, setSelected] = useState(""),
-    [payment, setPayment] = useState(false),
+    [reviewing, setReviewing] = useState(false),
     [error, setError] = useState(""),
     [toast, setToast] = useState(false),
     [pending, start] = useTransition();
   const slot =
-      confirmation?.slot ?? teacher.slots.find((s) => s.id === selected),
-    price = t("teachers.price", {
-      price: formatUzs(teacher.price_uzs_15min),
-    });
+    confirmation?.slot ?? teacher.slots.find((s) => s.id === selected);
   const time = (at: string) =>
     slotLabel(
       at,
@@ -47,15 +44,17 @@ export function BookingFlow({
       <Card className="mx-auto max-w-xl space-y-6 text-center">
         <CheckCircle className="mx-auto text-success" />
         <h1>{t("booking.done")}</h1>
-        <Tag>{t("common.simulated")}</Tag>
+        {teacher.is_sample && <Tag>{t("common.sample")}</Tag>}
         <h2>{teacher.full_name}</h2>
         <p>
           {time(confirmation.slot.starts_at)} · {t("booking.duration")}
         </p>
         <p className="text-sm text-muted">{t("teachers.timezone")}</p>
-        <p>{price}</p>
+        <p className="font-bold text-royal">{t("teachers.freeForStudents")}</p>
+        <p className="text-sm text-muted">{t("teachers.fundingPlan")}</p>
         <p>{t("booking.meeting")}</p>
         <div className="rounded-xl bg-sky-50 p-4">
+          <p className="mb-3 text-sm text-muted">{t("booking.offlineNotice")}</p>
           <Button variant="secondary" onClick={() => setToast(true)}>
             {t("booking.offline")}
           </Button>
@@ -91,13 +90,13 @@ export function BookingFlow({
         <p className="text-sm text-muted">
           {t("teachers.center", { name: teacher.offline_center })}
         </p>
-        <p className="font-bold">{price}</p>
+        <p className="font-bold text-royal">{t("teachers.freeSession")}</p>
+        <p className="text-sm text-muted">{t("teachers.fundingPlan")}</p>
       </Card>
       <Card className="space-y-5">
-        {payment && slot ? (
+        {reviewing && slot ? (
           <>
-            <h2>{t("booking.paymentTitle")}</h2>
-            <Tag>{t("common.simulated")}</Tag>
+            <h2>{t("booking.reviewTitle")}</h2>
             <p>{t("booking.notice")}</p>
             <dl className="space-y-3">
               <div>
@@ -111,7 +110,7 @@ export function BookingFlow({
                 </dd>
               </div>
             </dl>
-            <p className="font-bold">{price}</p>
+            <p className="font-bold text-royal">{t("teachers.freeForStudents")}</p>
             <Button
               disabled={pending}
               className="w-full"
@@ -124,7 +123,7 @@ export function BookingFlow({
                       setError(result.error);
                       if (result.error === "slotTaken") {
                         setSelected("");
-                        setPayment(false);
+                        setReviewing(false);
                         router.refresh();
                       }
                     } else
@@ -137,12 +136,12 @@ export function BookingFlow({
                 });
               }}
             >
-              {t(pending ? "common.loading" : "booking.pay")}
+              {t(pending ? "common.loading" : "booking.confirmFree")}
             </Button>
             <Button
               variant="secondary"
               disabled={pending}
-              onClick={() => setPayment(false)}
+              onClick={() => setReviewing(false)}
             >
               {t("booking.back")}
             </Button>
@@ -198,7 +197,7 @@ export function BookingFlow({
                 </Button>
               </>
             )}
-            <Button disabled={!slot} onClick={() => setPayment(true)}>
+            <Button disabled={!slot} onClick={() => setReviewing(true)}>
               {t("common.continue")}
             </Button>
           </>

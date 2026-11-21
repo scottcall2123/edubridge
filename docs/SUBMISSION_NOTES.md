@@ -7,14 +7,16 @@ Link: https://edubridge-seven-alpha.vercel.app
 Demo login: click **Demo bilan kirish** on the home or login page. The dedicated demo email/password are also displayed on the login page; no account request or installation is needed.
 
 Main flow to test:
-Dashboard → Savol berish → choose subject and topic → write a question → see similar questions explained step by step → AI Ustoz bilan ishlash. The AI explains one step at a time and asks Tushundingmi? Press the simpler button twice to see the teacher option → book a Fergana teacher → simulated payment → confirmation → Profile. Alternatively, press understood, then problem solved, and open Profile to see saved points, questions and chat history. Log out and in again to verify persistence.
+Dashboard → Savol berish → choose subject and topic → write a question → see similar questions explained step by step → AI Ustoz bilan ishlash. The AI explains one step at a time and asks Tushundingmi? Press the simpler button twice to see the teacher option → choose a Fergana teacher and time → review the free lesson → confirm booking → Profile. Online lessons are free for school students, with no payment step. Alternatively, press understood, then problem solved, and open Profile to see saved points, questions and chat history. Log out and in again to verify persistence.
 
 P1 extras:
 Register a student; grades 5–7 have a clearly simulated parent-code check (4821 shown on screen; no SMS). Post a public forum question, answer in steps from another account, and let the owner rate it once. Each star awards the helper four points. Reports are saved for manual moderation. Browse the sample-labeled Top-100 leaderboard. Attach a private JPEG/PNG image up to 5 MB to homework; type the question text for the AI too.
 
 Real: Supabase login/registration and sessions; saved questions, chats, points, streaks and bookings; Google Gemini tutor; Postgres similar-question search; forum posts/answers/one-time ratings/reports; private image storage; UZ/EN/RU interface and AI reply-language selection.
 
-Simulated/sample: teacher profiles, ratings, prices and slots; payment (no money moves); meeting-link placeholder; parent SMS code; offline-course request; team-written example Q&A, sample leaderboard students and demo past activity.
+Planned funding: Farg‘ona hokimiyat covers compensation for teachers’ extra online teaching. The MVP does not process teacher payouts or claim an approved funding agreement. Offline courses are separate offers.
+
+Simulated/sample: teacher profiles, ratings and slots; meeting-link placeholder; parent SMS code; offline-course request; team-written example Q&A, sample leaderboard students and demo past activity.
 
 Lessons and the Barkamol-Raqamli portfolio are labeled coming soon.
 

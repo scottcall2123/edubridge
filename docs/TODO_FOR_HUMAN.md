@@ -2,9 +2,15 @@
 
 Steps 1–10 are already deployed and live-tested according to the team. Keep the existing working environment variables and seed data.
 
-## Run exactly these new SQL files
+## Free online lesson update
 
-In Supabase → SQL Editor, run these once, in this order:
+No new SQL, environment variables or payment provider is needed for this change. After the app deployment, check teacher cards, teacher details, free lesson review, booking confirmation, saved Profile and landing in UZ/EN/RU. They must show that online lessons are free for school students, with no student price or payment step. Book a time and confirm that the booking and +3 points still persist after refresh/login.
+
+Funding is described as a planned Farg‘ona hokimiyat model. Confirm the funding agreement, teacher eligibility, approved rates and attendance verification before real teacher payments begin. Actual payouts and compensation reports are not implemented. A later phase can add completed-lesson approval and a monthly teacher compensation report; keep pupil booking free.
+
+## P1 SQL from the previous update, if not already applied
+
+In Supabase → SQL Editor, run these once, in this order, only if you have not already applied them:
 
 1. `supabase/migrations/005_forum.sql` — public forum visibility; retry-safe answer posting, owner-only one-time ratings and helper points; report handling.
 2. `supabase/migrations/006_question_images.sql` — creates/configures PRIVATE `question-images` storage, a 5 MB limit, JPEG/PNG MIME types and owner-folder read/upload/delete policies.
@@ -26,7 +32,7 @@ After the GitHub-triggered Vercel deployment is ready, perform the checks below.
 9. If an upload fails, confirm the question remains saved and can continue without the image or retry the upload.
 10. Switch UZ/EN/RU on register, forum, leaderboard, dashboard, tutor, teachers and profile. Confirm language survives refresh and login. Existing student-authored text/sample answers stay in their original language.
 11. Test at 375, 768 and 1280 pixels. Check keyboard focus, skip link, tablet navigation, mobile menu, empty states and error messages. No raw errors or keys should appear.
-12. Repeat the AGENTS.md section 21 main-flow checklist after the new migrations. In particular: demo → ask → AI → two simpler clicks → teacher → simulated payment → confirmation → saved Profile → logout/login.
+12. Repeat the AGENTS.md section 21 main-flow checklist after the new migrations. In particular: demo → ask → AI → two simpler clicks → teacher → free lesson review → confirmation → saved Profile → logout/login.
 
 ## Submission
 

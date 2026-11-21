@@ -82,7 +82,7 @@ export interface Teacher {
   subject_id: string;
   district: string;
   rating: number;
-  price_uzs_15min: number;
+  price_uzs_15min: number; // Legacy sample rate, never a student charge.
   bio_uz: string;
   bio_en: string;
   bio_ru: string;
@@ -103,7 +103,7 @@ export interface Booking {
   slot_id: string;
   question_id: string | null;
   status: "confirmed" | "cancelled";
-  payment_simulated: boolean;
+  payment_simulated: boolean; // Legacy MVP metadata; no student payment or teacher payout occurs.
   meeting_link: string | null;
   created_at: string;
 }

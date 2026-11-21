@@ -1,5 +1,11 @@
 # Verification — steps 1–12
 
+## Free online lessons update — 21 November 2026
+
+Production build, lint and all 26 existing tests passed, including UZ/EN/RU key/ICU checks. Headless Chromium checked landing, teacher list, slot selection → free review → back, booking confirmation and saved Profile presentation in all three languages at 375/768/1280. It verified free lesson labels, planned funding copy, no displayed legacy rate or student payment simulation, preserved question links, retained slot selection, and the separate simulated offline-course request. No horizontal page overflow or uncaught browser errors appeared. Mobile teacher-list screenshot reviewed.
+
+Screens used temporary synthetic-data fixtures, including a legacy booking with `payment_simulated=true`, to verify compatible display. Fixtures were removed before the production build. The existing reservation/points transaction was not changed. No production booking, teacher compensation or funding-agreement verification is claimed; live save/refresh/login checks remain in TODO_FOR_HUMAN.md. No new SQL files were added.
+
 ## Steps 11–12
 
 Each P1 increment (forum, leaderboard, registration, images) passed a production build and lint before its commit. The polish pass checks all three dictionaries for matching, nonempty keys and ICU arguments, parses every message, and checks key text/background contrast ratios. The complete unit suite has 26 passing tests, including forum validation, leaderboard ordering, image type/path checks and signed parent-code expiry/tampering checks.

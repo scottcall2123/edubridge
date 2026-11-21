@@ -112,7 +112,7 @@ export default async function Home() {
                   </div>
                   <h3 className="text-xl font-bold">{t(`landing.step${n}`)}</h3>
                   <p className="text-xs font-bold uppercase tracking-wider text-royal">
-                    {t(n === 3 ? "landing.last" : "landing.free")}
+                    {t("landing.free")}
                   </p>
                   <p className="text-sm text-muted">
                     {t(`landing.stepText${n}`)}

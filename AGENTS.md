@@ -4,6 +4,8 @@
 > Codex (and later Claude Code) must read ALL of it before writing code.
 > Put this file in the ROOT of the `edubridge` repository. Codex reads `AGENTS.md` automatically.
 
+**Product update — 21 November 2026:** Online teacher lessons are free for school students. The planned funding source for teachers’ extra online teaching is Farg‘ona hokimiyat; do not claim an approved partnership or an actual payout. Student screens show free 15-minute lessons and a booking review/confirmation, with no payment step. Existing teacher-rate and `payment_simulated` database fields are legacy MVP metadata, not student charges or payout records. Keep them for compatibility; no new SQL is required for this UI/flow change. Actual attendance approval and teacher compensation reporting are future work.
+
 ---
 
 ## 0. Mission, deadline, non-negotiables
@@ -39,11 +41,11 @@ EduBridge is a **3-step help funnel** for school homework, plus gamification.
 
 1. **Qadam-ma-qadam (free):** When a student asks a question, first show similar questions that were already explained **step by step**.
 2. **AI Ustoz (free):** A Socratic AI tutor (Google Gemini). It **never gives the final answer**. It explains one step, then asks **"Tushundingmi?"** ("Did you understand?"). If the student says no, it explains the same step more simply.
-3. **Jonli Ustozlar (paid, last step):** Only if the student is still stuck (after 2 "no" answers), they can book a short online session with a top-rated Fergana teacher. After the session, a button invites them to the teacher’s offline course.
+3. **Jonli Ustozlar (free for school students, last step):** Only if the student is still stuck (after 2 "no" answers), they can book a short online session with a top-rated Fergana teacher. After the session, a button invites them to the teacher’s separate offline course.
 
 Gamification: daily streak **"Olov"** (fire), points, daily goal, and a **"Farg‘ona Top-100"** leaderboard.
 
-Business model (show on landing page): free for students; teachers paid per session, funded by local education budgets (Hokimiyat / Barkamol Avlod) and sponsor companies; teachers also gain offline students.
+Business model (show on landing page): online lessons are free for school students; planned compensation for teachers’ extra online lessons comes from Farg‘ona hokimiyat. Present funding as planned until an agreement is confirmed. Teachers can also introduce their separate offline courses.
 
 Target users: students in grades 8–11 in Fergana region. Grade 7 and below may join only with a parent phone check (simulated).
 
@@ -65,7 +67,7 @@ Brand: **EduBridge**, tagline **"Bilimga ko‘prik"** (Bridge to knowledge). Log
 | Onlayn bog‘lanish | Connect online | teacher card button |
 | Olov | Fire (streak) | dashboard |
 | Namunaviy | Sample | tag on all sample data |
-| Simulyatsiya | Simulation | tag on fake payment etc. |
+| Simulyatsiya | Simulation | tag on parent SMS and offline-course request |
 
 ---
 
@@ -81,7 +83,7 @@ Brand: **EduBridge**, tagline **"Bilimga ko‘prik"** (Bridge to knowledge). Log
    - **"Ha, tushundim"** → AI gives the next step (or asks the student to finish the last step). The student can click **"Masala hal bo‘ldi"** (problem solved) at any time after at least one "Ha" → question `solved_by_ai`, +10 points, streak updated, success screen.
    - **"Yo‘q, soddaroq tushuntiring"** → AI explains the same step more simply.
    - After **2 "Yo‘q"** clicks in the session → gold banner **"Hali ham tushunmadingizmi? Farg‘onadagi ustozlarga ulanish"**.
-6. Banner → **teachers list** for that subject → picks a teacher → picks a time slot → **simulated payment** → **booking confirmed** card. Question status `sent_to_teacher`.
+6. Banner → **teachers list** for that subject → picks a teacher → picks a time slot → **free lesson review** → **booking confirmed** card. No student payment. Question status `sent_to_teacher`.
 7. **Profile page** shows the saved results: points history, solved questions, AI chat history, bookings. Data is still there after logout/login.
 
 ---
@@ -127,7 +129,7 @@ Do not add other big libraries (no UI kits like MUI/Chakra, no Redux, no Prisma)
   ask/page.tsx
   tutor/[questionId]/page.tsx
   teachers/page.tsx
-  teachers/[id]/page.tsx        ← profile + slots + payment + confirmation
+  teachers/[id]/page.tsx        ← profile + slots + free booking review + confirmation
   profile/page.tsx
   forum/page.tsx                ← P1
   forum/[id]/page.tsx           ← P1
@@ -247,9 +249,9 @@ Sections, top to bottom:
 
 1. **Hero** (white): left = title **"Qiyin mavzu endi to‘siq emas"**, subtitle **"Farg‘ona o‘quvchilari uchun: avval tengdoshlar tushuntiradi, keyin AI Ustoz qadam-baqadam yordam beradi, kerak bo‘lsa — eng yaxshi ustozlar. Javobni ko‘chirmaymiz — tushunamiz."**, buttons **"Demo bilan kirish"** (primary, runs demo login) and **"Ro‘yxatdan o‘tish"** (secondary). Right = the seal logo, large (280–360px) on a soft sky-50 circle.
 2. **Muammo (the problem):** 3 cards with icons: "Katta sinflarda har bir o‘quvchiga vaqt yetmaydi", "Telegram guruhlari tartibsiz va xavfsiz emas", "AI botlar tayyor javob beradi — o‘quvchi o‘rganmaydi". No numbers/statistics.
-3. **Qanday ishlaydi (3-step funnel):** 3 connected steps: 1 Qadam-ma-qadam (bepul) → 2 AI Ustoz (bepul) → 3 Jonli ustozlar (oxirgi bosqich). One line each.
+3. **Qanday ishlaydi (3-step funnel):** 3 connected steps: 1 Qadam-ma-qadam (bepul) → 2 AI Ustoz (bepul) → 3 Jonli ustozlar (bepul, oxirgi bosqich). One line each; all three stages show free access for students.
 4. **Gamification strip:** Olov (streak), Ballar, Farg‘ona Top-100.
-5. **Ustozlar uchun (for teachers):** "Onlayn darsdan pul ishlang va oflayn kurslaringizga yangi o‘quvchilar toping."
+5. **Ustozlar uchun (for teachers):** explain that school students receive free online help and teachers’ compensation for extra teaching is planned to come from Farg‘ona hokimiyat. Teachers can also introduce their separate offline courses.
 6. **Xavfsizlik:** "8-sinfdan boshlab mustaqil, 7-sinf va undan kichiklar — ota-ona tasdig‘i bilan."
 7. Final CTA + Footer.
 
@@ -307,18 +309,18 @@ Three-step wizard on one page (step indicator 1–2–3 at top):
 ### 9.7 Teachers `/teachers` (P0)
 
 - Title "Farg‘onadagi ustozlar" + subject filter tabs (Barchasi, Algebra, Fizika, Kimyo); preselect from `?subject=`.
-- A notice bar: "Namunaviy ma’lumot: ustozlar, reytinglar va narxlar MVP uchun namunaviy." (sky-50).
-- Grid of teacher cards: Avatar (initials), full name, subject, district, gold stars + rating number with a tiny "namunaviy" tag, price "{price} so‘m / 15 daqiqa", next 3 free slot chips (e.g. "Bugun 17:00", "Ertaga 09:00"), button **"Onlayn bog‘lanish"** → `/teachers/{id}?q={questionId}` (keep `q`).
+- Notice bars: school students get free online lessons; teachers’ compensation is planned to come from Farg‘ona hokimiyat. Teachers, ratings and lesson times are labeled sample data.
+- Grid of teacher cards: Avatar (initials), full name, subject, district, gold stars + rating number with a tiny "namunaviy" tag, **"Bepul · 15 daqiqa"**, next 3 available slot chips (e.g. "Bugun 17:00", "Ertaga 09:00"), button **"Onlayn bog‘lanish"** → `/teachers/{id}?q={questionId}` (keep `q`). Never show the legacy teacher rate as a student price.
 
 ### 9.8 Teacher profile + booking `/teachers/[id]` (P0)
 
 One page with 3 states:
 
 1. **Profile + slots:** avatar, name, subject, district, rating, bio (in current locale), offline center name ("Oflayn markaz: …"), list of free slots grouped by day (15-minute slots). Select one → "Davom etish".
-2. **Simulated payment:** summary card (teacher, date/time, 15 min, price) + "Simulyatsiya" tag + text "Bu MVP: haqiqiy to‘lov amalga oshirilmaydi." + button **"To‘lovni tasdiqlash (simulyatsiya)"**. Do NOT show any card-number form and do NOT imitate real payment brands.
+2. **Free booking review:** summary card (teacher, date/time, 15 min), free-for-school-students label, no-payment-required text, and **"Bepul darsni band qilish"** button. No checkout, payment simulation or card form. Teacher compensation is separate from student booking.
 3. **Confirmed:** success card: "Band qilindi!", teacher, date, time, "Uchrashuv havolasi: (namunaviy)" shown as plain text (not a real link), and a CTA card **"Ustozning oflayn kurslariga yozilish"** → shows a toast "So‘rovingiz yuborildi (simulyatsiya)". Buttons: "Profilga o‘tish", "Bosh sahifa".
 
-Server action `bookSlot(slotId, questionId?)`: verify user; in one transaction/RPC set `teacher_slots.is_booked = true` only if it was false; insert `bookings` row (`status: confirmed`, `payment_simulated: true`, `meeting_link: null`); if `questionId` belongs to the user → status `sent_to_teacher`. If the slot was just taken → friendly error and refresh slots.
+Server action `bookSlot(slotId, questionId?)`: verify user; in one transaction/RPC set `teacher_slots.is_booked = true` only if it was false; insert a confirmed booking with no actual payment or meeting link. Retain the legacy `payment_simulated` field for database compatibility, without displaying it as a student payment. If `questionId` belongs to the user → status `sent_to_teacher`. If the slot was just taken → friendly error and refresh slots.
 
 ### 9.9 Profile `/profile` (P0)
 
@@ -383,7 +385,7 @@ Key strings (use these exact texts):
 | tutor.busy | AI Ustoz hozir band. Bir daqiqadan so‘ng qayta urinib ko‘ring. | AI Ustoz is busy. Please try again in a minute. | AI Ustoz сейчас занят. Попробуйте через минуту. |
 | teachers.title | Farg‘onadagi ustozlar | Teachers in Fergana | Учителя Ферганы |
 | teachers.connect | Onlayn bog‘lanish | Connect online | Связаться онлайн |
-| booking.pay | To‘lovni tasdiqlash (simulyatsiya) | Confirm payment (simulated) | Подтвердить оплату (симуляция) |
+| booking.confirmFree | Bepul darsni band qilish | Book free lesson | Записаться бесплатно |
 | booking.done | Band qilindi! | Booked! | Забронировано! |
 | booking.offline | Ustozning oflayn kurslariga yozilish | Join the teacher’s offline course | Записаться на офлайн-курс учителя |
 | success.points | Barakalla! +{n} ball | Well done! +{n} points | Отлично! +{n} баллов |
@@ -779,8 +781,9 @@ The other 9: similar typical grade 8–9 problems (e.g. inequality 2x − 3 > 5;
 | AI Ustoz answers | Real (Google Gemini API) | — |
 | Similar-question search | Real (Postgres full-text search) | — |
 | UZ / EN / RU switching | Real | — |
-| Teachers, ratings, prices, time slots | Sample data | "Namunaviy" |
-| Payment | Simulated, no money moves | "Simulyatsiya" |
+| Teachers, ratings, time slots | Sample data | "Namunaviy" |
+| Online student lessons | Free; no payment step | Free for school students |
+| Teacher compensation | Planned funding from Farg‘ona hokimiyat; no payouts implemented | Planned funding |
 | Video meeting link | Placeholder text | "namunaviy" |
 | Parent SMS code | Simulated, code shown on screen | "Simulyatsiya" |
 | Offline-course sign-up | Simulated toast | "simulyatsiya" |
@@ -822,7 +825,7 @@ The other 9: similar typical grade 8–9 problems (e.g. inequality 2x − 3 > 5;
 5. **Dashboard** with `onDailyVisit`, all cards, points rules card. → commit
 6. **Ask flow** (wizard, create question, +2, similar questions, "helped" path, success screen). → commit
 7. **AI Ustoz** (`/api/tutor`, prompt, chat UI, buttons, counters, banner, "Masala hal bo‘ldi", limit, errors). → commit
-8. **Teachers + booking** (list, filters, `ensureFutureSlots`, profile, slots, simulated payment, `book_slot`, confirmation, offline CTA, +3 points). → commit
+8. **Teachers + booking** (list, filters, `ensureFutureSlots`, profile, slots, free booking review, `book_slot`, confirmation, offline CTA, +3 points). → commit
 9. **Profile** (header, badges, points history, questions, bookings, language select, portfolio "Tez kunda"). → commit
 10. **Landing page** full design (section 9.1). → commit
 11. **P1:** forum list/detail/answers/stars/report, leaderboard page, register page with age gate, photo upload. → commit each
@@ -862,11 +865,11 @@ The other 9: similar typical grade 8–9 problems (e.g. inequality 2x − 3 > 5;
 - [ ] AI Ustoz answers in Uzbek, one step per message, ends with "Tushundingmi?"
 - [ ] Asking "just tell me the answer" → AI refuses kindly and keeps guiding
 - [ ] 2 × "Yo‘q" → gold banner → teachers of that subject
-- [ ] Book a slot → simulated payment → "Band qilindi!" → booking in Profile
+- [ ] Book a slot → free lesson review (no payment) → "Band qilindi!" → booking in Profile
 - [ ] "Masala hal bo‘ldi" → +10; Profile shows the solved question and points history
 - [ ] Logout → login → all data still there
 - [ ] UZ / EN / RU switch changes all UI text and the AI reply language
-- [ ] All sample data shows "Namunaviy"; payment shows "Simulyatsiya"
+- [ ] All sample data shows "Namunaviy"; parent SMS/offline requests show "Simulyatsiya"; online lessons show free for students
 - [ ] No API key in the browser (check Network tab and page source) or in the GitHub repo
 - [ ] Works at 375px; no console errors; `npm run build` passes
 
@@ -880,12 +883,13 @@ Demo login: <DEMO_EMAIL> / <DEMO_PASSWORD>  (or click "Demo bilan kirish" on the
 Main flow to test:
 Dashboard → "Savol berish" → choose subject and topic → write a question → see similar questions explained
 step by step → "AI Ustoz bilan ishlash": the AI explains one step at a time and asks "Tushundingmi?" →
-press "Yo‘q" twice to see the teacher option → book a Fergana teacher (simulated payment) →
+press "Yo‘q" twice to see the teacher option → book a Fergana teacher free of charge →
 or press "Masala hal bo‘ldi" → open Profile: points, solved questions and bookings are saved.
 
 Real: login, all saved data (Supabase), AI tutor (Google Gemini API), similar-question search,
 points and streak, UZ/EN/RU.
-Simulated / sample: teacher profiles, ratings, prices and time slots; payment; meeting link;
+Planned funding: Farg‘ona hokimiyat covers teachers’ extra online lessons; payouts are not implemented.
+Simulated / sample: teacher profiles, ratings and time slots; meeting link;
 parent SMS code; offline-course sign-up; forum examples, leaderboard users and the demo student's
 past activity (sample data written by the team).
 ```
