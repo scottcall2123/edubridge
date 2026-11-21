@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Award, Flame, Star, CheckCircle } from "lucide-react";
 import { getTranslations, getLocale } from "next-intl/server";
-import { Card, Avatar, Tag } from "@/components/ui";
+import { Card, Avatar, Tag, PageHeader } from "@/components/ui";
 import { LocaleSelect } from "./LocaleSelect";
 import { earnedBadges } from "@/lib/badges";
 import type { loadProfile } from "@/lib/profile";
@@ -28,7 +28,7 @@ export async function ProfileView({
   const badges = earnedBadges(profile, questions, bookings);
   return (
     <main className="container space-y-8 py-8">
-      <h1>{t("profile.title")}</h1>
+      <PageHeader title={t("profile.title")} />
       <Card className="space-y-5">
         <div className="flex flex-wrap items-center gap-4">
           <Avatar name={profile.full_name} />

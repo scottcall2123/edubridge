@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
-import { Card, Tag } from "@/components/ui";
+import { Card, Tag, PageHeader } from "@/components/ui";
 import type { loadForum } from "@/lib/forum";
 import type { Locale } from "@/lib/i18n";
 export async function ForumList({
@@ -22,14 +22,16 @@ export async function ForumList({
   );
   return (
     <main className="container space-y-6 py-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1>{t("forum.title")}</h1>
-        {!hideNewQuestion && (
-          <Link href="/forum/new" className="button button-primary">
-            {t("forum.newQuestion")}
-          </Link>
-        )}
-      </div>
+      <PageHeader
+        title={t("forum.title")}
+        action={
+          hideNewQuestion ? undefined : (
+            <Link href="/forum/new" className="button button-primary">
+              {t("forum.newQuestion")}
+            </Link>
+          )
+        }
+      />
       <nav aria-label={t("ask.chooseSubject")} className="flex flex-wrap gap-2">
         {[
           { slug: "", label: t("teachers.all") },

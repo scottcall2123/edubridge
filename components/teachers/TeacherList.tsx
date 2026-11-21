@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Star, MapPin, Clock } from "lucide-react";
 import { getTranslations, getLocale } from "next-intl/server";
-import { Avatar, Card, Tag } from "@/components/ui";
+import { Avatar, Card, Tag, PageHeader } from "@/components/ui";
 import { slotLabel } from "@/lib/booking";
 import type { TeacherWithSlots } from "@/lib/teachers";
 import type { Subject } from "@/lib/types";
@@ -26,14 +26,14 @@ export async function TeacherList({
   );
   return (
     <main className="container space-y-6 py-8">
-      <h1>{t("teachers.title")}</h1>
-      <div className="space-y-2 rounded-xl bg-sky-50 p-4">
-        <p className="font-bold text-royal">{t("teachers.freeForStudents")}</p>
-        <p className="text-sm text-muted">{t("teachers.fundingPlan")}</p>
+      <PageHeader
+        title={t("teachers.title")}
+        subtitle={t("teachers.freeForStudents")}
+      />
+      <div className="space-y-2 rounded-xl bg-sky-50 p-4 text-sm">
+        <p className="text-muted">{t("teachers.fundingPlan")}</p>
+        <p className="text-royal">{t("teachers.notice")}</p>
       </div>
-      <p className="rounded-xl bg-sky-50 p-4 text-sm text-royal">
-        {t("teachers.notice")}
-      </p>
       <nav aria-label={t("ask.chooseSubject")} className="flex flex-wrap gap-2">
         {[
           { slug: "", name: t("teachers.all") },

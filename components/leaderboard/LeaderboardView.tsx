@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { Card, Tag } from "@/components/ui";
+import { Card, Tag, PageHeader } from "@/components/ui";
 import type { rankEntries } from "@/lib/ranking";
 export async function LeaderboardView({
   rows,
@@ -10,7 +10,7 @@ export async function LeaderboardView({
   const t = await getTranslations();
   return (
     <main className="container space-y-6 py-8">
-      <h1>{t("leaderboard.title")}</h1>
+      <PageHeader title={t("leaderboard.title")} />
       <p className="text-sm text-muted">{t("leaderboard.notice")}</p>
       <Card>
         {rows.length ? (
