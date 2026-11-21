@@ -2,14 +2,10 @@ import "server-only";
 import { GoogleGenAI, type Content } from "@google/genai";
 import { buildTutorPrompt, normalizeTutorReply } from "./tutor-prompt";
 import type { Locale } from "./i18n";
-export const DEFAULT_GEMINI_MODEL = "gemini-3.8-flash";
+export const DEFAULT_GEMINI_MODEL = "gemini-3.1-flash-lite";
 // Judges may test at any moment, so a single overloaded model must not break
 // the tutor. Try the configured model first, then widely available fallbacks.
-export const FALLBACK_GEMINI_MODELS = [
-  "gemini-3.7-flash",
-  "gemini-3.6-flash",
-  "gemini-3.1-flash-lite",
-] as const;
+export const FALLBACK_GEMINI_MODELS = ["gemini-3.8-flash"] as const;
 function isRetryable(error: unknown) {
   const text = error instanceof Error ? error.message : String(error);
   return /\b(429|500|502|503|504)\b|UNAVAILABLE|RESOURCE_EXHAUSTED|high demand|overloaded/i.test(
@@ -41,7 +37,7 @@ export async function generateTutorReply(input: {
           systemInstruction: buildTutorPrompt(input),
           temperature: 0.4,
           maxOutputTokens: 500,
-          httpOptions: { timeout: 25000 },
+          httpOptions: { timeout: 15000 },
         },
       });
       if (!response.text?.trim()) throw new Error("Empty model response");
