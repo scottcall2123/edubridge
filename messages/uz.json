@@ -11,7 +11,10 @@
     "soon": "Tez kunda",
     "back": "Bosh sahifaga",
     "language": "Til",
-    "continue": "Davom etish"
+    "continue": "Davom etish",
+    "skipContent": "Asosiy qismga o‘tish",
+    "notFound": "Sahifa topilmadi",
+    "languageError": "Til saqlanmadi. Qayta urinib ko‘ring."
   },
   "nav": {
     "home": "Bosh sahifa",
@@ -21,7 +24,8 @@
     "leaderboard": "Reyting",
     "forum": "Forum",
     "question": "Savol",
-    "menu": "Foydalanuvchi menyusi"
+    "menu": "Foydalanuvchi menyusi",
+    "navigation": "Asosiy navigatsiya"
   },
   "landing": {
     "title": "Qiyin mavzu endi to‘siq emas",

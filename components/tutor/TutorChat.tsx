@@ -9,7 +9,12 @@ import { Button, Card } from "@/components/ui";
 import { markSolvedByAI } from "@/app/actions/tutor";
 import type { TutorMessage } from "@/lib/types";
 type Action = "start" | "reply" | "simpler" | "understood";
-type Turn = { action: Action; message?: string; requestId: string; locale: string };
+type Turn = {
+  action: Action;
+  message?: string;
+  requestId: string;
+  locale: string;
+};
 export function TutorChat({
   questionId,
   subjectSlug,
@@ -46,7 +51,12 @@ export function TutorChat({
       inflight.current = true;
       setBusy(true);
       setError("");
-      const turn = retry ?? { action, message, requestId: crypto.randomUUID(), locale };
+      const turn = retry ?? {
+        action,
+        message,
+        requestId: crypto.randomUUID(),
+        locale,
+      };
       try {
         const response = await fetch("/api/tutor", {
           method: "POST",
@@ -266,7 +276,7 @@ export function TutorChat({
           )}
           {understood >= 1 && error !== "closed" && (
             <Button
-              className="bg-success text-white hover:bg-success/90"
+              className="bg-success-700 text-white hover:bg-success-700/90"
               disabled={disabled}
               onClick={solve}
             >

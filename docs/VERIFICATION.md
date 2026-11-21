@@ -1,4 +1,14 @@
-# Verification — steps 1–10
+# Verification — steps 1–12
+
+## Steps 11–12
+
+Each P1 increment (forum, leaderboard, registration, images) passed a production build and lint before its commit. The polish pass checks all three dictionaries for matching, nonempty keys and ICU arguments, parses every message, and checks key text/background contrast ratios. The complete unit suite has 26 passing tests, including forum validation, leaderboard ordering, image type/path checks and signed parent-code expiry/tampering checks.
+
+Migration 005 executed against local PostgreSQL 17. Transaction checks passed for retry-safe answer posting, public-only answers, owner-only ratings, blocked self-ratings, one-time helper points, deduplicated reports and service-only RPC permissions. Anonymous reads exposed public questions while hiding private homework. Migration 006 executed against a minimal local Supabase-style storage schema: private bucket configuration, 5 MB/type restrictions, owner uploads and cross-user/anonymous access denial passed. These are database checks, not a hosted Storage API test.
+
+Headless Chromium checked register, forum list/detail controls, leaderboard, ask-image validation and navigation at 375/768/1280 pixels. No horizontal page overflow or uncaught browser errors appeared. Checks included dynamic answer steps, five rating controls, grade 7 parent-code simulation with submit gating, grade 8 removal of parent fields, invalid SVG rejection, tablet navigation, mobile forum access, skip link, and UZ/EN/RU copy with locale persistence. Temporary synthetic-data fixtures were removed before the final build.
+
+Browser checks used dummy local Supabase configuration. They do not claim real new-account creation, hosted image upload, live Gemini responses or the new P1 end-to-end flow passed. The team reports steps 1–10 already deployed and tested live. Apply only migrations 005 and 006 to that existing project, then follow the new P1 and regression checklist in TODO_FOR_HUMAN.md.
 
 ## Step 10 and final screen checks
 

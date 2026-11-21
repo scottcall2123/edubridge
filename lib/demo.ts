@@ -2,12 +2,10 @@ import "server-only";
 import { z } from "zod";
 import { createAdminClient } from "./supabase/admin";
 export function getDemoCredentials() {
-  return z
-    .object({ email: z.email(), password: z.string().min(8) })
-    .parse({
-      email: process.env.DEMO_EMAIL,
-      password: process.env.DEMO_PASSWORD,
-    });
+  return z.object({ email: z.email(), password: z.string().min(8) }).parse({
+    email: process.env.DEMO_EMAIL,
+    password: process.env.DEMO_PASSWORD,
+  });
 }
 export async function ensureDemoUser(
   retrying = false,
@@ -44,19 +42,17 @@ export async function ensureDemoUser(
     }
     userId = data.user.id;
   }
-  const { error: profileError } = await admin
-    .from("profiles")
-    .upsert(
-      {
-        id: userId,
-        full_name: "Aziza Karimova",
-        grade: 8,
-        school: "12-maktab",
-        district: "Farg‘ona sh.",
-        is_demo: true,
-      },
-      { onConflict: "id", ignoreDuplicates: true },
-    );
+  const { error: profileError } = await admin.from("profiles").upsert(
+    {
+      id: userId,
+      full_name: "Aziza Karimova",
+      grade: 8,
+      school: "12-maktab",
+      district: "Farg‘ona sh.",
+      is_demo: true,
+    },
+    { onConflict: "id", ignoreDuplicates: true },
+  );
   if (profileError) throw profileError;
   const { error } = await admin.rpc("initialize_demo", { p_user: userId });
   if (error) throw error;

@@ -1,9 +1,46 @@
 @import "tailwindcss";
 
-@keyframes chat-appear {from {opacity:0;transform:translateY(4px)} to {opacity:1;transform:translateY(0)}}
-@keyframes points-rise {from {opacity:0;transform:translateY(10px)} to {opacity:1;transform:translateY(0)}}
-.chat-message {animation:chat-appear 150ms ease-out;}
-.earned-points {animation:points-rise 500ms ease-out;}
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -80px;
+  z-index: 100;
+  border-radius: 12px;
+  background: white;
+  color: #0a1a3f;
+  padding: 12px 24px;
+  font-weight: 700;
+}
+.skip-link:focus {
+  top: 8px;
+}
+
+@keyframes chat-appear {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes points-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.chat-message {
+  animation: chat-appear 150ms ease-out;
+}
+.earned-points {
+  animation: points-rise 500ms ease-out;
+}
 @theme inline {
   --font-sans: var(--font-manrope);
   --color-navy: #0a1a3f;
@@ -18,6 +55,7 @@
   --color-muted: #5a6680;
   --color-line: #e6eaf3;
   --color-success: #1e8e5a;
+  --color-success-700: #14643f;
   --color-danger: #c0392b;
 }
 body {

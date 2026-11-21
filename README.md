@@ -1,33 +1,50 @@
 # EduBridge
 
-A learning platform for grades 8–11 in Fergana. Next.js App Router, TypeScript, Tailwind, next-intl and Supabase. AGENTS.md is the full specification.
+[Open EduBridge](https://edubridge-seven-alpha.vercel.app) · Team Renessans · UzHack 2026
 
-## Development
+A step-by-step learning platform for grades 8–11 in Fergana. Students first explore explained examples, then work with AI Ustoz, and can book a Fergana teacher if they are still stuck.
 
-Use Node.js 22 or newer. Run `npm ci`, copy `.env.example` to `.env.local`, fill in environment variables, then `npm run dev`. Run `npm run build` and `npm run lint` before committing.
+## Run locally
+
+Use Node.js 22+. Run `npm ci`, copy `.env.example` to `.env.local`, fill the values, and run `npm run dev`.
+
+Checks: `npm run build`, `npm run lint`, `npm test`.
+
+## Database setup
+
+For the existing deployed steps 1–10 database, run only these NEW migrations in order:
+
+1. `supabase/migrations/005_forum.sql`
+2. `supabase/migrations/006_question_images.sql`
+
+No seed rerun or new environment variables are needed. 006 creates/configures the private image bucket and owner-only policies.
+
+For a brand-new project, run migrations 001 through 006 in numeric order, then `supabase/seed.sql`. See [human setup and acceptance checks](docs/TODO_FOR_HUMAN.md).
 
 ## Environment
 
-Supabase URL and anon key are public. Service-role key, Gemini key and demo password belong in server environment variables. Never commit `.env.local`.
+The Supabase URL and anon key are public. Service-role key, Gemini key and demo password stay on the server. Never commit `.env.local`. Keep your working deployment variables unchanged.
+
+`GEMINI_MODEL` optionally overrides the model. The current upstream default is `gemini-3.1-flash-lite`, with `gemini-3.8-flash` as a fallback. The model key is read only in server code.
 
 ## Status
 
-Steps 1–10 are implemented: shared UI, UZ/EN/RU, Supabase auth/demo login, dashboard and points, ask/similar answers, Gemini AI Ustoz, teachers and booking, saved-results profile, and the full landing page.
+Steps 1–12 are implemented: responsive UZ/EN/RU layout, real Supabase auth and demo login, dashboard/points/streaks, ask and similar answers, Gemini tutor, teachers/booking, profile histories, landing, public forum with answers/stars/reports, Top-100 leaderboard, registration with simulated parent code, and private JPEG/PNG uploads up to 5 MB.
 
-The learning paths save questions, chat history, counters, points, solved results and teacher bookings. AI Ustoz works one step at a time, supports simpler explanations, unlocks the teacher option after two simpler requests and limits each student to 30 AI replies per Tashkent day. Profile shows persisted histories and computed badges. Payments and offline-course requests are clearly simulated. Registration, forum posting, leaderboard and photo upload are P1 and still show coming-soon cards.
+Forum posts are explicitly public. Homework from /ask and its images stay private. Student text and team-written sample answers are not automatically translated; all interface text, subjects, topics and teacher bios support UZ/EN/RU.
 
-## Database and hosting
+Payment, parent SMS and offline-course requests are clearly simulated. Teachers, ratings, prices, slots, example questions, sample leaderboard entries and demo history are labeled sample data. No real video meeting is created.
 
-Follow [docs/TODO_FOR_HUMAN.md](docs/TODO_FOR_HUMAN.md). On a new project run migrations `001_init.sql`, `002_progress.sql`, `003_tutor.sql`, `004_booking.sql` in order, then `supabase/seed.sql`. On your deployed steps 1–7 project, run **only the new 004 migration**. No new keys or seed rerun are needed for steps 8–10. Demo history is initialized once and never reset automatically.
+Lessons and the Barkamol-Raqamli portfolio remain intentional P2 coming-soon cards.
 
-No project secrets were provided, so hosted Supabase authentication has not been tested. Local PostgreSQL schema/seed checks and build results are recorded in docs/VERIFICATION.md. Next.js supports the requested middleware.ts file but reports a deprecation warning in favor of proxy.ts; the spec filename is retained.
+The team reports steps 1–10 are deployed and live-tested. This session added local tests for the P1 features; run the live acceptance checks after applying 005/006. No known failing local build/lint/tests. Next.js still emits a middleware-to-proxy deprecation notice; middleware.ts is retained to match AGENTS.md. Upstream Gemini fixes and removal of the temporary diagnostic endpoint are preserved.
 
-## AI setup and verification
+## Handoff
 
-Set server-only `GEMINI_API_KEY` from Google AI Studio. `GEMINI_MODEL` defaults to `gemini-3.8-flash`, checked against Google’s official model/pricing documentation. It can be overridden without code changes. No model call runs during build; missing keys produce the friendly busy state at runtime.
+- [Human actions](docs/TODO_FOR_HUMAN.md)
+- [Verification evidence and limitations](docs/VERIFICATION.md)
+- [Decisions](docs/DECISIONS.md)
+- [Submission notes](docs/SUBMISSION_NOTES.md)
+- AGENTS.md is the full product specification.
 
-Run `npm test` for date/streak, input, history and tutor-prompt checks. Local PostgreSQL tests also exercised transaction idempotency, retry counters and the daily cap. Screen fixtures were tested at 375/768/1280 with synthetic tutor responses; fixtures are not included in production. Live Supabase/Gemini integration still requires your keys; see docs/VERIFICATION.md.
-
-Build passed after each of steps 8, 9 and 10; lint and the expanded test suite pass. Local PostgreSQL checks cover booking retries, atomic points, ownership, subject match, past-slot rejection and cross-user booking isolation. Live deployment smoke checks remain for the human because production credentials are not in this workspace.
-
-Next: section 19 step 11 (P1 features), then the final polish/submission checklist. The temporary debug-setup endpoint added before this work remains unchanged; remove or disable it after setup verification.
+Demo login creates Aziza Karimova and sample past activity only once, and never resets later results automatically.

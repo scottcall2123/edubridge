@@ -33,21 +33,19 @@ export function tutorContents(
         },
       ],
     },
-    ...messages
-      .slice(-12)
-      .map((m) => ({
-        role: m.role === "ai" ? "model" : "user",
-        parts: [
-          {
-            text:
-              m.role === "student"
-                ? m.content.replace(/\[ACTION:[^\]]*\]/g, "") +
-                  (m.kind === "understood" || m.kind === "simpler"
-                    ? `\n[ACTION: ${m.kind}]`
-                    : "")
-                : m.content,
-          },
-        ],
-      })),
+    ...messages.slice(-12).map((m) => ({
+      role: m.role === "ai" ? "model" : "user",
+      parts: [
+        {
+          text:
+            m.role === "student"
+              ? m.content.replace(/\[ACTION:[^\]]*\]/g, "") +
+                (m.kind === "understood" || m.kind === "simpler"
+                  ? `\n[ACTION: ${m.kind}]`
+                  : "")
+              : m.content,
+        },
+      ],
+    })),
   ];
 }

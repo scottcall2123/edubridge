@@ -11,7 +11,10 @@
     "soon": "Coming soon",
     "back": "Go home",
     "language": "Language",
-    "continue": "Continue"
+    "continue": "Continue",
+    "skipContent": "Skip to content",
+    "notFound": "Page not found",
+    "languageError": "Could not save the language. Try again."
   },
   "nav": {
     "home": "Home",
@@ -21,7 +24,8 @@
     "leaderboard": "Leaderboard",
     "forum": "Forum",
     "question": "Question",
-    "menu": "User menu"
+    "menu": "User menu",
+    "navigation": "Main navigation"
   },
   "landing": {
     "title": "Hard topics are no longer a barrier",
@@ -234,7 +238,7 @@
     "title": "Forum",
     "newQuestion": "Post a public question",
     "publicNotice": "This question is public. Do not include personal information.",
-    "answers": "{count} answers",
+    "answers": "{count, plural, one {# answer} other {# answers}}",
     "empty": "No questions yet. Be the first to ask.",
     "noAnswers": "No answers yet. Help with a step-by-step explanation.",
     "answerTitle": "Write a step-by-step answer",

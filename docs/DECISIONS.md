@@ -1,5 +1,11 @@
 # Decisions
 
+- Step 12: complete UZ/EN/RU key and ICU parity, localized metadata/errors, keyboard skip link and tablet icon navigation. Student-authored text and existing Uzbek sample answers retain their original language.
+- P1 images use direct authenticated uploads to a private owner-folder bucket, avoiding the hosting request-body limit. Server attachment validates ownership, bytes, MIME and a conditional image update; signed URLs expire after five minutes. AI uses the typed question, without OCR.
+- Registration uses real Supabase Auth. The simulated parent check is bound to the normalized phone and a ten-minute signed httpOnly cookie; it sends no SMS and does not claim parental identity verification.
+- Public leaderboard returns only the displayed name/school/district/points projection; user IDs stay server-side and sample entries remain labeled. Forum subject filtering happens before the result limit, with paged answer counts.
+- Existing deployed projects run only new migrations 005 and 006. No seed rerun, new secrets or manual storage bucket creation is needed. Live P1 acceptance remains a team task because production credentials are unavailable locally.
+
 - P1 forum: open public posts are readable, while /ask questions remain private. Public page loaders query only public rows and return a limited projection; private answer/chat data remains behind ownership checks.
 - Forum stars use a service-only transaction with the helper profile lock and expected snapshot. Only the question owner can rate another real author once; points/streak amounts stay in lib/points.ts.
 

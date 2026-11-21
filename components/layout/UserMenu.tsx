@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { Avatar } from "@/components/ui";
-import {LogIn} from 'lucide-react';
+import { LogIn } from "lucide-react";
 export async function UserMenu({
   name,
   logout,
@@ -19,8 +19,17 @@ export async function UserMenu({
         <Avatar name={name} />
       </summary>
       <div className="absolute right-0 z-30 mt-3 w-48 rounded-xl border border-line bg-white p-2 text-navy shadow-lg">
+        <Link className="block min-h-11 rounded-lg p-3" href="/dashboard">
+          {t("nav.home")}
+        </Link>
         <Link className="block rounded-lg p-3" href="/profile">
           {t("nav.profile")}
+        </Link>
+        <Link className="block min-h-11 rounded-lg p-3" href="/forum">
+          {t("nav.forum")}
+        </Link>
+        <Link className="block min-h-11 rounded-lg p-3" href="/leaderboard">
+          {t("nav.leaderboard")}
         </Link>
         {logout && (
           <form action={logout}>
@@ -35,8 +44,12 @@ export async function UserMenu({
     <Link
       className="inline-flex min-h-11 min-w-11 items-center justify-center text-sm font-bold sm:px-3"
       href="/login"
+      aria-label={t("common.login")}
     >
-      <span className="sm:hidden" aria-label={t('common.login')}><LogIn/></span><span className="hidden sm:inline">{t("common.login")}</span>
+      <span className="sm:hidden" aria-label={t("common.login")}>
+        <LogIn />
+      </span>
+      <span className="hidden sm:inline">{t("common.login")}</span>
     </Link>
   );
 }

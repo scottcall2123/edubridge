@@ -38,12 +38,10 @@ export async function ensureFutureSlots() {
     }
   }
   if (inserts.length) {
-    const { error } = await admin
-      .from("teacher_slots")
-      .upsert(inserts, {
-        onConflict: "teacher_id,starts_at",
-        ignoreDuplicates: true,
-      });
+    const { error } = await admin.from("teacher_slots").upsert(inserts, {
+      onConflict: "teacher_id,starts_at",
+      ignoreDuplicates: true,
+    });
     if (error) throw new Error("Slots unavailable");
   }
 }

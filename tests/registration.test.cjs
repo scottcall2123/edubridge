@@ -1,8 +1,70 @@
 /* eslint-disable @typescript-eslint/no-require-imports -- Node TypeScript test harness. */
-const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),Module=require('node:module'),ts=require('typescript');const original=Module._load;Module._load=function(name,...args){if(name==='server-only')return {};return original.call(this,name,...args);};
-require.extensions['.ts']=(module,file)=>module._compile(ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,file);
-const {registrationInput,phoneInput,DISTRICTS}=require('../lib/registration.ts'),{signParentCheck,verifyParentCheck}=require('../lib/parent-check.ts');
-const valid={fullName:'Test Student',email:'student@example.com',password:'testpassword',grade:8,school:'12-maktab',district:DISTRICTS[0],locale:'uz'};
-test('registration validates grade, district and password; grade 8 needs no parent phone',()=>{assert(registrationInput.safeParse(valid).success);for(const extra of [{grade:4},{grade:12},{district:'unknown'},{password:'short'}])assert(!registrationInput.safeParse({...valid,...extra}).success);});
-test('grade 7 and below require a valid parent phone and the visible simulation code',()=>{assert(!registrationInput.safeParse({...valid,grade:7}).success);assert(registrationInput.safeParse({...valid,grade:7,parentPhone:'+998 90 123 45 67',parentCode:'4821'}).success);assert.equal(phoneInput.parse('+998 90 123 45 67'),'+998901234567');});
-test('parent check binds phone and expiry, rejects tampering and wrong secrets',()=>{const token=signParentCheck('+998901234567','test-only-secret',1000);assert(verifyParentCheck(token,'+998901234567','test-only-secret',2000));assert(!verifyParentCheck(token,'+998901234568','test-only-secret',2000));assert(!verifyParentCheck(token,'+998901234567','wrong',2000));assert(!verifyParentCheck(token,'+998901234567','test-only-secret',700000));assert(!verifyParentCheck(token+'x','+998901234567','test-only-secret',2000));});
+const { test } = require("node:test"),
+  assert = require("node:assert/strict"),
+  fs = require("node:fs"),
+  Module = require("node:module"),
+  ts = require("typescript");
+const original = Module._load;
+Module._load = function (name, ...args) {
+  if (name === "server-only") return {};
+  return original.call(this, name, ...args);
+};
+require.extensions[".ts"] = (module, file) =>
+  module._compile(
+    ts.transpileModule(fs.readFileSync(file, "utf8"), {
+      compilerOptions: {
+        module: ts.ModuleKind.CommonJS,
+        target: ts.ScriptTarget.ES2022,
+      },
+    }).outputText,
+    file,
+  );
+const {
+    registrationInput,
+    phoneInput,
+    DISTRICTS,
+  } = require("../lib/registration.ts"),
+  { signParentCheck, verifyParentCheck } = require("../lib/parent-check.ts");
+const valid = {
+  fullName: "Test Student",
+  email: "student@example.com",
+  password: "testpassword",
+  grade: 8,
+  school: "12-maktab",
+  district: DISTRICTS[0],
+  locale: "uz",
+};
+test("registration validates grade, district and password; grade 8 needs no parent phone", () => {
+  assert(registrationInput.safeParse(valid).success);
+  for (const extra of [
+    { grade: 4 },
+    { grade: 12 },
+    { district: "unknown" },
+    { password: "short" },
+  ])
+    assert(!registrationInput.safeParse({ ...valid, ...extra }).success);
+});
+test("grade 7 and below require a valid parent phone and the visible simulation code", () => {
+  assert(!registrationInput.safeParse({ ...valid, grade: 7 }).success);
+  assert(
+    registrationInput.safeParse({
+      ...valid,
+      grade: 7,
+      parentPhone: "+998 90 123 45 67",
+      parentCode: "4821",
+    }).success,
+  );
+  assert.equal(phoneInput.parse("+998 90 123 45 67"), "+998901234567");
+});
+test("parent check binds phone and expiry, rejects tampering and wrong secrets", () => {
+  const token = signParentCheck("+998901234567", "test-only-secret", 1000);
+  assert(verifyParentCheck(token, "+998901234567", "test-only-secret", 2000));
+  assert(!verifyParentCheck(token, "+998901234568", "test-only-secret", 2000));
+  assert(!verifyParentCheck(token, "+998901234567", "wrong", 2000));
+  assert(
+    !verifyParentCheck(token, "+998901234567", "test-only-secret", 700000),
+  );
+  assert(
+    !verifyParentCheck(token + "x", "+998901234567", "test-only-secret", 2000),
+  );
+});

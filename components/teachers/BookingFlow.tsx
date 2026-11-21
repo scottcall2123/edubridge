@@ -165,7 +165,7 @@ export function BookingFlow({
                     {slots.map((s) => (
                       <label
                         key={s.id}
-                        className={`mb-0 cursor-pointer rounded-xl border p-3 ${selected === s.id ? "border-royal bg-sky-50" : "border-line"}`}
+                        className={`mb-0 min-h-12 cursor-pointer rounded-xl border p-3 ${selected === s.id ? "border-royal bg-sky-50" : "border-line"}`}
                       >
                         <input
                           type="radio"
@@ -190,7 +190,14 @@ export function BookingFlow({
                 </fieldset>
               ))}
             </div>
-            {!teacher.slots.length && <p>{t("teachers.noSlots")}</p>}
+            {!teacher.slots.length && (
+              <>
+                <p>{t("teachers.noSlots")}</p>
+                <Button variant="secondary" onClick={() => router.refresh()}>
+                  {t("errors.retry")}
+                </Button>
+              </>
+            )}
             <Button disabled={!slot} onClick={() => setPayment(true)}>
               {t("common.continue")}
             </Button>
