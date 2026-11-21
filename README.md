@@ -12,4 +12,14 @@ Supabase URL and anon key are public. Service-role key, Gemini key and demo pass
 
 ## Status
 
-Step 1 scaffold. Database and auth follow in steps 3–4.
+Steps 1–4 are implemented: scaffold and shared UI, responsive navigation, UZ/EN/RU cookie-based languages, full database schema and seed files, email/password login, one-click demo login, logout and protected routes.
+
+The dashboard is an authenticated welcome page for now. Learning, points logic, tutor, booking, profile and registration features are later steps; unfinished pages show a coming-soon card.
+
+## Database and hosting
+
+Follow [docs/TODO_FOR_HUMAN.md](docs/TODO_FOR_HUMAN.md). Run `supabase/migrations/001_init.sql` once on a new Supabase project, then `supabase/seed.sql`. The seed is safe to rerun. Demo user creation and sample history happen on first demo login and are never reset automatically.
+
+No project secrets were provided, so hosted Supabase authentication has not been tested. Local PostgreSQL schema/seed checks and build results are recorded in docs/VERIFICATION.md. Next.js supports the requested middleware.ts file but reports a deprecation warning in favor of proxy.ts; the spec filename is retained.
+
+Next: section 19 step 5, the complete dashboard and daily points rules.
