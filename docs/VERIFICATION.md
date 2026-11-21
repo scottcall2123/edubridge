@@ -1,4 +1,8 @@
-# Verification — steps 1–7
+# Verification — steps 1–10
+
+## Step 10 and final screen checks
+
+Landing build/lint passed. Headless Chromium checked the production server with the actual landing plus temporary teacher-list, booking, confirmation and profile fixtures at 375/768/1280: no horizontal overflow, preserved question links, slot selection → payment → back, no card form, simulated offline CTA, saved-history sections/chat expansion, profile language selection surviving reload, and UZ/EN/RU landing copy. A discovered Node/browser Uzbek number-format mismatch was fixed with canonical booking prices/dates and a shared server reference time; the rerun had no uncaught browser/hydration errors. Fixtures are removed before the final build. All 15 unit tests pass. Live booking/logout-login checks remain in TODO_FOR_HUMAN.md.
 
 ## Step 9
 

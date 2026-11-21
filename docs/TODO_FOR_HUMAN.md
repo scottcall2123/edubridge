@@ -11,7 +11,7 @@ For an existing steps 1–4 project: run `supabase/migrations/002_progress.sql`,
 1. Open https://supabase.com and sign in with GitHub. Create project `edubridge` in Singapore. Save the database password privately.
 2. In Project Settings → API, copy the project URL, `anon` public key and `service_role` secret key.
 3. Authentication → Sign In / Providers → Email: turn OFF **Confirm email**.
-4. In SQL Editor, run migrations `001_init.sql`, `002_progress.sql`, `003_tutor.sql` in that order, then `supabase/seed.sql`. Run each migration once. The seed can be rerun.
+4. For a NEW project only, run migrations `001_init.sql`, `002_progress.sql`, `003_tutor.sql`, `004_booking.sql` in that order, then `supabase/seed.sql`. Run each migration once. The seed can be rerun.
 5. Later, for P1 photo uploads: create a PRIVATE Storage bucket named `question-images`. Upload policies will be added with that feature.
 
 ## Environment variables
@@ -38,7 +38,10 @@ The demo button creates Aziza Karimova once and adds sample history once. It pre
 6. Test dashboard: refresh twice and confirm only one daily +5 event; ask Algebra → topic → question. Confirm the question saves and +2 is awarded once. Choose a similar worked answer → helped → saved result and +5.
 7. Ask a new question → AI Ustoz. Confirm a real reply in UZ, EN and RU. Ask “just tell me the answer” and verify it keeps guiding rather than giving the final result. Click simpler twice → gold teacher banner. Click understood once → problem solved → saved +10. Reload and log in again to confirm chats and points remain saved.
 8. Check with two accounts that a copied `/tutor/{questionId}` URL cannot open someone else’s chat. Test the 30-reply limit with a dedicated test user, plus a failed Gemini request/retry. The UI should show friendly messages, never keys or raw errors.
-9. Teacher booking and the full profile are steps 8–9; their links currently lead to coming-soon pages. Run the full section 21 checklist after those steps.
+9. After running 004 and the new deployment is ready, use AI Ustoz → simpler twice → teacher → pick a slot → simulated payment → confirmation. Confirm that Profile shows the booking, question status and exactly one +3 award. Refresh the confirmation and verify no extra points appear. Log out/in and confirm all histories remain.
+10. Open the same free slot in two separate test accounts. After the first books it, the second must see a friendly slot-taken error and fresh slots. Confirm no money moves and the meeting placeholder is plain text.
+11. Check the full landing page and profile at 375px and desktop, in UZ/EN/RU. Check profile language preference survives logout/login. Run the full section 21 checklist, noting registration/forum/leaderboard remain P1.
+12. The pre-existing `app/api/debug-setup/route.ts` is marked temporary and remains unchanged in this delivery. Remove or disable that diagnostic route after setup verification; the latest upstream version probes Gemini models and returns diagnostic details.
 
 ## Optional local run
 

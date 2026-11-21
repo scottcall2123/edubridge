@@ -1,18 +1,87 @@
-import 'server-only';
-import {createAdminClient} from './supabase/admin';
-import {createClient} from './supabase/server';
-import {slotCandidates} from './booking';
-import type {Teacher,TeacherSlot,Subject,Booking} from './types';
-export type TeacherWithSlots=Teacher&{subject:Subject;slots:TeacherSlot[]};
-export async function ensureFutureSlots(){
- const admin=createAdminClient(),now=new Date();
- const [teachers,slots]=await Promise.all([admin.from('teachers').select('id'),admin.from('teacher_slots').select('*').gt('starts_at',now.toISOString())]);if(teachers.error||slots.error)throw new Error('Slots unavailable');
- const inserts=[];
- for(const teacher of teachers.data){const existing=(slots.data as TeacherSlot[]).filter(s=>s.teacher_id===teacher.id);let needed=3-existing.filter(s=>!s.is_booked).length;for(const start of slotCandidates(now)){if(needed<=0)break;if(existing.some(s=>new Date(s.starts_at).getTime()===Date.parse(start)))continue;inserts.push({teacher_id:teacher.id,starts_at:start,ends_at:new Date(Date.parse(start)+15*60000).toISOString()});needed--;}}
- if(inserts.length){const {error}=await admin.from('teacher_slots').upsert(inserts,{onConflict:'teacher_id,starts_at',ignoreDuplicates:true});if(error)throw new Error('Slots unavailable');}
+import "server-only";
+import { createAdminClient } from "./supabase/admin";
+import { createClient } from "./supabase/server";
+import { slotCandidates } from "./booking";
+import type { Teacher, TeacherSlot, Subject, Booking } from "./types";
+export type TeacherWithSlots = Teacher & {
+  subject: Subject;
+  slots: TeacherSlot[];
+};
+export async function ensureFutureSlots() {
+  const admin = createAdminClient(),
+    now = new Date();
+  const [teachers, slots] = await Promise.all([
+    admin.from("teachers").select("id"),
+    admin.from("teacher_slots").select("*").gt("starts_at", now.toISOString()),
+  ]);
+  if (teachers.error || slots.error) throw new Error("Slots unavailable");
+  const inserts = [];
+  for (const teacher of teachers.data) {
+    const existing = (slots.data as TeacherSlot[]).filter(
+      (s) => s.teacher_id === teacher.id,
+    );
+    let needed = 3 - existing.filter((s) => !s.is_booked).length;
+    for (const start of slotCandidates(now)) {
+      if (needed <= 0) break;
+      if (
+        existing.some(
+          (s) => new Date(s.starts_at).getTime() === Date.parse(start),
+        )
+      )
+        continue;
+      inserts.push({
+        teacher_id: teacher.id,
+        starts_at: start,
+        ends_at: new Date(Date.parse(start) + 15 * 60000).toISOString(),
+      });
+      needed--;
+    }
+  }
+  if (inserts.length) {
+    const { error } = await admin
+      .from("teacher_slots")
+      .upsert(inserts, {
+        onConflict: "teacher_id,starts_at",
+        ignoreDuplicates: true,
+      });
+    if (error) throw new Error("Slots unavailable");
+  }
 }
-export async function loadTeachers():Promise<{teachers:TeacherWithSlots[];subjects:Subject[]}>{
- await ensureFutureSlots();const client=await createClient();const [teachers,subjects,slots]=await Promise.all([client.from('teachers').select('*').order('rating',{ascending:false}),client.from('subjects').select('*').order('sort'),client.from('teacher_slots').select('*').eq('is_booked',false).gt('starts_at',new Date().toISOString()).order('starts_at')]);if(teachers.error||subjects.error||slots.error)throw new Error('Teachers unavailable');
- return {subjects:subjects.data as Subject[],teachers:(teachers.data as Teacher[]).map(t=>({...t,subject:(subjects.data as Subject[]).find(s=>s.id===t.subject_id)!,slots:(slots.data as TeacherSlot[]).filter(s=>s.teacher_id===t.id)}))};
+export async function loadTeachers(): Promise<{
+  teachers: TeacherWithSlots[];
+  subjects: Subject[];
+}> {
+  await ensureFutureSlots();
+  const client = await createClient();
+  const [teachers, subjects, slots] = await Promise.all([
+    client.from("teachers").select("*").order("rating", { ascending: false }),
+    client.from("subjects").select("*").order("sort"),
+    client
+      .from("teacher_slots")
+      .select("*")
+      .eq("is_booked", false)
+      .gt("starts_at", new Date().toISOString())
+      .order("starts_at"),
+  ]);
+  if (teachers.error || subjects.error || slots.error)
+    throw new Error("Teachers unavailable");
+  return {
+    subjects: subjects.data as Subject[],
+    teachers: (teachers.data as Teacher[]).map((t) => ({
+      ...t,
+      subject: (subjects.data as Subject[]).find((s) => s.id === t.subject_id)!,
+      slots: (slots.data as TeacherSlot[]).filter((s) => s.teacher_id === t.id),
+    })),
+  };
 }
-export async function ownedBooking(id:string,userId:string){const client=await createClient();const {data,error}=await client.from('bookings').select('*').eq('id',id).eq('user_id',userId).single();if(error||!data)return null;return data as Booking;}
+export async function ownedBooking(id: string, userId: string) {
+  const client = await createClient();
+  const { data, error } = await client
+    .from("bookings")
+    .select("*")
+    .eq("id", id)
+    .eq("user_id", userId)
+    .single();
+  if (error || !data) return null;
+  return data as Booking;
+}

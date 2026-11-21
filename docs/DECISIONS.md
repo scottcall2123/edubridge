@@ -1,5 +1,12 @@
 # Decisions
 
+- Preserved concurrent upstream Gemini fallback/diagnostic commits by rebasing the final landing commit onto updated main and rebuilding the combined state.
+
+- Use deterministic numeric booking prices/dates and a server-provided reference time: Node and Chromium disagree on Uzbek ICU number grouping, which caused a hydration mismatch during screen tests. Canonical formatting fixes it without hiding hydration warnings.
+
+- Step 10: landing copy follows all seven specified sections, keeps the supplied logos, and presents funding as a planned model rather than claiming signed partners. No invented statistics or reviews.
+- Authenticated landing CTAs open the student dashboard instead of switching the current account to the demo user. All new UI copy has UZ/EN/RU keys.
+
 - Step 9: profile histories use user-scoped RLS plus explicit user IDs and paged reads so Supabase’s default row limit does not silently truncate saved results. Badges are computed from saved questions/bookings/current streak, not invented activity.
 - Profile language selection reuses the existing validated server action to save both profiles.locale and NEXT_LOCALE. Step 9 needs no SQL migration.
 
