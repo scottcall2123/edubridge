@@ -50,7 +50,26 @@
     "hello": "Hello, {name}!",
     "streak": "day streak",
     "points": "points",
-    "goal": "Today’s goal"
+    "goal": "Today’s goal",
+    "subtitle": "Understand one problem today.",
+    "streakHint": "After two missed days, points start to decrease.",
+    "history": "History",
+    "goalText": "Today’s goal: understand one problem or help one friend",
+    "activity": "Recent activity",
+    "top5": "Fergana Top 5",
+    "rules": "How do you earn points?",
+    "noActivity": "No activity yet. Ask your first question.",
+    "noLeaders": "No leaderboard entries yet.",
+    "lessons": "Learn more",
+    "lessonsText": "Short texts, videos and mini-quizzes for each topic",
+    "rule_daily_visit": "Daily visit: +5 points",
+    "rule_question_asked": "Ask a question: +2 points",
+    "rule_forum_helped": "Learn from forum: +5 points",
+    "rule_ai_understood": "Solve with AI: +10 points",
+    "rule_helper_star": "Each helper star: +4 points",
+    "rule_booking_made": "Book a teacher: +3 points",
+    "rule_streak_loss": "From the third missed day: −5 points/day, at most −50",
+    "goalLabel": "Daily goal: {value}/1"
   },
   "ask": {
     "chooseSubject": "Choose a subject",
@@ -97,5 +116,14 @@
   },
   "success": {
     "points": "Well done! +{n} points"
+  },
+  "events": {
+    "daily_visit": "Daily visit",
+    "question_asked": "Question asked",
+    "forum_helped": "Forum helped",
+    "ai_understood": "Solved with AI",
+    "helper_star": "Star for helping",
+    "booking_made": "Lesson booked",
+    "streak_loss": "Streak lost"
   }
 }

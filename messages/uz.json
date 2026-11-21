@@ -50,14 +50,50 @@
     "hello": "Salom, {name}!",
     "streak": "kunlik olov",
     "points": "ball",
-    "goal": "Bugungi maqsad"
+    "goal": "Bugungi maqsad",
+    "subtitle": "Bugun bitta masalani tushunib oling.",
+    "streakHint": "2 kun o‘tkazib yuborsangiz, ballar kamaya boshlaydi.",
+    "history": "Tarix",
+    "goalText": "Bugungi maqsad: 1 ta masalani tushunish yoki 1 do‘stga yordam berish",
+    "activity": "So‘nggi faoliyat",
+    "top5": "Farg‘ona Top-5",
+    "rules": "Ballar qanday beriladi?",
+    "noActivity": "Hali faoliyat yo‘q. Birinchi savolingizni bering.",
+    "noLeaders": "Reyting hali bo‘sh.",
+    "lessons": "Bilib ol",
+    "lessonsText": "Har bir mavzu uchun qisqa matn, video va mini-test",
+    "rule_daily_visit": "Kunlik tashrif: +5 ball",
+    "rule_question_asked": "Savol berish: +2 ball",
+    "rule_forum_helped": "Forum yordam berdi: +5 ball",
+    "rule_ai_understood": "AI bilan masala hal qilish: +10 ball",
+    "rule_helper_star": "Yordamchiga har bir yulduz: +4 ball",
+    "rule_booking_made": "Ustoz darsini band qilish: +3 ball",
+    "rule_streak_loss": "Uchinchi o‘tkazilgan kundan boshlab: −5 ball/kun, ko‘pi bilan −50",
+    "goalLabel": "Kunlik maqsad: {value}/1"
   },
   "ask": {
     "chooseSubject": "Fanni tanlang",
     "writeQuestion": "Savolingizni yozing",
     "similar": "O‘xshash savollar — qadam-ma-qadam",
     "helped": "Bu menga yordam berdi",
-    "toAi": "AI Ustoz bilan ishlash"
+    "toAi": "AI Ustoz bilan ishlash",
+    "steps": "Savol bosqichlari",
+    "step1": "Fan",
+    "step2": "Mavzu va savol",
+    "step3": "Qadam-ma-qadam",
+    "topic": "Mavzu",
+    "chooseTopic": "Mavzuni tanlang",
+    "length": "{count}/1000 belgi · kamida 10",
+    "private": "Savolingiz faqat sizga ko‘rinadi.",
+    "back": "Orqaga",
+    "validation": "Fan va mavzuni tanlang. Savol 10–1000 belgidan iborat bo‘lsin.",
+    "save": "Savol saqlanmadi. Qayta urinib ko‘ring.",
+    "noSubjects": "Fanlar hali yuklanmagan. Iltimos, keyinroq qayting.",
+    "noSimilar": "Hozircha o‘xshash savol topilmadi. AI Ustoz bilan davom eting.",
+    "saved": "Natija saqlandi",
+    "savedText": "Tushunganingiz saqlandi, ballaringiz yangilandi.",
+    "again": "Yana savol berish",
+    "toProfile": "Profilga o‘tish"
   },
   "tutor": {
     "understood": "Ha, tushundim",
@@ -97,5 +133,14 @@
   },
   "success": {
     "points": "Barakalla! +{n} ball"
+  },
+  "events": {
+    "daily_visit": "Kunlik tashrif",
+    "question_asked": "Savol berildi",
+    "forum_helped": "Forum yordam berdi",
+    "ai_understood": "AI bilan hal qilindi",
+    "helper_star": "Yordam uchun yulduz",
+    "booking_made": "Dars band qilindi",
+    "streak_loss": "Olov uzildi"
   }
 }

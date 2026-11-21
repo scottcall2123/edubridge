@@ -22,4 +22,4 @@ Follow [docs/TODO_FOR_HUMAN.md](docs/TODO_FOR_HUMAN.md). Run `supabase/migration
 
 No project secrets were provided, so hosted Supabase authentication has not been tested. Local PostgreSQL schema/seed checks and build results are recorded in docs/VERIFICATION.md. Next.js supports the requested middleware.ts file but reports a deprecation warning in favor of proxy.ts; the spec filename is retained.
 
-Next: section 19 step 5, the complete dashboard and daily points rules.
+Step 5 is complete: the dashboard loads saved data, awards a daily visit once, shows goal/activity/Top-5 and all points rules. Apply migration 002 before opening it. Run `npm test` for the Tashkent date and streak tests. Next: section 19 step 6, the ask flow.

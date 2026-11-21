@@ -1,5 +1,8 @@
 # Decisions
 
+- Step 5: lib/points.ts owns all point and Tashkent date/streak rules; commit_progress locks the profile and uses an expected snapshot to retry concurrent updates without lost points or duplicate daily awards.
+- Ask-flow questions are private by default, so solving homework does not publish student text automatically.
+
 - Use create-next-app stable defaults, App Router, root app directory, npm and Tailwind.
 - Use Manrope and supplied brand assets; light mode only.
 - UI primitives share the design tokens from AGENTS.md.

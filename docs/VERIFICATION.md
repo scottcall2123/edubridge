@@ -1,5 +1,9 @@
 # Verification — steps 1–4
 
+## Step 5
+
+Production build and lint passed. Four point-rule tests cover Tashkent midnight, repeat daily visits, missed-day penalties/cap/floor and streak continuation/reset. Migration 002 executed successfully in the local PostgreSQL database. Hosted Supabase keys remain unavailable.
+
 - Step 1: `npm run build` passed before commit `cd021c3`.
 - Step 2: `npm run build` passed before commit `2466654`.
 - Step 3: `npm run build` passed before commit `916062f`.

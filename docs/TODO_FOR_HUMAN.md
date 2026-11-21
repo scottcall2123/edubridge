@@ -4,6 +4,8 @@ The code builds without keys, but real login needs your Supabase project. Never 
 
 ## Supabase
 
+For an existing steps 1–4 project: run the new `supabase/migrations/002_progress.sql` in SQL Editor before using the dashboard. Do not rerun 001 on an existing database.
+
 1. Open https://supabase.com and sign in with GitHub. Create project `edubridge` in Singapore. Save the database password privately.
 2. In Project Settings → API, copy the project URL, `anon` public key and `service_role` secret key.
 3. Authentication → Sign In / Providers → Email: turn OFF **Confirm email**.
