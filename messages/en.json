@@ -229,7 +229,15 @@
     "unrated": "Not rated yet"
   },
   "leaderboard": {
-    "title": "Fergana Top 100 students"
+    "title": "Fergana Top 100 students",
+    "notice": "Sample students are labeled. Real points come from saved activity.",
+    "rank": "Rank",
+    "name": "Name",
+    "school": "School",
+    "district": "District",
+    "points": "Points",
+    "you": "You",
+    "empty": "The leaderboard is empty. Ask your first question."
   },
   "errors": {
     "invalid": "Check your email and password.",

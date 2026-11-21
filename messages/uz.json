@@ -229,7 +229,15 @@
     "unrated": "Hali baholanmagan"
   },
   "leaderboard": {
-    "title": "Farg‘ona Top-100 o‘quvchilari"
+    "title": "Farg‘ona Top-100 o‘quvchilari",
+    "notice": "Namunaviy o‘quvchilar alohida belgilangan. Haqiqiy ballar saqlangan faoliyatdan olinadi.",
+    "rank": "O‘rin",
+    "name": "Ism",
+    "school": "Maktab",
+    "district": "Tuman",
+    "points": "Ballar",
+    "you": "Siz",
+    "empty": "Reyting hali bo‘sh. Birinchi savolingizni bering."
   },
   "errors": {
     "invalid": "Email va parolni tekshiring.",
