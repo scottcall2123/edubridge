@@ -24,7 +24,7 @@ export async function loadForum(selected?: string) {
   const [questions, subjects, topics] = await Promise.all([
     admin
       .from("questions")
-      .select("id,text,subject_id,topic_id,is_sample,created_at")
+      .select("id,text,subject_id,topic_id,is_sample,created_at,answers(count)")
       .eq("is_public", true)
       .match(subjectId ? { subject_id: subjectId } : {})
       .order("created_at", { ascending: false })
@@ -34,25 +34,13 @@ export async function loadForum(selected?: string) {
   ]);
   if (questions.error || subjects.error || topics.error)
     throw new Error("Forum unavailable");
-  const ids = questions.data.map((q) => q.id);
-  const counts = new Map<string, number>();
-  if (ids.length)
-    for (let offset = 0; ; offset += 500) {
-      const { data, error } = await admin
-        .from("answers")
-        .select("question_id")
-        .in("question_id", ids)
-        .order("id")
-        .range(offset, offset + 499);
-      if (error) throw new Error("Forum unavailable");
-      for (const a of data)
-        counts.set(a.question_id, (counts.get(a.question_id) ?? 0) + 1);
-      if (data.length < 500) break;
-    }
   return {
-    questions: questions.data.map((q) => ({
+    // The answer count is aggregated by Postgres in the same query, which
+    // keeps the forum to one round trip.
+    questions: questions.data.map(({ answers, ...q }) => ({
       ...q,
-      answerCount: counts.get(q.id) ?? 0,
+      answerCount:
+        (answers as { count: number }[] | null)?.[0]?.count ?? 0,
     })) as ForumQuestion[],
     subjects: subjects.data as Subject[],
     topics: topics.data as Topic[],

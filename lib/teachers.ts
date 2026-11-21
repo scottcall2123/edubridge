@@ -7,7 +7,12 @@ export type TeacherWithSlots = Teacher & {
   subject: Subject;
   slots: TeacherSlot[];
 };
-export async function ensureFutureSlots() {
+// Topping up slots needs several round trips, so it must not run on every
+// page view. Each warm server instance repeats it at most once a minute.
+let lastSlotTopUp = 0;
+const SLOT_TOP_UP_INTERVAL = 60_000;
+export async function ensureFutureSlots(force = false) {
+  if (!force && Date.now() - lastSlotTopUp < SLOT_TOP_UP_INTERVAL) return;
   const admin = createAdminClient(),
     now = new Date();
   const [teachers, slots] = await Promise.all([
@@ -44,6 +49,7 @@ export async function ensureFutureSlots() {
     });
     if (error) throw new Error("Slots unavailable");
   }
+  lastSlotTopUp = Date.now();
 }
 export async function loadTeachers(): Promise<{
   teachers: TeacherWithSlots[];
