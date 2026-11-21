@@ -2,21 +2,20 @@ import "server-only";
 import { GoogleGenAI, type Content } from "@google/genai";
 import { buildTutorPrompt, normalizeTutorReply } from "./tutor-prompt";
 import type { Locale } from "./i18n";
-export const DEFAULT_GEMINI_MODEL = "gemini-3.5-flash";
+export const DEFAULT_GEMINI_MODEL = "gemini-3.1-flash-lite";
 // Free-tier capacity moves between models through the day, and judges may test
 // at any moment, so the tutor tries several models instead of depending on one.
 // Overloaded models refuse in a few seconds, which keeps the whole chain short.
 export const FALLBACK_GEMINI_MODELS = [
-  "gemini-3.6-flash",
   "gemini-3.8-flash",
-  "gemini-3.7-flash",
-  "gemini-3.1-flash-lite",
+  "gemini-3.6-flash",
+  "gemini-3.5-flash",
 ] as const;
 // The serverless function is cut off at 60s, so stop trying well before that
 // and let the page show its "try again" message instead of timing out.
-const TOTAL_BUDGET_MS = 42_000;
-const ATTEMPT_TIMEOUT_MS = 18_000;
-const MIN_ATTEMPT_MS = 6_000;
+const TOTAL_BUDGET_MS = 46_000;
+const ATTEMPT_TIMEOUT_MS = 22_000;
+const MIN_ATTEMPT_MS = 8_000;
 function isRetryable(error: unknown) {
   const text = error instanceof Error ? error.message : String(error);
   return /\b(400|404|429|500|502|503|504)\b|UNAVAILABLE|RESOURCE_EXHAUSTED|DEADLINE_EXCEEDED|INVALID_ARGUMENT|not found|high demand|overloaded/i.test(
@@ -51,7 +50,7 @@ export async function generateTutorReply(input: {
         config: {
           systemInstruction,
           temperature: 0.4,
-          maxOutputTokens: 400,
+          maxOutputTokens: 300,
           // A step-by-step hint needs no deep reasoning, and skipping it keeps
           // replies fast enough for the serverless time limit.
           thinkingConfig: { thinkingBudget: 0 },
