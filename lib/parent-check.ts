@@ -1,0 +1,4 @@
+import 'server-only';
+import {createHmac,timingSafeEqual} from 'node:crypto';
+export function signParentCheck(phone:string,secret:string,now=Date.now()){const payload=Buffer.from(JSON.stringify({phone,expires:now+10*60000})).toString('base64url');return `${payload}.${createHmac('sha256',secret).update(payload).digest('base64url')}`;}
+export function verifyParentCheck(token:string|undefined,phone:string,secret:string,now=Date.now()){try{if(!token)return false;const [payload,signature,...extra]=token.split('.');if(extra.length)return false;const expected=createHmac('sha256',secret).update(payload).digest(),actual=Buffer.from(signature,'base64url');if(expected.length!==actual.length||!timingSafeEqual(expected,actual))return false;const parsed=JSON.parse(Buffer.from(payload,'base64url').toString('utf8'));return parsed.phone===phone&&Number.isFinite(parsed.expires)&&parsed.expires>now;}catch{return false;}}
