@@ -14,7 +14,9 @@
     "continue": "Davom etish",
     "skipContent": "Asosiy qismga o‘tish",
     "notFound": "Sahifa topilmadi",
-    "languageError": "Til saqlanmadi. Qayta urinib ko‘ring."
+    "languageError": "Til saqlanmadi. Qayta urinib ko‘ring.",
+    "darkMode": "Tungi rejim",
+    "lightMode": "Kunduzgi rejim"
   },
   "nav": {
     "teacherHome": "O‘qituvchi sahifasi",

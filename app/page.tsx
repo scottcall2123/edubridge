@@ -54,7 +54,7 @@ export default async function Home() {
   return (
     <>
       <main>
-        <section className="border-b border-line bg-white">
+        <section className="border-b border-line bg-surface">
           <div className="container grid items-center gap-12 py-12 md:grid-cols-[1.2fr_1fr] md:py-20">
             <div className="space-y-6">
               <p className="eyebrow flex items-center gap-3">
@@ -92,7 +92,7 @@ export default async function Home() {
             <div className="grid gap-6 md:grid-cols-3">
               {problems.map(({ key, Icon }) => (
                 <Card key={key} className="space-y-5">
-                  <span className="inline-flex rounded-xl bg-sky-50 p-3 text-royal">
+                  <span className="inline-flex rounded-xl bg-sky-50 p-3 text-accent">
                     <Icon />
                   </span>
                   <h3 className="font-bold">{t(`landing.problem_${key}`)}</h3>
@@ -109,10 +109,10 @@ export default async function Home() {
                     <span className="flex size-11 items-center justify-center rounded-full bg-royal text-sm font-extrabold text-white">
                       0{n}
                     </span>
-                    <Icon className="text-royal" />
+                    <Icon className="text-accent" />
                   </div>
                   <h3 className="text-xl font-bold">{t(`landing.step${n}`)}</h3>
-                  <p className="text-xs font-bold uppercase tracking-wider text-royal">
+                  <p className="text-xs font-bold uppercase tracking-wider text-accent">
                     {t("landing.free")}
                   </p>
                   <p className="text-sm text-muted">
@@ -121,7 +121,7 @@ export default async function Home() {
                   {n !== 3 && (
                     <ArrowRight
                       aria-hidden="true"
-                      className="absolute -right-6 top-12 z-10 hidden text-royal md:block"
+                      className="absolute -right-6 top-12 z-10 hidden text-accent md:block"
                     />
                   )}
                 </Card>
@@ -154,19 +154,19 @@ export default async function Home() {
             className="grid gap-6 md:grid-cols-2"
           >
             <Card className="space-y-5">
-              <GraduationCap className="text-royal" />
+              <GraduationCap className="text-accent" />
               <h2 id="teacher-title">{t("landing.forTeachers")}</h2>
               <p className="text-muted">{t("landing.teacherText")}</p>
               <Link
                 href="/teachers"
-                className="inline-flex min-h-11 items-center gap-2 font-bold text-royal"
+                className="inline-flex min-h-11 items-center gap-2 font-bold text-accent"
               >
                 {t("teachers.title")}
                 <ArrowRight />
               </Link>
             </Card>
             <Card className="space-y-5">
-              <BookOpen className="text-royal" />
+              <BookOpen className="text-accent" />
               <h2>{t("landing.modelTitle")}</h2>
               <p className="text-muted">{t("landing.modelText")}</p>
             </Card>
@@ -175,7 +175,7 @@ export default async function Home() {
             aria-labelledby="safety-title"
             className="flex flex-col gap-5 rounded-2xl border border-line bg-sky-50 p-6 md:flex-row md:p-8"
           >
-            <ShieldCheck className="text-royal" />
+            <ShieldCheck className="text-accent" />
             <div className="space-y-3">
               <h2 id="safety-title">{t("landing.safety")}</h2>
               <p>{t("landing.safetyText")}</p>

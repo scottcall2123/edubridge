@@ -37,7 +37,7 @@ export async function LeaderboardView({
                     <td className="p-3">
                       <span className="font-bold">{r.full_name}</span>
                       {r.isCurrent && (
-                        <span className="ml-2 text-royal">
+                        <span className="ml-2 text-accent">
                           {t("leaderboard.you")}
                         </span>
                       )}

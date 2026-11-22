@@ -7,7 +7,7 @@ export function BottomTabs() {
   const path = usePathname(),
     t = useTranslations("nav");
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] md:hidden">
       {[
         { href: "/dashboard", key: "home", Icon: Home },
         { href: "/ask", key: "question", Icon: MessageCircleQuestion },
@@ -18,7 +18,7 @@ export function BottomTabs() {
           key={key}
           aria-current={path.startsWith(href) ? "page" : undefined}
           href={href}
-          className={`flex min-h-16 flex-col items-center justify-center gap-1 text-xs ${path.startsWith(href) ? "text-royal" : "text-muted"}`}
+          className={`flex min-h-16 flex-col items-center justify-center gap-1 text-xs ${path.startsWith(href) ? "text-accent" : "text-muted"}`}
         >
           <Icon />
           {t(key)}

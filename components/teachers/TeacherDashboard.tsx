@@ -71,7 +71,7 @@ async function QuestionCard({ question }: { question: Question }) {
       </div>
       {question.messages.length > 0 && (
         <details className="rounded-xl border border-line px-4">
-          <summary className="min-h-11 cursor-pointer py-3 font-bold text-royal">
+          <summary className="min-h-11 cursor-pointer py-3 font-bold text-accent">
             {t("profile.chats")}
           </summary>
           <ol className="space-y-3 pb-4">
@@ -249,7 +249,7 @@ export async function TeacherDashboard({
                               "inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-bold",
                               slot.is_booked
                                 ? "bg-royal text-white"
-                                : "bg-sky-50 text-navy",
+                                : "bg-sky-50 text-ink",
                             )}
                           >
                             <Clock aria-hidden="true" className="size-4" />
@@ -302,7 +302,7 @@ export async function TeacherDashboard({
                 {question.is_sample && <Tag>{t("common.sample")}</Tag>}
                 <Link
                   href={`/forum/${question.id}`}
-                  className="flex min-h-11 items-center wrap-anywhere font-bold text-royal hover:underline"
+                  className="flex min-h-11 items-center wrap-anywhere font-bold text-accent hover:underline"
                 >
                   {question.text}
                 </Link>

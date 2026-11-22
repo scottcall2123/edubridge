@@ -49,7 +49,7 @@ export default async function TeacherPage({
   return (
     <main className="container space-y-6 py-8">
       <Link
-        className="inline-flex min-h-11 items-center text-royal"
+        className="inline-flex min-h-11 items-center text-accent"
         href={`/teachers?subject=${teacher.subject.slug}${query.q ? `&q=${query.q}` : ""}`}
       >
         {t("teachers.back")}

@@ -191,7 +191,7 @@ export function RegisterForm() {
         {t(pending ? "common.loading" : "common.register")}
       </Button>
       <Link
-        className="inline-flex min-h-11 items-center font-bold text-royal"
+        className="inline-flex min-h-11 items-center font-bold text-accent"
         href="/login"
       >
         {t("common.login")}

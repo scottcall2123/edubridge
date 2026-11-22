@@ -39,7 +39,17 @@ export default async function RootLayout({
     current = await getCurrentUser();
   const t = await getTranslations();
   return (
-    <html lang={locale} className={manrope.variable}>
+    <html lang={locale} className={manrope.variable} data-theme="light">
+      <head>
+        {/* Applies the saved choice before the first paint, so a reader who
+            picked dark never sees a white flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('edubridge-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}",
+          }}
+        />
+      </head>
       <body>
         <NextIntlClientProvider>
           <a href="#main-content" className="skip-link">

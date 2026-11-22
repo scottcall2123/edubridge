@@ -3,6 +3,7 @@ import Image from "next/image";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { UserMenu } from "./UserMenu";
 import { DesktopNav } from "./DesktopNav";
+import { ThemeToggle } from "./ThemeToggle";
 export async function TopBar({
   name,
   teacher,
@@ -27,6 +28,7 @@ export async function TopBar({
         </Link>
         {name && <DesktopNav teacher={teacher} />}
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <LanguageSwitcher />
           <UserMenu name={name} teacher={teacher} logout={logout} />
         </div>

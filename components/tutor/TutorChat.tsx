@@ -143,7 +143,7 @@ export function TutorChat({
             className={`flex ${m.role === "ai" ? "justify-start" : "justify-end"}`}
           >
             <div
-              className={`chat-message max-w-[92%] rounded-2xl p-4 ${m.role === "ai" ? "bg-sky-50 text-navy" : "bg-royal text-white"}`}
+              className={`chat-message max-w-[92%] rounded-2xl p-4 ${m.role === "ai" ? "bg-sky-50 text-ink" : "bg-royal text-white"}`}
             >
               <div className="mb-2 flex items-center gap-2 text-xs font-bold">
                 {m.role === "ai" && (

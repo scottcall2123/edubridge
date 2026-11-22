@@ -32,7 +32,7 @@ export async function TeacherList({
       />
       <div className="space-y-2 rounded-xl bg-sky-50 p-4 text-sm">
         <p className="text-muted">{t("teachers.fundingPlan")}</p>
-        <p className="text-royal">{t("teachers.notice")}</p>
+        <p className="text-accent">{t("teachers.notice")}</p>
       </div>
       <nav aria-label={t("ask.chooseSubject")} className="flex flex-wrap gap-2">
         {[

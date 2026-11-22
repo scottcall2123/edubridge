@@ -64,7 +64,7 @@ export async function ForumList({
               {q.is_sample && <Tag>{t("common.sample")}</Tag>}
             </div>
             <Link
-              className="inline-flex min-h-11 items-center break-words text-lg font-bold text-royal"
+              className="inline-flex min-h-11 items-center break-words text-lg font-bold text-accent"
               href={`/forum/${q.id}`}
             >
               {q.text}

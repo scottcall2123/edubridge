@@ -51,7 +51,7 @@ export async function ProfileView({
           {Object.entries(badges).map(([key, earned]) => (
             <li
               key={key}
-              className={`flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold ${earned ? "bg-sky-50 text-royal" : "bg-paper text-muted"}`}
+              className={`flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold ${earned ? "bg-sky-50 text-accent" : "bg-paper text-muted"}`}
             >
               <Award />
               <span>{t(`profile.${key}`)}</span>
@@ -119,7 +119,7 @@ export async function ProfileView({
               <li key={q.id} className="space-y-3 py-4">
                 <Link
                   href={`/tutor/${q.id}`}
-                  className="inline-flex min-h-11 items-center break-words font-bold text-royal hover:underline"
+                  className="inline-flex min-h-11 items-center break-words font-bold text-accent hover:underline"
                 >
                   {q.text}
                 </Link>
@@ -168,7 +168,7 @@ export async function ProfileView({
               </ol>
               <Link
                 href={`/tutor/${q.id}`}
-                className="mt-4 inline-flex min-h-11 items-center font-bold text-royal"
+                className="mt-4 inline-flex min-h-11 items-center font-bold text-accent"
               >
                 {t("profile.openChat")}
               </Link>
@@ -204,7 +204,7 @@ export async function ProfileView({
                 <p className="text-sm text-muted">{t("booking.meeting")}</p>
                 <Link
                   href={`/teachers/${b.teacher_id}?booking=${b.id}`}
-                  className="inline-flex min-h-11 items-center gap-2 font-bold text-royal"
+                  className="inline-flex min-h-11 items-center gap-2 font-bold text-accent"
                 >
                   <CheckCircle />
                   {t("profile.viewBooking")}

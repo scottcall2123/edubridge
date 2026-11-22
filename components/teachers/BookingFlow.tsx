@@ -50,7 +50,7 @@ export function BookingFlow({
           {time(confirmation.slot.starts_at)} · {t("booking.duration")}
         </p>
         <p className="text-sm text-muted">{t("teachers.timezone")}</p>
-        <p className="font-bold text-royal">{t("teachers.freeForStudents")}</p>
+        <p className="font-bold text-accent">{t("teachers.freeForStudents")}</p>
         <p className="text-sm text-muted">{t("teachers.fundingPlan")}</p>
         <p>{t("booking.meeting")}</p>
         <div className="rounded-xl bg-sky-50 p-4">
@@ -90,7 +90,7 @@ export function BookingFlow({
         <p className="text-sm text-muted">
           {t("teachers.center", { name: teacher.offline_center })}
         </p>
-        <p className="font-bold text-royal">{t("teachers.freeSession")}</p>
+        <p className="font-bold text-accent">{t("teachers.freeSession")}</p>
         <p className="text-sm text-muted">{t("teachers.fundingPlan")}</p>
       </Card>
       <Card className="space-y-5">
@@ -110,7 +110,7 @@ export function BookingFlow({
                 </dd>
               </div>
             </dl>
-            <p className="font-bold text-royal">{t("teachers.freeForStudents")}</p>
+            <p className="font-bold text-accent">{t("teachers.freeForStudents")}</p>
             <Button
               disabled={pending}
               className="w-full"
@@ -164,7 +164,7 @@ export function BookingFlow({
                     {slots.map((s) => (
                       <label
                         key={s.id}
-                        className={`mb-0 min-h-12 cursor-pointer rounded-xl border p-3 ${selected === s.id ? "border-royal bg-sky-50" : "border-line"}`}
+                        className={`mb-0 min-h-12 cursor-pointer rounded-xl border p-3 ${selected === s.id ? "border-accent bg-sky-50" : "border-line"}`}
                       >
                         <input
                           type="radio"

@@ -17,7 +17,7 @@ export function Steps({ step }: { step: number }) {
         <li
           key={n}
           aria-current={step === n ? "step" : undefined}
-          className={`rounded-xl border px-3 py-3 text-center text-sm font-bold ${n === step ? "border-royal bg-sky-50 text-royal" : "border-line bg-white text-muted"}`}
+          className={`rounded-xl border px-3 py-3 text-center text-sm font-bold ${n === step ? "border-accent bg-sky-50 text-accent" : "border-line bg-surface text-muted"}`}
         >
           {n}
           <span className="mt-1 block text-xs">{t(`step${n}`)}</span>
@@ -71,7 +71,7 @@ export function AskWizard({
               return (
                 <button
                   key={s.id}
-                  className={`card flex min-h-44 flex-col gap-3 text-left ${chosen ? "border-royal bg-sky-50" : ""}`}
+                  className={`card flex min-h-44 flex-col gap-3 text-left ${chosen ? "border-accent bg-sky-50" : ""}`}
                   aria-pressed={chosen}
                   onClick={() => {
                     setSubject(s.id);
@@ -93,7 +93,7 @@ export function AskWizard({
                     {own.slice(0, 3).map((topic) => (
                       <span
                         key={topic.id}
-                        className="inline-flex rounded-full bg-sky-50 px-2 py-0.5 text-xs font-semibold text-royal"
+                        className="inline-flex rounded-full bg-sky-50 px-2 py-0.5 text-xs font-semibold text-accent"
                       >
                         {topic[`title_${locale}`]}
                       </span>

@@ -29,7 +29,7 @@ export function Tag({
     <span
       className={clsx(
         "inline-flex rounded-full px-3 py-1 text-xs font-semibold",
-        simulated ? "bg-gold-50 text-navy" : "bg-sky-50 text-royal",
+        simulated ? "bg-gold-50 text-ink" : "bg-sky-50 text-accent",
       )}
     >
       {children}
@@ -39,7 +39,7 @@ export function Tag({
 export function Avatar({ name }: { name: string }) {
   return (
     <span
-      className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-50 font-bold text-navy"
+      className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-50 font-bold text-ink"
       aria-label={name}
     >
       {name

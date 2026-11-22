@@ -30,7 +30,7 @@ export default async function ForumDetail({
     <main className="container max-w-3xl space-y-6 py-8">
       <Link
         href="/forum"
-        className="inline-flex min-h-11 items-center font-bold text-royal"
+        className="inline-flex min-h-11 items-center font-bold text-accent"
       >
         {t("forum.back")}
       </Link>

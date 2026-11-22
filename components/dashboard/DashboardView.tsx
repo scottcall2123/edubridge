@@ -69,7 +69,7 @@ export async function DashboardView({
         >
           <Link
             href="/profile#points"
-            className="inline-flex min-h-11 items-center gap-2 font-bold text-royal"
+            className="inline-flex min-h-11 items-center gap-2 font-bold text-accent"
           >
             <History />
             {t("dashboard.history")}
@@ -120,7 +120,7 @@ export async function DashboardView({
           <div className="section-title">
             <h2>{t("dashboard.top5")}</h2>
             <Link
-              className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-bold text-royal"
+              className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-bold text-accent"
               href="/leaderboard"
               aria-label={t("nav.leaderboard")}
             >
@@ -162,7 +162,7 @@ export async function DashboardView({
               )}
             </h2>
             <Link
-              className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-bold text-royal"
+              className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-bold text-accent"
               href="/timetable"
             >
               {t("timetable.openTimetable")}

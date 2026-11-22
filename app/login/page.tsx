@@ -83,7 +83,7 @@ export default async function LoginPage({
         )}
         <LoginForm />
         <p className="text-center text-sm">
-          <Link className="font-bold text-royal" href="/register">
+          <Link className="font-bold text-accent" href="/register">
             {t("common.register")}
           </Link>
         </p>

@@ -47,7 +47,7 @@ export function LanguageSwitcher() {
       {error && (
         <span
           role="alert"
-          className="absolute right-0 top-full z-40 mt-2 w-56 rounded-xl bg-white p-3 text-sm text-danger"
+          className="absolute right-0 top-full z-40 mt-2 w-56 rounded-xl bg-surface p-3 text-sm text-danger"
         >
           {t("languageError")}
         </span>

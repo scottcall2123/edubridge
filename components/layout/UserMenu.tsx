@@ -20,7 +20,7 @@ export async function UserMenu({
       >
         <Avatar name={name} />
       </summary>
-      <div className="absolute right-0 z-30 mt-3 w-48 rounded-xl border border-line bg-white p-2 text-navy shadow-lg">
+      <div className="absolute right-0 z-30 mt-3 w-48 rounded-xl border border-line bg-surface p-2 text-ink shadow-lg">
         <Link
           className="block min-h-11 rounded-lg p-3"
           href={teacher ? "/teacher" : "/dashboard"}

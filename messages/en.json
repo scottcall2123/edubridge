@@ -14,7 +14,9 @@
     "continue": "Continue",
     "skipContent": "Skip to content",
     "notFound": "Page not found",
-    "languageError": "Could not save the language. Try again."
+    "languageError": "Could not save the language. Try again.",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode"
   },
   "nav": {
     "teacherHome": "Teacher dashboard",

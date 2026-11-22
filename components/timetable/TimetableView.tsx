@@ -76,8 +76,8 @@ export function TimetableView({
             onClick={() => setActive(weekday)}
             className={`min-h-11 rounded-xl border px-4 text-sm font-bold ${
               weekday === active
-                ? "border-royal bg-royal text-white"
-                : "border-line bg-white text-navy hover:bg-sky-50"
+                ? "border-accent bg-royal text-white"
+                : "border-line bg-surface text-ink hover:bg-sky-50"
             }`}
           >
             {weekdayName(weekday, locale)}

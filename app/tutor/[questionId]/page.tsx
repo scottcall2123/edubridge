@@ -48,7 +48,7 @@ export default async function TutorPage({
     <main className="container max-w-3xl space-y-6 py-8">
       <Link
         href="/ask"
-        className="inline-flex min-h-11 items-center gap-2 font-bold text-royal"
+        className="inline-flex min-h-11 items-center gap-2 font-bold text-accent"
       >
         <ArrowLeft />
         {t("ask.back")}
