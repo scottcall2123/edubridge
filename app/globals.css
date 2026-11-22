@@ -129,8 +129,19 @@
 .lesson-writing > li:nth-child(3) { animation-name: lesson-line-3; }
 .lesson-writing > li:nth-child(4) { animation-name: lesson-line-4; }
 .lesson-ring { animation: lesson-ring 6s linear infinite; }
-.lesson-audio > span { animation: motion-enter 240ms ease-out; }
-.lesson-audio > span:nth-child(even) { transform: translateY(-3px); }
+/* Speaking indicator: the dots rise and fall in a wave, each one a beat behind
+   the last, so the row looks like a live voice meter. Only transform and opacity
+   move, and the base state (a plain visible dot) is what shows under
+   prefers-reduced-motion once the animation is switched off. */
+@keyframes lesson-wave {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(-5px); opacity: 1; }
+}
+.lesson-audio > span { animation: lesson-wave 900ms ease-in-out infinite; }
+.lesson-audio > span:nth-child(2) { animation-delay: 150ms; }
+.lesson-audio > span:nth-child(3) { animation-delay: 300ms; }
+.lesson-audio > span:nth-child(4) { animation-delay: 450ms; }
+.lesson-audio > span:nth-child(5) { animation-delay: 600ms; }
 @keyframes lesson-line-2 { 0%, 17% { opacity: 0; transform: translateY(6px); } 21%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
 @keyframes lesson-line-3 { 0%, 32% { opacity: 0; transform: translateY(6px); } 36%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
 @keyframes lesson-line-4 { 0%, 47% { opacity: 0; transform: translateY(6px); } 51%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
