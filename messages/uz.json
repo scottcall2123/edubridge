@@ -345,6 +345,7 @@
     "overall": "Umumiy davomat",
     "ofLessons": "{attended}/{held} dars",
     "openTimetable": "Jadvalni ochish",
-    "todayLessons": "Bugungi darslar"
+    "todayLessons": "Bugungi darslar",
+    "nextLessons": "Keyingi dars kuni"
   }
 }

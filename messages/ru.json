@@ -345,6 +345,7 @@
     "overall": "Общая посещаемость",
     "ofLessons": "{attended}/{held} уроков",
     "openTimetable": "Открыть расписание",
-    "todayLessons": "Сегодняшние уроки"
+    "todayLessons": "Сегодняшние уроки",
+    "nextLessons": "Следующий учебный день"
   }
 }

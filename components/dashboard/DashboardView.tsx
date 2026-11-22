@@ -22,9 +22,18 @@ export async function DashboardView({
     format = await getFormatter(),
     locale = await getLocale(),
     now = new Date();
+  // Sundays and holidays would leave the card empty, so it falls forward to
+  // the next school day rather than showing nothing.
   const weekday = todayInFergana();
-  const today =
-    weekPlan().find((day) => day.weekday === weekday)?.lessons ?? [];
+  const plan = weekPlan();
+  const todayPlan = plan.find((day) => day.weekday === weekday);
+  const shown =
+    todayPlan && todayPlan.lessons.length
+      ? todayPlan
+      : (plan.find((day) => day.weekday > weekday && day.lessons.length) ??
+        plan.find((day) => day.lessons.length));
+  const isToday = shown?.weekday === weekday;
+  const today = shown?.lessons ?? [];
   return (
     <main className="container space-y-8 py-8">
       <PageHeader
@@ -149,7 +158,11 @@ export async function DashboardView({
         </Card>
         <Card className="lg:col-span-2">
           <div className="section-title">
-            <h2>{t("timetable.todayLessons")}</h2>
+            <h2>
+              {t(
+                isToday ? "timetable.todayLessons" : "timetable.nextLessons",
+              )}
+            </h2>
             <Link
               className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-bold text-royal"
               href="/timetable"

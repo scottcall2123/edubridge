@@ -345,6 +345,7 @@
     "overall": "Overall attendance",
     "ofLessons": "{attended}/{held} lessons",
     "openTimetable": "Open the timetable",
-    "todayLessons": "Today's lessons"
+    "todayLessons": "Today's lessons",
+    "nextLessons": "Next school day"
   }
 }
