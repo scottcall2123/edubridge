@@ -145,7 +145,7 @@ export function StatTile({
 export function Spinner({ label }: { label: string }) {
   return (
     <span role="status" className="inline-flex items-center gap-2">
-      <LoaderCircle className="animate-spin" />
+      <LoaderCircle />
       {label}
     </span>
   );

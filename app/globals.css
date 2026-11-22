@@ -28,7 +28,7 @@
 @keyframes points-rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -36,10 +36,77 @@
   }
 }
 .chat-message {
-  animation: chat-appear 150ms ease-out;
+  animation: chat-appear 200ms ease-out;
 }
 .earned-points {
-  animation: points-rise 500ms ease-out;
+  animation: points-rise 260ms ease-out;
+}
+@keyframes motion-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes motion-icon {
+  from { opacity: 0; transform: rotate(-30deg) scale(0.9); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+@keyframes motion-bar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.motion-page, .motion-panel, .motion-day {
+  animation: motion-enter 220ms ease-out;
+}
+.motion-stagger > :nth-child(-n + 3) {
+  animation: motion-enter 200ms ease-out backwards;
+  animation-delay: var(--motion-delay, 0ms);
+}
+.motion-stagger > :nth-child(2) { --motion-delay: 40ms; }
+.motion-stagger > :nth-child(3) { --motion-delay: 80ms; }
+.motion-icon { animation: motion-icon 180ms ease-out; }
+.motion-bar {
+  transform-origin: left center;
+  animation: motion-bar 280ms ease-out backwards;
+}
+.motion-streak { display: inline-block; animation: motion-enter 240ms ease-out; }
+.motion-card {
+  transition: transform 160ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+@media (hover: hover) {
+  .motion-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--c-ink) 12%, transparent);
+  }
+}
+.motion-card:active { transform: translateY(0); }
+.motion-step {
+  position: relative;
+  isolation: isolate;
+  background: var(--c-surface);
+}
+.motion-tab {
+  position: relative;
+  isolation: isolate;
+  background: var(--c-surface);
+  transition: transform 160ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+.motion-step::before, .motion-tab::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 160ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+.motion-step::before { background: var(--c-sky-50); }
+.motion-tab::before { background: var(--c-royal); }
+.motion-step[aria-current="step"]::before,
+.motion-tab[aria-selected="true"]::before { opacity: 1; }
+.motion-tab:active { transform: scale(0.97); }
+@media (hover: hover) {
+  .motion-tab:not([aria-selected="true"]):hover::before {
+    opacity: 0.12;
+  }
 }
 /* Raw colours live here so a single attribute on <html> can repoint them.
    The theme below maps Tailwind's tokens onto these, so every utility and
@@ -204,14 +271,20 @@ h2 {
   padding: 12px 24px;
   border-radius: 12px;
   font-weight: 700;
-  transition: background 150ms;
   cursor: pointer;
+}
+.button:not(:disabled):not([aria-disabled="true"]) {
+  transition: background-color 160ms cubic-bezier(0.2, 0, 0.2, 1),
+    transform 160ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+.button:not(:disabled):not([aria-disabled="true"]):active {
+  transform: scale(0.97);
 }
 .button-primary {
   background: var(--color-royal);
   color: white;
 }
-.button-primary:hover {
+.button-primary:not(:disabled):not([aria-disabled="true"]):hover {
   background: var(--color-royal-600);
 }
 .button-secondary {

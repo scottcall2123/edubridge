@@ -74,10 +74,10 @@ export function TimetableView({
             role="tab"
             aria-selected={weekday === active}
             onClick={() => setActive(weekday)}
-            className={`min-h-11 rounded-xl border px-4 text-sm font-bold ${
+            className={`motion-tab min-h-11 rounded-xl border px-4 text-sm font-bold ${
               weekday === active
-                ? "border-accent bg-royal text-white"
-                : "border-line bg-surface text-ink hover:bg-sky-50"
+                ? "border-accent text-white"
+                : "border-line text-ink"
             }`}
           >
             {weekdayName(weekday, locale)}
@@ -91,9 +91,9 @@ export function TimetableView({
       </div>
 
       {day.lessons.length === 0 ? (
-        <Card>{t("timetable.noLessons")}</Card>
+        <Card key={active} className="motion-day">{t("timetable.noLessons")}</Card>
       ) : (
-        <ol className="space-y-3">
+        <ol key={active} className="motion-day space-y-3">
           {day.lessons.map((lesson) => {
             const slug = lesson.subject.slug;
             const open = slug ? (openQuestions[slug] ?? 0) : 0;
@@ -151,7 +151,7 @@ export function TimetableView({
                   aria-label={`${share}%`}
                 >
                   <div
-                    className={`h-2 rounded-full ${share >= 90 ? "bg-royal" : "bg-gold"}`}
+                    className={`motion-bar h-2 rounded-full ${share >= 90 ? "bg-royal" : "bg-gold"}`}
                     style={{ width: `${share}%` }}
                   />
                 </div>

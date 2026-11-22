@@ -11,6 +11,8 @@ export function ThemeToggle() {
   // applied the stored choice, so the button reads it after mounting.
   const [dark, setDark] = useState(false);
   useEffect(() => {
+    // Read the pre-paint theme only after hydration to keep server markup stable.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDark(document.documentElement.dataset.theme === "dark");
   }, []);
 
@@ -34,7 +36,7 @@ export function ThemeToggle() {
       title={label}
       className="flex min-h-11 min-w-11 items-center justify-center rounded-lg text-white hover:bg-white/10"
     >
-      {dark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+      {dark ? <Sun className="motion-icon" aria-hidden="true" /> : <Moon className="motion-icon" aria-hidden="true" />}
       <span className="sr-only">{label}</span>
     </button>
   );

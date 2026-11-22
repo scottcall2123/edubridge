@@ -34,7 +34,7 @@ export function LanguageSwitcher() {
               }
             });
           }}
-          className={`min-h-11 min-w-11 rounded-lg text-xs font-bold disabled:cursor-wait ${l === selectedLocale ? "bg-white text-navy" : "text-white hover:bg-white/10"} ${pending && l === selectedLocale ? "animate-pulse motion-reduce:animate-none" : ""}`}
+          className={`min-h-11 min-w-11 rounded-lg text-xs font-bold disabled:cursor-wait ${l === selectedLocale ? "bg-white text-navy" : "text-white hover:bg-white/10"}`}
         >
           {l.toUpperCase()}
         </button>

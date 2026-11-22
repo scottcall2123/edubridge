@@ -17,7 +17,7 @@ export function Steps({ step }: { step: number }) {
         <li
           key={n}
           aria-current={step === n ? "step" : undefined}
-          className={`rounded-xl border px-3 py-3 text-center text-sm font-bold ${n === step ? "border-accent bg-sky-50 text-accent" : "border-line bg-surface text-muted"}`}
+          className={`motion-step rounded-xl border px-3 py-3 text-center text-sm font-bold ${n === step ? "border-accent text-accent" : "border-line text-muted"}`}
         >
           {n}
           <span className="mt-1 block text-xs">{t(`step${n}`)}</span>
@@ -63,7 +63,7 @@ export function AskWizard({
               <p>{t("ask.chooseSubjectHint")}</p>
             </div>
           </header>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="motion-stagger grid gap-4 md:grid-cols-3">
             {subjects.map((s) => {
               const Icon = icons[s.slug] ?? Sigma;
               const own = topics.filter((topic) => topic.subject_id === s.id);
@@ -71,7 +71,7 @@ export function AskWizard({
               return (
                 <button
                   key={s.id}
-                  className={`card flex min-h-44 flex-col gap-3 text-left ${chosen ? "border-accent bg-sky-50" : ""}`}
+                  className={`card motion-card flex min-h-44 flex-col gap-3 text-left ${chosen ? "border-accent bg-sky-50" : ""}`}
                   aria-pressed={chosen}
                   onClick={() => {
                     setSubject(s.id);

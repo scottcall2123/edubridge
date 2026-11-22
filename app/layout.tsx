@@ -39,7 +39,7 @@ export default async function RootLayout({
     current = await getCurrentUser();
   const t = await getTranslations();
   return (
-    <html lang={locale} className={manrope.variable} data-theme="light">
+    <html lang={locale} className={manrope.variable} data-theme="light" suppressHydrationWarning>
       <head>
         {/* Applies the saved choice before the first paint, so a reader who
             picked dark never sees a white flash. */}
