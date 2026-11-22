@@ -8,13 +8,14 @@ export async function generateMetadata() {
 export default async function Forum({
   searchParams,
 }: {
-  searchParams: Promise<{ subject?: string }>;
+  searchParams: Promise<{ subject?: string; olympiad?: string }>;
 }) {
-  const { subject } = await searchParams;
+  const { subject, olympiad } = await searchParams;
   const [data, current] = await Promise.all([loadForum(subject), getCurrentUser()]);
   return (
     <ForumList
       {...data}
+      onlyOlympiad={olympiad === "1"}
       hideNewQuestion={Boolean(current?.teacher)}
       selected={data.subjects.some((s) => s.slug === subject) ? subject : ""}
     />

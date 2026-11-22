@@ -16,16 +16,20 @@ export async function generateMetadata() {
 }
 export default async function ForumDetail({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ olympiad?: string }>;
 }) {
   const { id } = await params;
+  const onlyOlympiad = (await searchParams).olympiad === "1";
   if (!z.uuid().safeParse(id).success) notFound();
   const current = await getCurrentUser(),
     data = await loadForumDetail(id, current?.user.id);
   if (!data) notFound();
   const t = await getTranslations(),
     locale = (await getLocale()) as Locale;
+  const answers = data.answers.filter((answer) => !onlyOlympiad || answer.is_olympiad);
   return (
     <main className="container motion-page max-w-3xl space-y-6 py-8">
       <Link
@@ -44,11 +48,13 @@ export default async function ForumDetail({
         {current ? <ReportButton targetId={id} targetType="question" />:<Link href="/login" className="button button-secondary">{t('forum.report')}</Link>}
       </Card>
       <h2>{t("forum.answers", { count: data.answers.length })}</h2>
-      {data.answers.map((a) => (
+      <Link className={`button ${onlyOlympiad ? "button-gold" : "button-secondary"}`} href={`/forum/${id}${onlyOlympiad ? "" : "?olympiad=1"}`} aria-current={onlyOlympiad ? "page" : undefined}>{t("forum.olympiadFilter")}</Link>
+      {answers.map((a) => (
         <Card key={a.id} className="space-y-4">
           <div className="flex flex-wrap items-center gap-2">
             <p className="font-bold">{a.author_name}</p>
-            {a.is_sample && <Tag>{t("common.sample")}</Tag>}
+            {a.is_olympiad && <Tag simulated>{t("forum.olympiadWinner")}</Tag>}
+            {a.is_sample && <Tag simulated>{t("common.sample")}</Tag>}
           </div>
           <ol className="list-decimal space-y-3 pl-6">
             {a.steps.map((s, i) => (
@@ -64,7 +70,7 @@ export default async function ForumDetail({
           {current ? <ReportButton targetId={a.id} targetType="answer" />:<Link href="/login" className="button button-secondary">{t('forum.report')}</Link>}
         </Card>
       ))}
-      {!data.answers.length && <Card>{t("forum.noAnswers")}</Card>}
+      {!answers.length && <Card>{t("forum.noAnswers")}</Card>}
       <Card>
         {current ? (
           <AnswerForm questionId={id} />

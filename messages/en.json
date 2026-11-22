@@ -311,7 +311,9 @@
     "reportThanks": "Thank you. Moderators will review it.",
     "loginToAnswer": "Log in to answer",
     "back": "Back to forum",
-    "unrated": "Not rated yet"
+    "unrated": "Not rated yet",
+    "olympiadWinner": "Olympiad winner",
+    "olympiadFilter": "Olympiad student answers"
   },
   "leaderboard": {
     "title": "Fergana Top 100 students",

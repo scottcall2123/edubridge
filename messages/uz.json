@@ -311,7 +311,9 @@
     "reportThanks": "Rahmat, moderatorlar tekshiradi.",
     "loginToAnswer": "Javob yozish uchun kiring",
     "back": "Forumga qaytish",
-    "unrated": "Hali baholanmagan"
+    "unrated": "Hali baholanmagan",
+    "olympiadWinner": "Olimpiada g‘olibi",
+    "olympiadFilter": "Olimpiadachilar javoblari"
   },
   "leaderboard": {
     "title": "Farg‘ona Top-100 o‘quvchilari",

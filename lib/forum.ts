@@ -1,4 +1,5 @@
 import "server-only";
+import { sampleOlympiadAnswer } from "./forum-samples";
 import { createAdminClient } from "./supabase/admin";
 import type { Subject, Topic, Answer } from "./types";
 export interface ForumQuestion {
@@ -81,7 +82,8 @@ export async function loadForumDetail(id: string, userId?: string) {
     topic: topic.data as Topic | null,
     answers: (answers.data as Answer[]).map((a) => ({
       id: a.id,
-      author_name: a.author_name,
+      author_name: sampleOlympiadAnswer(a)?.full_name ?? a.author_name,
+      is_olympiad: Boolean(sampleOlympiadAnswer(a)),
       steps: a.steps,
       stars: a.stars,
       is_sample: a.is_sample,
