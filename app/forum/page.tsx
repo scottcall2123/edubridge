@@ -31,7 +31,7 @@ export default async function Forum({ searchParams }: {
     }
   }
   const t = await getTranslations();
-  const similar = questionId ? <section className="space-y-4 rounded-2xl border border-line p-4 md:p-6">
+  const similar = questionId && olympiad !== "1" ? <section className="space-y-4 rounded-2xl border border-line p-4 md:p-6">
     <p className="text-sm text-muted">{t("forum.similarContext")}</p>
     <SimilarQuestions embedded key={questionId} questionId={questionId} questions={await findSimilar(questionId)} />
   </section> : undefined;

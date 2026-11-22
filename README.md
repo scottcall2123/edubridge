@@ -29,6 +29,10 @@ The Supabase URL and anon key are public. Service-role key, Gemini key and demo 
 
 ## Status
 
+Final submission additions: the login introduces the product; `/jonli-dars` demonstrates a clearly labelled sample lesson, with no video, recording or parent access implemented. Teacher escalation offers earliest availability and time filters. New questions open AI Ustoz directly; `/ask?q=...` redirects safely and subject forums retain similar answers and the original points action. Three fictional sample students have Olympiad badges and forum filters.
+
+Solved-by-AI questions offer practice on request. Up to three attempts per question use deterministic unique reservations in the existing private `tutor_turns` table; retries of a completed request reuse its result. Results are kept in reservation metadata, separate from tutor chat history. No SQL or new environment variables are required. The original tutor Gemini helper and teacher dashboard remain unchanged.
+
 Steps 1–12 are implemented: responsive UZ/EN/RU layout, real Supabase auth and demo login, dashboard/points/streaks, ask and similar answers, Gemini tutor, teachers/booking, profile histories, landing, public forum with answers/stars/reports, Top-100 leaderboard, registration with simulated parent code, and private JPEG/PNG uploads up to 5 MB.
 
 Forum posts are explicitly public. Private homework and images are available to the student and, for upcoming confirmed bookings with a linked question, the booked teacher. Student text and team-written sample answers keep their original language. Interface text, subjects, topics and teacher bios support UZ/EN/RU.

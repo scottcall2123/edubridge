@@ -31,12 +31,13 @@ export default async function LoginPage({
     <main className="container motion-page py-4 md:py-8">
       <div className="card mx-auto max-w-lg space-y-4">
         <Image
-          className="mx-auto h-24 w-auto rounded-xl bg-sky-50 p-2"
+          className="brand-light mx-auto h-24 w-auto"
           src="/brand/edubridge-logo-vertical.svg"
           width={114}
           height={96}
           alt="EduBridge"
         />
+        <Image className="brand-dark mx-auto h-24 w-auto" src="/brand/edubridge-logo-vertical-on-dark.svg" width={114} height={96} alt="EduBridge" />
         <div className="text-center">
           <h1>{t("auth.title")}</h1>
           <p className="mt-2 text-sm text-muted">{t("auth.description")}</p>

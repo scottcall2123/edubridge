@@ -134,6 +134,9 @@
 @keyframes lesson-line-2 { 0%, 17% { opacity: 0; transform: translateY(6px); } 21%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
 @keyframes lesson-line-3 { 0%, 32% { opacity: 0; transform: translateY(6px); } 36%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
 @keyframes lesson-line-4 { 0%, 47% { opacity: 0; transform: translateY(6px); } 51%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
+.brand-dark { display: none; }
+[data-theme="dark"] .brand-light { display: none; }
+[data-theme="dark"] .brand-dark { display: block; }
 /* Raw colours live here so a single attribute on <html> can repoint them.
    The theme below maps Tailwind's tokens onto these, so every utility and
    every rule in this file follows the mode with no duplicated styles. */
