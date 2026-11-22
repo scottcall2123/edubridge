@@ -141,7 +141,7 @@
     "steps": "Question steps",
     "step1": "Subject",
     "step2": "Topic and question",
-    "step3": "Step by step",
+    "step3": "AI Ustoz",
     "topic": "Topic",
     "chooseTopic": "Choose a topic",
     "length": "{count}/1000 characters · at least 10",
@@ -313,7 +313,9 @@
     "back": "Back to forum",
     "unrated": "Not rated yet",
     "olympiadWinner": "Olympiad winner",
-    "olympiadFilter": "Olympiad student answers"
+    "olympiadFilter": "Olympiad student answers",
+    "peerFirst": "Check peer explanations in the forum first",
+    "similarContext": "Solutions similar to your open question in this subject. Marking one as helpful saves your question as solved."
   },
   "leaderboard": {
     "title": "Fergana Top 100 students",

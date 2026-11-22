@@ -4,11 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { requireStudent } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { ownedQuestion } from "@/lib/questions";
-import { findSimilar } from "@/app/actions/questions";
 import { AskWizard } from "@/components/ask/AskWizard";
-import { SimilarQuestions } from "@/components/ask/SimilarQuestions";
-import { PhotoRetry } from "@/components/ask/PhotoRetry";
-import { QuestionImage } from "@/components/ask/QuestionImage";
 import type { Subject, Topic } from "@/lib/types";
 export async function generateMetadata() {
   return { title: (await getTranslations("nav"))("ask") };
@@ -24,22 +20,7 @@ export default async function Ask({
     if (!z.uuid().safeParse(q).success) notFound();
     const question = await ownedQuestion(q, user.id).catch(() => null);
     if (!question) notFound();
-    if (
-      question.status === "solved_by_forum" ||
-      question.status === "solved_by_ai"
-    )
-      redirect(`/ask/success?q=${q}`);
-    return (
-      <main className="container motion-page max-w-3xl py-8">
-        {imageError && !question.image_url && <PhotoRetry questionId={q} />}
-        <QuestionImage
-          path={question.image_url}
-          userId={user.id}
-          questionId={q}
-        />
-        <SimilarQuestions questionId={q} questions={await findSimilar(q)} />
-      </main>
-    );
+    redirect(`/tutor/${q}${imageError ? "?imageError=1" : ""}`);
   }
   const client = await createClient();
   const [subjects, topics] = await Promise.all([

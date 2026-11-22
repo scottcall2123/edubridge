@@ -141,7 +141,7 @@
     "steps": "Savol bosqichlari",
     "step1": "Fan",
     "step2": "Mavzu va savol",
-    "step3": "Qadam-ma-qadam",
+    "step3": "AI Ustoz",
     "topic": "Mavzu",
     "chooseTopic": "Mavzuni tanlang",
     "length": "{count}/1000 belgi · kamida 10",
@@ -313,7 +313,9 @@
     "back": "Forumga qaytish",
     "unrated": "Hali baholanmagan",
     "olympiadWinner": "Olimpiada g‘olibi",
-    "olympiadFilter": "Olimpiadachilar javoblari"
+    "olympiadFilter": "Olimpiadachilar javoblari",
+    "peerFirst": "Avval forumdagi tushuntirishlarni ko‘ring",
+    "similarContext": "O‘zingizning shu fandagi ochiq savolingizga o‘xshash yechimlar. Yordam berganini belgilasangiz, savolingiz hal qilingan deb saqlanadi."
   },
   "leaderboard": {
     "title": "Farg‘ona Top-100 o‘quvchilari",

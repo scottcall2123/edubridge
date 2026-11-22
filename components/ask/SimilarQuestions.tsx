@@ -10,8 +10,10 @@ import { Steps } from "./AskWizard";
 export function SimilarQuestions({
   questionId,
   questions,
+  embedded = false,
 }: {
   questionId: string;
+  embedded?: boolean;
   questions: SimilarQuestion[];
 }) {
   const t = useTranslations(),
@@ -20,8 +22,8 @@ export function SimilarQuestions({
     [error, setError] = useState(false);
   return (
     <>
-      <Steps step={3} />
-      <h1 className="mb-6">{t("ask.similar")}</h1>
+      {!embedded && <Steps step={3} />}
+      {embedded ? <h2 className="mb-4">{t("ask.similar")}</h2> : <h1 className="mb-6">{t("ask.similar")}</h1>}
       <div className="space-y-6">
         {questions.map((q) => (
           <Card key={q.id} className="space-y-4">

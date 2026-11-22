@@ -8,6 +8,8 @@ import { ownedQuestion } from "@/lib/questions";
 import { createClient } from "@/lib/supabase/server";
 import { Card, Tag } from "@/components/ui";
 import { TutorChat } from "@/components/tutor/TutorChat";
+import { PhotoRetry } from "@/components/ask/PhotoRetry";
+import { Steps } from "@/components/ask/AskWizard";
 import { QuestionImage } from "@/components/ask/QuestionImage";
 import type { Locale } from "@/lib/i18n";
 import type { Subject, Topic, TutorMessage } from "@/lib/types";
@@ -16,8 +18,10 @@ export async function generateMetadata() {
 }
 export default async function TutorPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ questionId: string }>;
+  searchParams: Promise<{ imageError?: string }>;
 }) {
   const { user } = await requireStudent(),
     { questionId } = await params;
@@ -53,7 +57,9 @@ export default async function TutorPage({
         <ArrowLeft />
         {t("ask.back")}
       </Link>
+      <Steps step={3} />
       <h1>{t("tutor.title")}</h1>
+      <Link className="inline-flex min-h-11 items-center font-bold text-accent" href={`/forum?subject=${s.slug}&q=${q.id}`}>{t("forum.peerFirst")}</Link>
       <Card className="space-y-4">
         <div className="flex flex-wrap gap-2">
           <Tag>{s[`name_${locale}`]}</Tag>
@@ -61,6 +67,7 @@ export default async function TutorPage({
         </div>
         <p className="whitespace-pre-wrap break-words">{q.text}</p>
       </Card>
+      {(await searchParams).imageError && !q.image_url && <PhotoRetry questionId={q.id} />}
       <QuestionImage path={q.image_url} userId={user.id} questionId={q.id} />
       <TutorChat
         key={q.id}

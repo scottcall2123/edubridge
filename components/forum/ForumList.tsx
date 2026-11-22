@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { hasSampleOlympiadAnswer } from "@/lib/forum-samples";
 import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
@@ -10,10 +11,12 @@ export async function ForumList({
   topics,
   selected = "",
   onlyOlympiad = false,
+  similar,
   hideNewQuestion = false,
 }: Awaited<ReturnType<typeof loadForum>> & {
   selected?: string;
   onlyOlympiad?: boolean;
+  similar?: ReactNode;
   hideNewQuestion?: boolean;
 }) {
   const t = await getTranslations(),
@@ -54,6 +57,7 @@ export async function ForumList({
         ))}
       </nav>
       <Link className={`button ${onlyOlympiad ? "button-gold" : "button-secondary"}`} href={`/forum?${new URLSearchParams({ ...(selected ? { subject: selected } : {}), ...(!onlyOlympiad ? { olympiad: "1" } : {}) })}`} aria-current={onlyOlympiad ? "page" : undefined}>{t("forum.olympiadFilter")}</Link>
+      {similar}
       <div className="motion-stagger grid gap-4 md:grid-cols-2">
         {rows.map((q) => (
           <Card key={q.id} className="motion-card space-y-4">

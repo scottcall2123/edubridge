@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRef, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -60,6 +61,7 @@ export function AskWizard({
             <div>
               <p className="eyebrow">{t("nav.ask")}</p>
               <h1>{t("ask.chooseSubject")}</h1>
+              <Link href="/forum" className="inline-flex min-h-11 items-center font-bold text-accent">{t("forum.peerFirst")}</Link>
               <p>{t("ask.chooseSubjectHint")}</p>
             </div>
           </header>
@@ -163,7 +165,7 @@ export function AskWizard({
                     router.push(
                       publicMode
                         ? `/forum/${result.questionId}`
-                        : `/ask?q=${result.questionId}${imageError ? "&imageError=1" : ""}`,
+                        : `/tutor/${result.questionId}${imageError ? "?imageError=1" : ""}`,
                     );
                   }
                 } catch {
