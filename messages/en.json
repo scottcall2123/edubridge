@@ -238,7 +238,11 @@
     "time_morning": "Morning · 09:00–12:00",
     "time_afternoon": "Afternoon · 12:00–17:00",
     "time_evening": "Evening · 17:00–21:00",
-    "noMatchingTime": "No free lessons match this time. Please choose another time."
+    "noMatchingTime": "No free lessons match this time. Please choose another time.",
+    "searchTitle": "AI Ustoz is finding the right teacher for you",
+    "searchStep1": "Selecting teachers for {subject}",
+    "searchStep2": "Checking free lesson times",
+    "searchStep3": "Sorting by the soonest time"
   },
   "booking": {
     "confirmFree": "Book free lesson",

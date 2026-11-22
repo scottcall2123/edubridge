@@ -238,7 +238,11 @@
     "time_morning": "Ertalab · 09:00–12:00",
     "time_afternoon": "Tushdan keyin · 12:00–17:00",
     "time_evening": "Kechqurun · 17:00–21:00",
-    "noMatchingTime": "Bu vaqtda bo‘sh dars topilmadi. Boshqa vaqtni tanlang."
+    "noMatchingTime": "Bu vaqtda bo‘sh dars topilmadi. Boshqa vaqtni tanlang.",
+    "searchTitle": "AI Ustoz sizga mos ustozni qidirmoqda",
+    "searchStep1": "{subject} fani bo‘yicha ustozlar tanlanmoqda",
+    "searchStep2": "Bo‘sh dars vaqtlari tekshirilmoqda",
+    "searchStep3": "Eng yaqin vaqtlar bo‘yicha saralanmoqda"
   },
   "booking": {
     "confirmFree": "Bepul darsni band qilish",

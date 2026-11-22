@@ -378,6 +378,143 @@ svg.lucide {
     padding-inline: 24px;
   }
 }
+/* AI Ustoz searching for a teacher.
+   Shown only when the student escalates from the tutor. Pure CSS so there is no
+   client JavaScript and no hydration risk: the panel hides itself after 3.4s and
+   stops taking clicks. The list underneath is already rendered, so if anything
+   stops the animation the student still reaches it. */
+@keyframes teacher-search-hide {
+  0%,
+  91% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes teacher-search-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+}
+@keyframes teacher-search-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes teacher-search-step-1 {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  3%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes teacher-search-step-2 {
+  0%,
+  29% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  33%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes teacher-search-step-3 {
+  0%,
+  59% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  63%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.teacher-search {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--c-paper);
+  animation: teacher-search-hide 3400ms ease-out forwards;
+}
+.teacher-search-card {
+  display: flex;
+  width: 100%;
+  max-width: 420px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--c-line);
+  border-radius: 16px;
+  background: var(--c-surface);
+  box-shadow: var(--shadow-card);
+  padding: 32px 24px;
+  text-align: center;
+}
+/* svg.lucide pins every icon to 20px, so match its specificity to go bigger. */
+svg.teacher-search-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--c-accent);
+  animation: teacher-search-pulse 1200ms ease-in-out infinite;
+}
+.teacher-search-steps {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--c-muted);
+}
+.teacher-search-step {
+  opacity: 0;
+}
+.teacher-search-step.step-1 {
+  animation: teacher-search-step-1 3400ms ease-out forwards;
+}
+.teacher-search-step.step-2 {
+  animation: teacher-search-step-2 3400ms ease-out forwards;
+}
+.teacher-search-step.step-3 {
+  animation: teacher-search-step-3 3400ms ease-out forwards;
+}
+.teacher-search-bar {
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--c-sky-50);
+}
+.teacher-search-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--c-accent);
+  transform-origin: left;
+  animation: teacher-search-fill 3400ms linear forwards;
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -385,5 +522,10 @@ svg.lucide {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+  /* Animations are off, so the panel could never hide itself. Skip it entirely
+     and show the teacher list straight away. */
+  .teacher-search {
+    display: none !important;
   }
 }
