@@ -242,7 +242,13 @@
     "searchTitle": "AI Ustoz is finding the right teacher for you",
     "searchStep1": "Selecting teachers for {subject}",
     "searchStep2": "Checking free lesson times",
-    "searchStep3": "Sorting by the soonest time"
+    "searchStep3": "Sorting by the soonest time",
+    "time_now": "Now",
+    "status_now": "Free now",
+    "status_today": "Free today",
+    "status_tomorrow": "Free tomorrow",
+    "status_later": "Free later",
+    "status_none": "No times yet"
   },
   "booking": {
     "confirmFree": "Book free lesson",

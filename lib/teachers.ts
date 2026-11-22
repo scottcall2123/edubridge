@@ -1,7 +1,7 @@
 import "server-only";
 import { createAdminClient } from "./supabase/admin";
 import { createClient } from "./supabase/server";
-import { slotCandidates } from "./booking";
+import { slotCandidates, soonSlot, SOON_WINDOW_MS } from "./booking";
 import type { Teacher, TeacherSlot, Subject, Booking } from "./types";
 export type TeacherWithSlots = Teacher & {
   subject: Subject;
@@ -21,10 +21,27 @@ export async function ensureFutureSlots(force = false) {
   ]);
   if (teachers.error || slots.error) throw new Error("Slots unavailable");
   const inserts = [];
+  const soon = soonSlot(now);
+  const soonLimit = now.getTime() + SOON_WINDOW_MS;
   for (const teacher of teachers.data) {
     const existing = (slots.data as TeacherSlot[]).filter(
       (s) => s.teacher_id === teacher.id,
     );
+    // Keep one bookable slot in the next hour or so. This is separate from the
+    // three-slot top-up below, because a teacher already holding tomorrow's
+    // three slots would otherwise never look free now.
+    const freeSoon = existing.some(
+      (s) => !s.is_booked && Date.parse(s.starts_at) <= soonLimit,
+    );
+    if (
+      !freeSoon &&
+      !existing.some((s) => Date.parse(s.starts_at) === Date.parse(soon))
+    )
+      inserts.push({
+        teacher_id: teacher.id,
+        starts_at: soon,
+        ends_at: new Date(Date.parse(soon) + 15 * 60000).toISOString(),
+      });
     let needed = 3 - existing.filter((s) => !s.is_booked).length;
     for (const start of slotCandidates(now)) {
       if (needed <= 0) break;
@@ -56,10 +73,13 @@ export async function loadTeachers(): Promise<{
   subjects: Subject[];
 }> {
   const client = await createClient();
-  // The top-up runs beside the reads rather than before them, so a visitor
-  // waits for the slowest query instead of the sum of all of them.
-  const [, teachers, subjects, slots] = await Promise.all([
-    ensureFutureSlots(),
+  // The top-up has to finish before the slots are read, or a student arriving on
+  // "Hozir bo'sh ustozlar" can be served the list from just before the new slot
+  // was written and see nobody free. It is throttled to once a minute per warm
+  // instance and returns immediately otherwise, so this costs nothing on almost
+  // every request.
+  await ensureFutureSlots();
+  const [teachers, subjects, slots] = await Promise.all([
     client
       .from("teachers")
       .select(

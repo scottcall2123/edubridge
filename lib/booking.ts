@@ -14,6 +14,18 @@ export function slotDate(value: Date | string) {
 export function formatUzs(value: number) {
   return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
+// The next quarter hour at least 10 minutes away, so "Hozir bo‘sh ustozlar"
+// always has a real slot a student can actually book instead of sending them to
+// tomorrow morning. Uzbekistan is a whole number of hours from UTC, so quarter
+// hours line up and this needs no timezone maths.
+export const SOON_LEAD_MS = 10 * 60000;
+export const SOON_WINDOW_MS = 75 * 60000;
+export function soonSlot(now = new Date()) {
+  const quarter = 15 * 60000;
+  return new Date(
+    Math.ceil((now.getTime() + SOON_LEAD_MS) / quarter) * quarter,
+  ).toISOString();
+}
 export function slotCandidates(now = new Date()) {
   const day = localDay(now),
     result: string[] = [];

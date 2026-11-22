@@ -2,7 +2,12 @@ import Link from "next/link";
 import { Star, MapPin, Clock } from "lucide-react";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Avatar, Card, Tag, PageHeader } from "@/components/ui";
-import { TIME_FILTERS, matchesTime, type TimeFilter } from "@/lib/teacher-time";
+import {
+  TIME_FILTERS,
+  matchesTime,
+  availability,
+  type TimeFilter,
+} from "@/lib/teacher-time";
 import { slotLabel } from "@/lib/booking";
 import type { TeacherWithSlots } from "@/lib/teachers";
 import type { Subject } from "@/lib/types";
@@ -27,7 +32,13 @@ export async function TeacherList({
   const now = new Date();
   const visible = teachers
     .filter((teacher) => !selected || teacher.subject.slug === selected)
-    .map((teacher) => ({ ...teacher, slots: teacher.slots.filter((slot) => matchesTime(slot, when, now)) }))
+    // status reads the teacher's full slot list, so filtering to one time of day
+    // never makes someone who is free now look unavailable.
+    .map((teacher) => ({
+      ...teacher,
+      status: availability(teacher.slots, now),
+      slots: teacher.slots.filter((slot) => matchesTime(slot, when, now)),
+    }))
     .filter((teacher) => !when || teacher.slots.length > 0)
     .sort((a, b) => (Date.parse(a.slots[0]?.starts_at) || Infinity) - (Date.parse(b.slots[0]?.starts_at) || Infinity));
   return (
@@ -69,6 +80,12 @@ export async function TeacherList({
                 <h2>{teacher.full_name}</h2>
                 <p className="text-sm text-muted">
                   {teacher.subject[`name_${locale}`]}
+                </p>
+                <p
+                  className={`availability availability-${teacher.status === "now" ? "now" : "later"}`}
+                >
+                  <span className="availability-dot" aria-hidden />
+                  {t(`teachers.status_${teacher.status}`)}
                 </p>
               </div>
             </div>

@@ -242,7 +242,13 @@
     "searchTitle": "AI Ustoz sizga mos ustozni qidirmoqda",
     "searchStep1": "{subject} fani bo‘yicha ustozlar tanlanmoqda",
     "searchStep2": "Bo‘sh dars vaqtlari tekshirilmoqda",
-    "searchStep3": "Eng yaqin vaqtlar bo‘yicha saralanmoqda"
+    "searchStep3": "Eng yaqin vaqtlar bo‘yicha saralanmoqda",
+    "time_now": "Hozir",
+    "status_now": "Hozir bo‘sh",
+    "status_today": "Bugun bo‘sh",
+    "status_tomorrow": "Ertaga bo‘sh",
+    "status_later": "Keyinroq bo‘sh",
+    "status_none": "Hozircha vaqt yo‘q"
   },
   "booking": {
     "confirmFree": "Bepul darsni band qilish",

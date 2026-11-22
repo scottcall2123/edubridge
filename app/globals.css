@@ -378,6 +378,46 @@ svg.lucide {
     padding-inline: 24px;
   }
 }
+/* Live availability under a teacher's name. The green state means they have a
+   free slot inside the same window the "Hozir" filter uses, so the badge and the
+   filter can never contradict each other. */
+@keyframes availability-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.55);
+    opacity: 0.5;
+  }
+}
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: currentColor;
+}
+.availability-now {
+  color: var(--c-success);
+}
+/* Base state is a plain visible dot, so switching the animation off under
+   prefers-reduced-motion still leaves the badge readable. */
+.availability-now .availability-dot {
+  animation: availability-pulse 1600ms ease-in-out infinite;
+}
+.availability-later {
+  color: var(--c-muted);
+}
+
 /* AI Ustoz searching for a teacher.
    Shown only when the student escalates from the tutor. Pure CSS so there is no
    client JavaScript and no hydration risk: the panel hides itself after 3.4s and

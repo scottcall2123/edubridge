@@ -191,7 +191,7 @@ export function TutorChat({
                 {/* search=1 shows the "AI Ustoz is finding a teacher" panel once
                     on arrival. The filter links on that page drop it, so it does
                     not replay every time the student changes subject or time. */}
-                <Link href={`${teacherHref}&search=1`} className="button button-gold">{t("teachers.availableNow")}</Link>
+                <Link href={`${teacherHref}&when=now&search=1`} className="button button-gold">{t("teachers.availableNow")}</Link>
                 <Link href={`${teacherHref}&when=evening`} className="button button-secondary">{t("teachers.chooseTime")}</Link>
               </div>
             </Card>

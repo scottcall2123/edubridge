@@ -6,7 +6,12 @@ import { useLocale, useTranslations } from "next-intl";
 import { CheckCircle, Star } from "lucide-react";
 import { Card, Tag, Avatar, Button } from "@/components/ui";
 import { bookSlot } from "@/app/actions/booking";
-import { slotLabel, localDay, slotDate } from "@/lib/booking";
+import {
+  slotLabel,
+  localDay,
+  slotDate,
+  SOON_WINDOW_MS,
+} from "@/lib/booking";
 import type { TeacherWithSlots } from "@/lib/teachers";
 import type { Locale } from "@/lib/i18n";
 import type { TeacherSlot, Booking } from "@/lib/types";
@@ -21,10 +26,19 @@ export function BookingFlow({
   confirmation?: { booking: Booking; slot: TeacherSlot };
   referenceTime: string;
 }) {
+  // referenceTime comes from the server, so "is this slot soon?" resolves the
+  // same on both sides and the preselected radio cannot cause a hydration
+  // mismatch.
+  const soonLimit = Date.parse(referenceTime) + SOON_WINDOW_MS;
+  const isSoon = (startsAt: string) => Date.parse(startsAt) <= soonLimit;
   const t = useTranslations(),
     locale = useLocale() as Locale,
     router = useRouter(),
-    [selected, setSelected] = useState(""),
+    // A student who came from "Hozir bo'sh ustozlar" wants the soonest lesson,
+    // so start with it chosen instead of making them hunt for it.
+    [selected, setSelected] = useState(
+      () => teacher.slots.find((s) => isSoon(s.starts_at))?.id ?? "",
+    ),
     [reviewing, setReviewing] = useState(false),
     [error, setError] = useState(""),
     [toast, setToast] = useState(false),
@@ -184,6 +198,12 @@ export function BookingFlow({
                           }}
                         />
                         {time(s.starts_at)}
+                        {isSoon(s.starts_at) && (
+                          <span className="availability availability-now ml-2">
+                            <span className="availability-dot" aria-hidden />
+                            {t("teachers.status_now")}
+                          </span>
+                        )}
                       </label>
                     ))}
                   </div>
