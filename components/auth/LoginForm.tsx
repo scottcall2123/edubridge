@@ -7,9 +7,9 @@ export function LoginForm() {
   const t = useTranslations(),
     [state, action, pending] = useActionState<AuthState, FormData>(login, {});
   return (
-    <form action={action} className="space-y-4">
+    <form action={action} className="space-y-3">
       <div>
-        <label htmlFor="email">{t("auth.email")}</label>
+        <label className="mb-1" htmlFor="email">{t("auth.email")}</label>
         <input
           id="email"
           name="email"
@@ -20,7 +20,7 @@ export function LoginForm() {
         />
       </div>
       <div>
-        <label htmlFor="password">{t("auth.password")}</label>
+        <label className="mb-1" htmlFor="password">{t("auth.password")}</label>
         <input
           id="password"
           name="password"

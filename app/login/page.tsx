@@ -28,8 +28,8 @@ export default async function LoginPage({
     /* Setup is documented for the project owner. */
   }
   return (
-    <main className="container motion-page py-4 md:py-8">
-      <div className="card mx-auto max-w-lg space-y-3">
+    <main className="container motion-page py-2 md:py-8">
+      <div className="card mx-auto max-w-lg space-y-2 md:space-y-4">
         <Image
           className="brand-light mx-auto h-16 w-auto"
           src="/brand/edubridge-logo-vertical.svg"
@@ -40,12 +40,12 @@ export default async function LoginPage({
         <Image className="brand-dark mx-auto h-16 w-auto" src="/brand/edubridge-logo-vertical-on-dark.svg" width={114} height={96} alt="EduBridge" />
         <div className="text-center">
           <h1>{t("auth.title")}</h1>
-          <p className="mt-2 text-sm text-muted">{t("auth.description")}</p>
-          <div className="mt-3 flex flex-wrap justify-center gap-2">
+          <p className="mt-1 text-sm text-muted">{t("auth.description")}</p>
+          <div className="mt-2 flex flex-wrap justify-center gap-2">
             {["aiChip", "teacherChip", "safeChip"].map((key) => <Tag key={key}>{t(`auth.${key}`)}</Tag>)}
           </div>
         </div>
-        <section className="space-y-4 rounded-xl bg-sky-50 p-4">
+        <section className="space-y-2 rounded-xl bg-sky-50 p-3 md:p-4">
           <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-base">{t("auth.demoTitle")}</h2><Tag>{t("common.sample")}</Tag></div>
           {demo ? (
             <>
