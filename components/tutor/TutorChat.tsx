@@ -187,9 +187,10 @@ export function TutorChat({
                 <Users className="text-gold" />
                 <h2 className="text-base">{t("tutor.banner")}</h2>
               </div>
-              <Link href={teacherHref} className="button button-gold">
-                {t("teachers.connect")}
-              </Link>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Link href={teacherHref} className="button button-gold">{t("teachers.availableNow")}</Link>
+                <Link href={`${teacherHref}&when=evening`} className="button button-secondary">{t("teachers.chooseTime")}</Link>
+              </div>
             </Card>
           )}
           {error && (

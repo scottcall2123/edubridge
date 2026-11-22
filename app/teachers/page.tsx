@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { getCurrentUser, requireStudent } from "@/lib/auth";
 import { ownedQuestion } from "@/lib/questions";
 import { loadTeachers } from "@/lib/teachers";
+import { timeFilter } from "@/lib/teacher-time";
 import { TeacherList } from "@/components/teachers/TeacherList";
 export async function generateMetadata() {
   return { title: (await getTranslations("teachers"))("title") };
@@ -11,7 +12,7 @@ export async function generateMetadata() {
 export default async function Teachers({
   searchParams,
 }: {
-  searchParams: Promise<{ subject?: string; q?: string }>;
+  searchParams: Promise<{ subject?: string; q?: string; when?: string }>;
 }) {
   const params = await searchParams;
   if ((await getCurrentUser())?.teacher) redirect("/teacher");
@@ -24,5 +25,5 @@ export default async function Teachers({
   const selected = data.subjects.some((s) => s.slug === params.subject)
     ? params.subject
     : "";
-  return <TeacherList {...data} selected={selected} questionId={params.q} />;
+  return <TeacherList {...data} selected={selected} questionId={params.q} when={timeFilter(params.when)} />;
 }

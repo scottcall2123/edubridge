@@ -227,7 +227,17 @@
     "center": "Offline center: {name}",
     "slots": "Choose a lesson time",
     "back": "Back to teachers",
-    "rating": "Rating: {rating} / 5"
+    "rating": "Rating: {rating} / 5",
+    "availableNow": "Available teachers",
+    "chooseTime": "Find by time",
+    "timeFilter": "Lesson time",
+    "anyTime": "Any time",
+    "time_today": "Today",
+    "time_tomorrow": "Tomorrow",
+    "time_morning": "Morning · 09:00–12:00",
+    "time_afternoon": "Afternoon · 12:00–17:00",
+    "time_evening": "Evening · 17:00–21:00",
+    "noMatchingTime": "No free lessons match this time. Please choose another time."
   },
   "booking": {
     "confirmFree": "Book free lesson",

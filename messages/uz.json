@@ -227,7 +227,17 @@
     "center": "Oflayn markaz: {name}",
     "slots": "Dars vaqtini tanlang",
     "back": "Ustozlarga qaytish",
-    "rating": "Reyting: {rating} / 5"
+    "rating": "Reyting: {rating} / 5",
+    "availableNow": "Hozir bo‘sh ustozlar",
+    "chooseTime": "Vaqtni tanlab topish",
+    "timeFilter": "Dars vaqti",
+    "anyTime": "Istalgan vaqt",
+    "time_today": "Bugun",
+    "time_tomorrow": "Ertaga",
+    "time_morning": "Ertalab · 09:00–12:00",
+    "time_afternoon": "Tushdan keyin · 12:00–17:00",
+    "time_evening": "Kechqurun · 17:00–21:00",
+    "noMatchingTime": "Bu vaqtda bo‘sh dars topilmadi. Boshqa vaqtni tanlang."
   },
   "booking": {
     "confirmFree": "Bepul darsni band qilish",

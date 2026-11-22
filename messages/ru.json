@@ -227,7 +227,17 @@
     "center": "Офлайн-центр: {name}",
     "slots": "Выберите время урока",
     "back": "Назад к учителям",
-    "rating": "Рейтинг: {rating} / 5"
+    "rating": "Рейтинг: {rating} / 5",
+    "availableNow": "Свободные учителя",
+    "chooseTime": "Подобрать время",
+    "timeFilter": "Время урока",
+    "anyTime": "Любое время",
+    "time_today": "Сегодня",
+    "time_tomorrow": "Завтра",
+    "time_morning": "Утро · 09:00–12:00",
+    "time_afternoon": "День · 12:00–17:00",
+    "time_evening": "Вечер · 17:00–21:00",
+    "noMatchingTime": "На это время нет свободных уроков. Выберите другое время."
   },
   "booking": {
     "confirmFree": "Записаться бесплатно",

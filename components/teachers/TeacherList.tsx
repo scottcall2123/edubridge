@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Star, MapPin, Clock } from "lucide-react";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Avatar, Card, Tag, PageHeader } from "@/components/ui";
+import { TIME_FILTERS, matchesTime, type TimeFilter } from "@/lib/teacher-time";
 import { slotLabel } from "@/lib/booking";
 import type { TeacherWithSlots } from "@/lib/teachers";
 import type { Subject } from "@/lib/types";
@@ -11,19 +12,24 @@ export async function TeacherList({
   subjects,
   selected = "",
   questionId,
+  when,
 }: {
   teachers: TeacherWithSlots[];
   subjects: Subject[];
   selected?: string;
   questionId?: string;
+  when?: TimeFilter;
 }) {
   const t = await getTranslations(),
     locale = (await getLocale()) as Locale;
-  const href = (slug: string) =>
-    `/teachers?${new URLSearchParams({ ...(slug ? { subject: slug } : {}), ...(questionId ? { q: questionId } : {}) })}`;
-  const visible = teachers.filter(
-    (t) => !selected || t.subject.slug === selected,
-  );
+  const href = (slug: string, preference: TimeFilter | "" | undefined = when) =>
+    `/teachers?${new URLSearchParams({ ...(slug ? { subject: slug } : {}), ...(questionId ? { q: questionId } : {}), ...(preference ? { when: preference } : {}) })}`;
+  const now = new Date();
+  const visible = teachers
+    .filter((teacher) => !selected || teacher.subject.slug === selected)
+    .map((teacher) => ({ ...teacher, slots: teacher.slots.filter((slot) => matchesTime(slot, when, now)) }))
+    .filter((teacher) => !when || teacher.slots.length > 0)
+    .sort((a, b) => (Date.parse(a.slots[0]?.starts_at) || Infinity) - (Date.parse(b.slots[0]?.starts_at) || Infinity));
   return (
     <main className="container motion-page space-y-6 py-8">
       <PageHeader
@@ -48,6 +54,10 @@ export async function TeacherList({
             {s.name}
           </Link>
         ))}
+      </nav>
+      <nav aria-label={t("teachers.timeFilter")} className="flex flex-wrap gap-2">
+        <Link href={href(selected, "")} className={`button ${!when ? "button-primary" : "button-secondary"}`} aria-current={!when ? "page" : undefined}>{t("teachers.anyTime")}</Link>
+        {TIME_FILTERS.map((filter) => <Link key={filter} href={href(selected, filter)} className={`button ${when === filter ? "button-primary" : "button-secondary"}`} aria-current={when === filter ? "page" : undefined}>{t(`teachers.time_${filter}`)}</Link>)}
       </nav>
       <p className="text-sm text-muted">{t("teachers.timezone")}</p>
       <div className="motion-stagger grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -102,7 +112,7 @@ export async function TeacherList({
           </Card>
         ))}
       </div>
-      {!visible.length && <Card>{t("teachers.empty")}</Card>}
+      {!visible.length && <Card>{t(when ? "teachers.noMatchingTime" : "teachers.empty")}</Card>}
     </main>
   );
 }
