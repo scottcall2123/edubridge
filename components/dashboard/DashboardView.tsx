@@ -11,6 +11,7 @@ import {
 import { getLocale, getTranslations, getFormatter } from "next-intl/server";
 import type { loadDashboard } from "@/lib/dashboard";
 import { Card, Tag, Avatar, PageHeader, StatTile } from "@/components/ui";
+import { todayInFergana, weekPlan } from "@/lib/timetable";
 export async function DashboardView({
   profile,
   recent,
@@ -21,6 +22,9 @@ export async function DashboardView({
     format = await getFormatter(),
     locale = await getLocale(),
     now = new Date();
+  const weekday = todayInFergana();
+  const today =
+    weekPlan().find((day) => day.weekday === weekday)?.lessons ?? [];
   return (
     <main className="container space-y-8 py-8">
       <PageHeader
@@ -143,15 +147,48 @@ export async function DashboardView({
             <p>{t("dashboard.noLeaders")}</p>
           )}
         </Card>
-        <Card className="flex items-start gap-4 lg:col-span-2">
-          <span className="stat-icon">
-            <BookOpen />
-          </span>
-          <div className="space-y-2">
-            <h2>{t("dashboard.lessons")}</h2>
-            <Tag>{t("common.soon")}</Tag>
-            <p className="text-sm text-muted">{t("dashboard.lessonsText")}</p>
+        <Card className="lg:col-span-2">
+          <div className="section-title">
+            <h2>{t("timetable.todayLessons")}</h2>
+            <Link
+              className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-bold text-royal"
+              href="/timetable"
+            >
+              {t("timetable.openTimetable")}
+              <ArrowRight />
+            </Link>
           </div>
+          {today.length ? (
+            <ul className="divide-y divide-line">
+              {today.map((lesson) => (
+                <li
+                  key={lesson.order}
+                  className="flex flex-wrap items-center gap-x-4 gap-y-2 py-3"
+                >
+                  <span className="w-28 shrink-0 font-extrabold">
+                    {lesson.start}
+                    <span className="text-muted"> – {lesson.end}</span>
+                  </span>
+                  <span className="min-w-0 grow font-bold wrap-anywhere">
+                    {lesson.subject[locale as "uz" | "en" | "ru"]}
+                  </span>
+                  {lesson.subject.slug && (
+                    <Link className="button button-secondary" href="/ask">
+                      {t("timetable.ask")}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="flex items-start gap-4 text-muted">
+              <span className="stat-icon">
+                <BookOpen />
+              </span>
+              {t("timetable.noLessons")}
+            </p>
+          )}
+          <p className="mt-4 text-xs text-muted">{t("timetable.sample")}</p>
         </Card>
         <Card>
           <details>
