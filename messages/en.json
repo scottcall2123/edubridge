@@ -154,7 +154,13 @@
     "imageUpload": "Your question is saved, but the image upload failed. Retry or continue without it.",
     "uploadImage": "Retry image upload",
     "imageUnavailable": "Could not display the image. Please refresh the page.",
-    "imageAlt": "Image attached to your question"
+    "imageAlt": "Image attached to your question",
+    "chooseSubjectHint": "Pick the subject you are stuck in. The next step asks for the topic and your question.",
+    "topicCount": "{count} topics",
+    "flowTitle": "How your question gets solved",
+    "flow1": "First you see similar questions other students already asked.",
+    "flow2": "AI Ustoz never gives the answer — it teaches you step by step.",
+    "flow3": "Still stuck? You connect to a teacher in Fergana."
   },
   "tutor": {
     "understood": "Yes, I understood",

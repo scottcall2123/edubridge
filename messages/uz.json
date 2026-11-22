@@ -154,7 +154,13 @@
     "imageUpload": "Savol saqlandi, lekin rasm yuklanmadi. Qayta yuklang yoki rasmsiz davom eting.",
     "uploadImage": "Rasmni qayta yuklash",
     "imageUnavailable": "Rasmni hozir ko‘rsatib bo‘lmadi. Sahifani yangilang.",
-    "imageAlt": "Savolga biriktirilgan rasm"
+    "imageAlt": "Savolga biriktirilgan rasm",
+    "chooseSubjectHint": "Qiynalgan faningizni tanlang. Keyingi qadamda mavzu va savolingizni yozasiz.",
+    "topicCount": "{count} ta mavzu",
+    "flowTitle": "Savolingiz qanday hal qilinadi",
+    "flow1": "Avval boshqa o‘quvchilar bergan o‘xshash savollar ko‘rsatiladi.",
+    "flow2": "AI Ustoz javobni aytmaydi — qadam-ma-qadam o‘rgatadi.",
+    "flow3": "Hali ham tushunmasangiz, Farg‘onadagi ustozga ulanasiz."
   },
   "tutor": {
     "understood": "Ha, tushundim",

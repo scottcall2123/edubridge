@@ -56,22 +56,49 @@ export function AskWizard({
       <Steps step={step} />
       {step === 1 ? (
         <>
-          <h1 className="mb-6">{t("ask.chooseSubject")}</h1>
+          <header className="page-header mb-6">
+            <div>
+              <p className="eyebrow">{t("nav.ask")}</p>
+              <h1>{t("ask.chooseSubject")}</h1>
+              <p>{t("ask.chooseSubjectHint")}</p>
+            </div>
+          </header>
           <div className="grid gap-4 md:grid-cols-3">
             {subjects.map((s) => {
               const Icon = icons[s.slug] ?? Sigma;
+              const own = topics.filter((topic) => topic.subject_id === s.id);
+              const chosen = subject === s.id;
               return (
                 <button
                   key={s.id}
-                  className={`card flex min-h-36 flex-col items-center justify-center gap-4 text-lg font-bold ${subject === s.id ? "border-royal bg-sky-50 text-royal" : ""}`}
-                  aria-pressed={subject === s.id}
+                  className={`card flex min-h-44 flex-col gap-3 text-left ${chosen ? "border-royal bg-sky-50" : ""}`}
+                  aria-pressed={chosen}
                   onClick={() => {
                     setSubject(s.id);
                     setTopic("");
                   }}
                 >
-                  <Icon />
-                  {s[`name_${locale}`]}
+                  <span
+                    className={`stat-icon ${chosen ? "stat-icon-gold" : ""}`}
+                  >
+                    <Icon aria-hidden="true" />
+                  </span>
+                  <span className="text-lg font-extrabold">
+                    {s[`name_${locale}`]}
+                  </span>
+                  <span className="text-sm font-bold text-muted">
+                    {t("ask.topicCount", { count: own.length })}
+                  </span>
+                  <span className="flex flex-wrap gap-1">
+                    {own.slice(0, 3).map((topic) => (
+                      <span
+                        key={topic.id}
+                        className="inline-flex rounded-full bg-sky-50 px-2 py-0.5 text-xs font-semibold text-royal"
+                      >
+                        {topic[`title_${locale}`]}
+                      </span>
+                    ))}
+                  </span>
                 </button>
               );
             })}
@@ -84,6 +111,19 @@ export function AskWizard({
           >
             {t("common.continue")}
           </Button>
+          <section aria-labelledby="ask-flow" className="mt-10 space-y-4">
+            <h2 id="ask-flow" className="section-title">
+              {t("ask.flowTitle")}
+            </h2>
+            <ol className="grid gap-4 md:grid-cols-3">
+              {[1, 2, 3].map((n) => (
+                <li key={n} className="card flex gap-3">
+                  <span className="stat-icon shrink-0 font-extrabold">{n}</span>
+                  <p className="text-sm">{t(`ask.flow${n}`)}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
         </>
       ) : (
         <Card>
