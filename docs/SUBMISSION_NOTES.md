@@ -16,6 +16,8 @@ Timetable: the student menu has **Jadval**, a grade 8 week from the national cur
 P1 extras:
 Register a student; grades 5–7 have a clearly simulated parent-code check (4821 shown on screen; no SMS). Post a public forum question, answer in steps from another account, and let the owner rate it once. Each star awards the helper four points. Reports are saved for manual moderation. Browse the sample-labeled Top-100 leaderboard. Attach a private JPEG/PNG image up to 5 MB to homework; type the question text for the AI too.
 
+Light and dark: the moon button in the top bar switches the whole interface; the choice is remembered in the browser and applied before the page paints.
+
 Real: Supabase login/registration and sessions; saved questions, chats, points, streaks and bookings; Google Gemini tutor, including reading an attached homework photo; Postgres similar-question search; forum posts/answers/one-time ratings/reports; private image storage; the teacher account, its lesson preparation view and its own booked and free hours; the open-question counts shown against the timetable; UZ/EN/RU interface and AI reply-language selection.
 
 Planned funding: Farg‘ona hokimiyat covers compensation for teachers’ extra online teaching. The MVP does not process teacher payouts or claim an approved funding agreement. Offline courses are separate offers.
