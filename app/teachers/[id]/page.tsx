@@ -47,7 +47,7 @@ export default async function TeacherPage({
   }
   const t = await getTranslations();
   return (
-    <main className="container space-y-6 py-8">
+    <main className="container motion-page space-y-6 py-8">
       <Link
         className="inline-flex min-h-11 items-center text-accent"
         href={`/teachers?subject=${teacher.subject.slug}${query.q ? `&q=${query.q}` : ""}`}

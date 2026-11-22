@@ -169,8 +169,7 @@ export function TutorChat({
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  style={{ animationDelay: `${i * 150}ms` }}
-                  className="size-2 animate-pulse rounded-full bg-royal"
+                  className="size-2 rounded-full bg-royal"
                 />
               ))}
             </span>
@@ -182,7 +181,7 @@ export function TutorChat({
       {open ? (
         <>
           {simpler >= 2 && (
-            <Card className="sticky bottom-20 z-10 space-y-3 border-gold bg-gold-50 md:bottom-4">
+            <Card className="motion-panel sticky bottom-20 z-10 space-y-3 border-gold bg-gold-50 md:bottom-4">
               <div className="flex gap-3">
                 <Users className="text-gold" />
                 <h2 className="text-base">{t("tutor.banner")}</h2>

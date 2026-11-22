@@ -37,7 +37,7 @@ export async function DashboardView({
   const isToday = shown?.weekday === weekday;
   const today = shown?.lessons ?? [];
   return (
-    <main className="container space-y-8 py-8">
+    <main className="container motion-page space-y-8 py-8">
       <PageHeader
         eyebrow={t("common.tagline")}
         title={t("dashboard.hello", {
@@ -55,7 +55,7 @@ export async function DashboardView({
         <StatTile
           gold
           icon={<Flame />}
-          figure={profile.streak_days}
+          figure={<span className="motion-streak">{profile.streak_days}</span>}
           label={t("dashboard.streak")}
         >
           <p className="text-sm text-muted">{t("dashboard.streakHint")}</p>

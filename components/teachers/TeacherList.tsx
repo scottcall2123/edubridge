@@ -25,7 +25,7 @@ export async function TeacherList({
     (t) => !selected || t.subject.slug === selected,
   );
   return (
-    <main className="container space-y-6 py-8">
+    <main className="container motion-page space-y-6 py-8">
       <PageHeader
         title={t("teachers.title")}
         subtitle={t("teachers.freeForStudents")}
@@ -50,9 +50,9 @@ export async function TeacherList({
         ))}
       </nav>
       <p className="text-sm text-muted">{t("teachers.timezone")}</p>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="motion-stagger grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {visible.map((teacher) => (
-          <Card key={teacher.id} className="flex flex-col gap-4">
+          <Card key={teacher.id} className="motion-card flex flex-col gap-4">
             <div className="flex items-center gap-3">
               <Avatar name={teacher.full_name} />
               <div>

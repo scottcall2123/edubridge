@@ -28,7 +28,7 @@ export default async function LoginPage({
     /* Setup is documented for the project owner. */
   }
   return (
-    <main className="container py-10">
+    <main className="container motion-page py-10">
       <div className="card mx-auto max-w-lg space-y-6">
         <Image
           className="mx-auto"

@@ -30,7 +30,7 @@ export default async function Ask({
     )
       redirect(`/ask/success?q=${q}`);
     return (
-      <main className="container max-w-3xl py-8">
+      <main className="container motion-page max-w-3xl py-8">
         {imageError && !question.image_url && <PhotoRetry questionId={q} />}
         <QuestionImage
           path={question.image_url}
@@ -48,7 +48,7 @@ export default async function Ask({
   ]);
   if (subjects.error || topics.error) throw new Error("Subjects unavailable");
   return (
-    <main className="container py-8">
+    <main className="container motion-page py-8">
       <AskWizard
         subjects={subjects.data as Subject[]}
         topics={topics.data as Topic[]}

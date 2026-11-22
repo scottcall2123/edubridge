@@ -20,7 +20,7 @@ export async function ProfileView({
     time = (value: string) => formatDateTime(value, locale);
   const badges = earnedBadges(profile, questions, bookings);
   return (
-    <main className="container space-y-8 py-8">
+    <main className="container motion-page space-y-8 py-8">
       <PageHeader title={t("profile.title")} />
       <Card className="space-y-5">
         <div className="flex flex-wrap items-center gap-4">

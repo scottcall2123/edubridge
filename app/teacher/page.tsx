@@ -17,7 +17,7 @@ export default async function TeacherPage() {
   await requireTeacher();
   const t = await getTranslations("common");
   return (
-    <main className="container space-y-8 py-8">
+    <main className="container motion-page space-y-8 py-8">
       <Suspense fallback={<Spinner label={t("loading")} />}>
         <DashboardContent />
       </Suspense>

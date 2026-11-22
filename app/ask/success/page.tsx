@@ -35,7 +35,7 @@ export default async function Success({
   if (error) throw new Error("Result unavailable");
   const t = await getTranslations();
   return (
-    <main className="container py-12">
+    <main className="container motion-page py-12">
       <Card className="mx-auto max-w-lg space-y-6 text-center">
         <Image
           src="/brand/edubridge-seal.svg"

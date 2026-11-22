@@ -37,7 +37,7 @@ export default async function TimetablePage() {
   }
 
   return (
-    <main className="container space-y-6 py-8">
+    <main className="container motion-page space-y-6 py-8">
       <PageHeader
         eyebrow={t("nav.timetable")}
         title={t("timetable.title")}

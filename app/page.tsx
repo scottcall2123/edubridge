@@ -53,7 +53,7 @@ export default async function Home() {
     ];
   return (
     <>
-      <main>
+      <main className="motion-page">
         <section className="border-b border-line bg-surface">
           <div className="container grid items-center gap-12 py-12 md:grid-cols-[1.2fr_1fr] md:py-20">
             <div className="space-y-6">

@@ -9,7 +9,7 @@ export async function LeaderboardView({
 }) {
   const t = await getTranslations();
   return (
-    <main className="container space-y-6 py-8">
+    <main className="container motion-page space-y-6 py-8">
       <PageHeader title={t("leaderboard.title")} />
       <p className="text-sm text-muted">{t("leaderboard.notice")}</p>
       <Card>

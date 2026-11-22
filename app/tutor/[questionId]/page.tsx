@@ -45,7 +45,7 @@ export default async function TutorPage({
   const s = subject.data as Subject,
     tp = topic.data as Topic | null;
   return (
-    <main className="container max-w-3xl space-y-6 py-8">
+    <main className="container motion-page max-w-3xl space-y-6 py-8">
       <Link
         href="/ask"
         className="inline-flex min-h-11 items-center gap-2 font-bold text-accent"

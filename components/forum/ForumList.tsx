@@ -21,7 +21,7 @@ export async function ForumList({
       subjects.find((s) => s.id === q.subject_id)?.slug === selected,
   );
   return (
-    <main className="container space-y-6 py-8">
+    <main className="container motion-page space-y-6 py-8">
       <PageHeader
         title={t("forum.title")}
         action={
@@ -50,9 +50,9 @@ export async function ForumList({
           </Link>
         ))}
       </nav>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="motion-stagger grid gap-4 md:grid-cols-2">
         {rows.map((q) => (
-          <Card key={q.id} className="space-y-4">
+          <Card key={q.id} className="motion-card space-y-4">
             <div className="flex flex-wrap gap-2">
               <Tag>
                 {
