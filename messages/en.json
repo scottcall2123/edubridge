@@ -187,7 +187,7 @@
     "upcoming": "Upcoming lessons",
     "lessonsThisWeek": "Lessons this week",
     "studentsHelped": "Students helped",
-    "helpedHint": "Counts distinct students whose confirmed lesson time has passed.",
+    "helpedHint": "Unique students with a confirmed lesson.",
     "rating": "Rating",
     "noLessons": "There are no upcoming lessons yet.",
     "demoScope": "This shared demo shows bookings from the demo student only.",
