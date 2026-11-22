@@ -105,7 +105,8 @@
     "description": "Sokratik AI ustoz va Farg‘onadagi jonli ustozlar yordamida mustaqil o‘rganing",
     "aiChip": "AI Ustoz",
     "teacherChip": "Jonli ustozlar",
-    "safeChip": "Xavfsiz muhit"
+    "safeChip": "Xavfsiz muhit",
+    "demoCredentials": "Demo hisob ma’lumotlari"
   },
   "dashboard": {
     "hello": "Salom, {name}!",

@@ -29,15 +29,15 @@ export default async function LoginPage({
   }
   return (
     <main className="container motion-page py-4 md:py-8">
-      <div className="card mx-auto max-w-lg space-y-4">
+      <div className="card mx-auto max-w-lg space-y-3">
         <Image
-          className="brand-light mx-auto h-24 w-auto"
+          className="brand-light mx-auto h-16 w-auto"
           src="/brand/edubridge-logo-vertical.svg"
           width={114}
           height={96}
           alt="EduBridge"
         />
-        <Image className="brand-dark mx-auto h-24 w-auto" src="/brand/edubridge-logo-vertical-on-dark.svg" width={114} height={96} alt="EduBridge" />
+        <Image className="brand-dark mx-auto h-16 w-auto" src="/brand/edubridge-logo-vertical-on-dark.svg" width={114} height={96} alt="EduBridge" />
         <div className="text-center">
           <h1>{t("auth.title")}</h1>
           <p className="mt-2 text-sm text-muted">{t("auth.description")}</p>
@@ -46,9 +46,15 @@ export default async function LoginPage({
           </div>
         </div>
         <section className="space-y-4 rounded-xl bg-sky-50 p-4">
-          <h2 className="text-base">{t("auth.demoTitle")}</h2>
+          <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-base">{t("auth.demoTitle")}</h2><Tag>{t("common.sample")}</Tag></div>
           {demo ? (
             <>
+              <form action={demoLogin} className="grid grid-cols-2 gap-2">
+                <DemoButton role="student" />
+                <DemoButton role="teacher" formAction={demoTeacherLogin} />
+              </form>
+              <details>
+                <summary className="min-h-11 cursor-pointer py-3 text-sm font-bold text-accent">{t("auth.demoCredentials")}</summary>
               <dl className="space-y-2 break-words text-sm">
                 <div>
                   <dt className="text-muted">{t("auth.studentDemoEmail")}</dt>
@@ -63,15 +69,11 @@ export default async function LoginPage({
                   <dd>{demo.password}</dd>
                 </div>
               </dl>
-              <form action={demoLogin} className="grid grid-cols-2 gap-2">
-                <DemoButton role="student" />
-                <DemoButton role="teacher" formAction={demoTeacherLogin} />
-              </form>
+              </details>
             </>
           ) : (
             <p className="text-sm">{t("auth.setup")}</p>
           )}
-          <Tag>{t("common.sample")}</Tag>
           <p className="text-xs text-muted">{t("auth.sampleHistory")}</p>
         </section>
         {params.error && (

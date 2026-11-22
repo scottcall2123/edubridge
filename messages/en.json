@@ -105,7 +105,8 @@
     "description": "Learn independently with a Socratic AI tutor and live teachers in Fergana",
     "aiChip": "AI tutor",
     "teacherChip": "Live teachers",
-    "safeChip": "Safe environment"
+    "safeChip": "Safe environment",
+    "demoCredentials": "Demo account details"
   },
   "dashboard": {
     "hello": "Hello, {name}!",
