@@ -56,7 +56,7 @@ export async function loadTeacherDashboard() {
   // forward before reading the dashboard. It touches demo rows only.
   // Both are housekeeping: the page still renders if either is not ready yet.
   await Promise.all([
-    admin.rpc("refresh_demo_lesson").then(
+    admin.rpc("refresh_demo_lesson", {}).then(
       () => undefined,
       () => undefined,
     ),
@@ -68,7 +68,8 @@ export async function loadTeacherDashboard() {
   if (error) throw new Error("Teacher dashboard unavailable");
   if (!data) redirect("/dashboard");
 
-  const dashboard = { slots: [], ...(data as Dashboard) };
+  const raw = data as Dashboard;
+  const dashboard: Dashboard = { ...raw, slots: raw.slots ?? [] };
   const upcoming = await Promise.all(
     dashboard.upcoming.map(async (lesson) => {
       if (!lesson.question) return { ...lesson, question: null };
