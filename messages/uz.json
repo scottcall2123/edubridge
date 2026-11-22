@@ -190,7 +190,13 @@
     "noStep": "AI Ustoz qadami hali saqlanmagan.",
     "forum": "Forumdagi savollar",
     "openForum": "Forumni ochish",
-    "noForum": "Bu fan bo‘yicha ochiq savollar hozircha yo‘q."
+    "noForum": "Bu fan bo‘yicha ochiq savollar hozircha yo‘q.",
+    "schedule": "Mening jadvalim",
+    "scheduleHint": "Keyingi kunlardagi dars vaqtlaringiz.",
+    "booked": "Band",
+    "free": "Bo‘sh",
+    "noSlots": "Yaqin kunlarda ochiq vaqt yo‘q.",
+    "slotsSummary": "{booked} ta band · {free} ta bo‘sh"
   },
   "teachers": {
     "title": "Farg‘onadagi ustozlar",

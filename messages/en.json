@@ -190,7 +190,13 @@
     "noStep": "AI Ustoz has no saved step yet.",
     "forum": "Forum questions",
     "openForum": "Open forum",
-    "noForum": "There are no open forum questions for this subject yet."
+    "noForum": "There are no open forum questions for this subject yet.",
+    "schedule": "My schedule",
+    "scheduleHint": "Your lesson hours over the next few days.",
+    "booked": "Booked",
+    "free": "Free",
+    "noSlots": "No open hours in the next few days.",
+    "slotsSummary": "{booked} booked · {free} free"
   },
   "teachers": {
     "title": "Teachers in Fergana",

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { requireTeacher } from "./auth";
 import { validImagePath } from "./image-input";
 import { createAdminClient } from "./supabase/admin";
+import { ensureFutureSlots } from "./teachers";
 import type { Booking, Subject, Topic, TutorMessage } from "./types";
 
 type Preparation = {
@@ -38,6 +39,12 @@ type Dashboard = {
     is_sample: boolean;
     question: Preparation | null;
   }[];
+  slots: {
+    id: string;
+    starts_at: string;
+    ends_at: string;
+    is_booked: boolean;
+  }[];
   forum: { id: string; text: string; is_sample: boolean }[];
 };
 
@@ -45,13 +52,23 @@ export async function loadTeacherDashboard() {
   const { user } = await requireTeacher();
 
   const admin = createAdminClient();
+  // The demo lesson is only useful while it is still ahead of us, so move it
+  // forward before reading the dashboard. It touches demo rows only.
+  // Both are housekeeping: the page still renders if either is not ready yet.
+  await Promise.all([
+    admin.rpc("refresh_demo_lesson").then(
+      () => undefined,
+      () => undefined,
+    ),
+    ensureFutureSlots().catch(() => undefined),
+  ]);
   const { data, error } = await admin.rpc("teacher_dashboard", {
     p_user: user.id,
   });
   if (error) throw new Error("Teacher dashboard unavailable");
   if (!data) redirect("/dashboard");
 
-  const dashboard = data as Dashboard;
+  const dashboard = { slots: [], ...(data as Dashboard) };
   const upcoming = await Promise.all(
     dashboard.upcoming.map(async (lesson) => {
       if (!lesson.question) return { ...lesson, question: null };

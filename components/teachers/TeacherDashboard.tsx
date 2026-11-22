@@ -1,8 +1,9 @@
 import Image from "next/image";
+import clsx from "clsx";
 import Link from "next/link";
-import { CalendarDays, MapPin, Star, Users } from "lucide-react";
+import { CalendarDays, Clock, MapPin, Star, Users } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Avatar, Card, Tag } from "@/components/ui";
+import { Avatar, Card, StatTile, Tag } from "@/components/ui";
 import type { Locale } from "@/lib/i18n";
 import type { loadTeacherDashboard } from "@/lib/teacher-dashboard";
 
@@ -99,6 +100,7 @@ export async function TeacherDashboard({
   lessons_this_week,
   students_helped,
   upcoming,
+  slots,
   forum,
 }: Dashboard) {
   const t = await getTranslations();
@@ -108,34 +110,34 @@ export async function TeacherDashboard({
     dateStyle: "medium",
     timeStyle: "short",
   });
-  const stats = [
-    {
-      label: t("teacherDashboard.lessonsThisWeek"),
-      value: lessons_this_week,
-      Icon: CalendarDays,
-    },
-    {
-      label: t("teacherDashboard.studentsHelped"),
-      value: students_helped,
-      Icon: Users,
-      hint: t("teacherDashboard.helpedHint"),
-    },
-    {
-      label: t("teacherDashboard.rating"),
-      value: teacher.rating.toFixed(1),
-      Icon: Star,
-      sample: teacher.is_sample,
-    },
-  ];
+  const dayLabel = new Intl.DateTimeFormat(locale, {
+    timeZone: "Asia/Tashkent",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
+  const hour = new Intl.DateTimeFormat(locale, {
+    timeZone: "Asia/Tashkent",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  // The teacher thinks in days, not in a flat list of timestamps.
+  const days = new Map<string, Dashboard["slots"]>();
+  for (const slot of slots.slice(0, 24)) {
+    const key = dayLabel.format(new Date(slot.starts_at));
+    const day = days.get(key);
+    if (day) day.push(slot);
+    else days.set(key, [slot]);
+  }
+  const bookedCount = slots.filter((slot) => slot.is_booked).length;
+
   return (
     <>
       <Card className="space-y-4">
         <div className="flex flex-wrap items-center gap-4">
           <Avatar name={teacher.full_name} />
           <div className="min-w-0">
-            <p className="text-sm font-bold text-royal">
-              {t("nav.teacherHome")}
-            </p>
+            <p className="eyebrow">{t("nav.teacherHome")}</p>
             <h1 className="wrap-anywhere">{teacher.full_name}</h1>
           </div>
         </div>
@@ -153,64 +155,144 @@ export async function TeacherDashboard({
         </div>
       </Card>
 
-      <dl className="grid gap-4 sm:grid-cols-3">
-        {stats.map(({ label, value, Icon, hint, sample }) => (
-          <div className="card space-y-2" key={label}>
-            <dt className="flex items-center gap-2 text-sm font-bold text-muted">
-              <Icon aria-hidden="true" className="shrink-0 text-royal" />
-              {label}
-            </dt>
-            <dd className="flex flex-wrap items-center gap-2 text-2xl font-extrabold">
-              {value}
-              {sample && <Tag>{t("common.sample")}</Tag>}
-            </dd>
-            {hint && <dd className="text-xs text-muted">{hint}</dd>}
-          </div>
-        ))}
-      </dl>
+      <div className="grid gap-4 sm:grid-cols-3">
+        <StatTile
+          icon={<CalendarDays aria-hidden="true" />}
+          figure={lessons_this_week}
+          label={t("teacherDashboard.lessonsThisWeek")}
+        />
+        <StatTile
+          icon={<Users aria-hidden="true" />}
+          figure={students_helped}
+          label={t("teacherDashboard.studentsHelped")}
+        >
+          <p className="text-xs text-muted">
+            {t("teacherDashboard.helpedHint")}
+          </p>
+        </StatTile>
+        <StatTile
+          gold
+          icon={<Star aria-hidden="true" />}
+          figure={teacher.rating.toFixed(1)}
+          label={t("teacherDashboard.rating")}
+        >
+          {teacher.is_sample && <Tag>{t("common.sample")}</Tag>}
+        </StatTile>
+      </div>
 
-      <section aria-labelledby="upcoming-lessons" className="space-y-4">
-        <div className="space-y-1">
-          <h2 id="upcoming-lessons">{t("teacherDashboard.upcoming")}</h2>
-          <p className="text-sm text-muted">{t("teachers.timezone")}</p>
-          {teacher.is_demo && (
-            <p className="text-sm text-muted">
-              {t("teacherDashboard.demoScope")}
-            </p>
+      <div className="grid items-start gap-4 lg:grid-cols-3">
+        <section
+          aria-labelledby="upcoming-lessons"
+          className="space-y-4 lg:col-span-2"
+        >
+          <div className="space-y-1">
+            <h2 id="upcoming-lessons">{t("teacherDashboard.upcoming")}</h2>
+            <p className="text-sm text-muted">{t("teachers.timezone")}</p>
+            {teacher.is_demo && (
+              <p className="text-sm text-muted">
+                {t("teacherDashboard.demoScope")}
+              </p>
+            )}
+          </div>
+          {upcoming.length === 0 && (
+            <Card>{t("teacherDashboard.noLessons")}</Card>
           )}
-        </div>
-        {upcoming.length === 0 && (
-          <Card>{t("teacherDashboard.noLessons")}</Card>
-        )}
-        {upcoming.map((lesson) => (
-          <Card key={lesson.id} className="space-y-4">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div className="min-w-0 space-y-1">
-                <h3 className="wrap-anywhere text-lg font-extrabold">
-                  {lesson.first_name || t("teacherDashboard.student")}
-                </h3>
-                <p className="wrap-anywhere text-sm text-muted">
-                  {lesson.grade && t("profile.grade", { grade: lesson.grade })}
-                  {lesson.grade && lesson.school && " · "}
-                  {lesson.school}
-                </p>
+          {upcoming.map((lesson) => (
+            <Card key={lesson.id} className="space-y-4">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="min-w-0 space-y-1">
+                  <h3 className="wrap-anywhere text-lg font-extrabold">
+                    {lesson.first_name || t("teacherDashboard.student")}
+                  </h3>
+                  <p className="wrap-anywhere text-sm text-muted">
+                    {lesson.grade && t("profile.grade", { grade: lesson.grade })}
+                    {lesson.grade && lesson.school && " · "}
+                    {lesson.school}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <Tag>{t(`booking.${lesson.status}`)}</Tag>
+                  {lesson.is_sample && <Tag>{t("common.sample")}</Tag>}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2">
-                <Tag>{t(`booking.${lesson.status}`)}</Tag>
-                {lesson.is_sample && <Tag>{t("common.sample")}</Tag>}
-              </div>
-            </div>
-            <p>
-              <time dateTime={lesson.starts_at}>
-                {date.format(new Date(lesson.starts_at))}
-              </time>{" "}
-              · {t("booking.duration")}
+              <p>
+                <time dateTime={lesson.starts_at}>
+                  {date.format(new Date(lesson.starts_at))}
+                </time>{" "}
+                · {t("booking.duration")}
+              </p>
+              <p className="text-sm text-muted">{t("booking.meeting")}</p>
+              {lesson.question && <QuestionCard question={lesson.question} />}
+            </Card>
+          ))}
+        </section>
+
+        <section aria-labelledby="teacher-schedule" className="space-y-4">
+          <div className="space-y-1">
+            <h2 id="teacher-schedule">{t("teacherDashboard.schedule")}</h2>
+            <p className="text-sm text-muted">
+              {t("teacherDashboard.scheduleHint")}
             </p>
-            <p className="text-sm text-muted">{t("booking.meeting")}</p>
-            {lesson.question && <QuestionCard question={lesson.question} />}
+          </div>
+          <Card className="space-y-4">
+            {slots.length === 0 ? (
+              <p className="text-sm text-muted">
+                {t("teacherDashboard.noSlots")}
+              </p>
+            ) : (
+              <>
+                <p className="text-sm font-bold text-muted">
+                  {t("teacherDashboard.slotsSummary", {
+                    booked: bookedCount,
+                    free: slots.length - bookedCount,
+                  })}
+                </p>
+                <ul className="space-y-4">
+                  {[...days].map(([label, daySlots]) => (
+                    <li key={label} className="space-y-2">
+                      <p className="text-sm font-extrabold">{label}</p>
+                      <ul className="flex flex-wrap gap-2">
+                        {daySlots.map((slot) => (
+                          <li
+                            key={slot.id}
+                            className={clsx(
+                              "inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-bold",
+                              slot.is_booked
+                                ? "bg-royal text-white"
+                                : "bg-sky-50 text-navy",
+                            )}
+                          >
+                            <Clock aria-hidden="true" className="size-4" />
+                            {hour.format(new Date(slot.starts_at))}
+                            <span className="sr-only">
+                              {" "}
+                              {t(
+                                slot.is_booked
+                                  ? "teacherDashboard.booked"
+                                  : "teacherDashboard.free",
+                              )}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+                <p className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
+                  <span className="inline-flex items-center gap-1">
+                    <span className="size-3 rounded bg-royal" />
+                    {t("teacherDashboard.booked")}
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <span className="size-3 rounded bg-sky-50" />
+                    {t("teacherDashboard.free")}
+                  </span>
+                </p>
+              </>
+            )}
           </Card>
-        ))}
-      </section>
+        </section>
+      </div>
 
       <section aria-labelledby="teacher-forum" className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
