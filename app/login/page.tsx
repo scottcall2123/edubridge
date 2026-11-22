@@ -28,18 +28,21 @@ export default async function LoginPage({
     /* Setup is documented for the project owner. */
   }
   return (
-    <main className="container motion-page py-10">
-      <div className="card mx-auto max-w-lg space-y-6">
+    <main className="container motion-page py-4 md:py-8">
+      <div className="card mx-auto max-w-lg space-y-4">
         <Image
-          className="mx-auto"
-          src="/brand/edubridge-seal.svg"
-          width={96}
+          className="mx-auto h-24 w-auto rounded-xl bg-sky-50 p-2"
+          src="/brand/edubridge-logo-vertical.svg"
+          width={114}
           height={96}
           alt="EduBridge"
         />
         <div className="text-center">
           <h1>{t("auth.title")}</h1>
-          <p className="mt-2 text-muted">{t("common.tagline")}</p>
+          <p className="mt-2 text-sm text-muted">{t("auth.description")}</p>
+          <div className="mt-3 flex flex-wrap justify-center gap-2">
+            {["aiChip", "teacherChip", "safeChip"].map((key) => <Tag key={key}>{t(`auth.${key}`)}</Tag>)}
+          </div>
         </div>
         <section className="space-y-4 rounded-xl bg-sky-50 p-4">
           <h2 className="text-base">{t("auth.demoTitle")}</h2>

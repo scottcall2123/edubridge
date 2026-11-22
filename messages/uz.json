@@ -101,7 +101,11 @@
     "register_exists": "Bu email bilan hisob mavjud. Kirish sahifasidan foydalaning.",
     "register_setup": "Xizmat hali sozlanmagan. Keyinroq qayta urinib ko‘ring.",
     "register_save": "Hisob yaratilmadi. Qayta urinib ko‘ring.",
-    "register_created": "Hisob yaratildi. Kirish sahifasida email va parolingiz bilan kiring."
+    "register_created": "Hisob yaratildi. Kirish sahifasida email va parolingiz bilan kiring.",
+    "description": "Sokratik AI ustoz va Farg‘onadagi jonli ustozlar yordamida mustaqil o‘rganing",
+    "aiChip": "AI Ustoz",
+    "teacherChip": "Jonli ustozlar",
+    "safeChip": "Xavfsiz muhit"
   },
   "dashboard": {
     "hello": "Salom, {name}!",

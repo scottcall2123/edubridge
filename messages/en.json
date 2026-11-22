@@ -101,7 +101,11 @@
     "register_exists": "An account with this email exists. Use the login page.",
     "register_setup": "The service is not configured yet. Try again later.",
     "register_save": "Could not create your account. Please try again.",
-    "register_created": "Your account was created. Log in with your email and password."
+    "register_created": "Your account was created. Log in with your email and password.",
+    "description": "Learn independently with a Socratic AI tutor and live teachers in Fergana",
+    "aiChip": "AI tutor",
+    "teacherChip": "Live teachers",
+    "safeChip": "Safe environment"
   },
   "dashboard": {
     "hello": "Hello, {name}!",
