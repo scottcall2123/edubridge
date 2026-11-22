@@ -97,6 +97,7 @@ export async function DashboardView({
                     <p>{t(`events.${e.reason}`)}</p>
                     <p className="text-xs text-muted">
                       <time
+                        suppressHydrationWarning
                         dateTime={e.created_at}
                         title={formatDateTime(e.created_at, locale as Locale)}
                       >
