@@ -8,6 +8,7 @@ import {
   Users,
   MessagesSquare,
   Trophy,
+  CalendarDays,
 } from "lucide-react";
 export function DesktopNav({ teacher }: { teacher?: boolean }) {
   const t = useTranslations("nav"),
@@ -25,6 +26,7 @@ export function DesktopNav({ teacher }: { teacher?: boolean }) {
         : [
             { key: "home", href: "/dashboard", Icon: Home },
             { key: "ask", href: "/ask", Icon: MessageCircleQuestion },
+            { key: "timetable", href: "/timetable", Icon: CalendarDays },
             { key: "teachers", href: "/teachers", Icon: Users },
             { key: "forum", href: "/forum", Icon: MessagesSquare },
             { key: "leaderboard", href: "/leaderboard", Icon: Trophy },

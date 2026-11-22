@@ -26,7 +26,8 @@
     "forum": "Forum",
     "question": "Question",
     "menu": "User menu",
-    "navigation": "Main navigation"
+    "navigation": "Main navigation",
+    "timetable": "Timetable"
   },
   "landing": {
     "title": "Hard topics are no longer a barrier",
@@ -329,5 +330,21 @@
     "helper_star": "Star for helping",
     "booking_made": "Lesson booked",
     "streak_loss": "Streak lost"
+  },
+  "timetable": {
+    "title": "Class timetable",
+    "subtitle": "Grade 8 timetable. Ask a question in the subject you got stuck in.",
+    "sample": "The timetable and attendance are sample data. EduBridge is not a school register.",
+    "today": "Today",
+    "lesson": "Lesson {order}",
+    "openQuestions": "{count} open questions of yours",
+    "ask": "Ask a question",
+    "noLessons": "No lessons on this day.",
+    "attendance": "Attendance",
+    "attendanceHint": "Attendance this term.",
+    "overall": "Overall attendance",
+    "ofLessons": "{attended}/{held} lessons",
+    "openTimetable": "Open the timetable",
+    "todayLessons": "Today's lessons"
   }
 }

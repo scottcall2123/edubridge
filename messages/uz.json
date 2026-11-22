@@ -26,7 +26,8 @@
     "forum": "Forum",
     "question": "Savol",
     "menu": "Foydalanuvchi menyusi",
-    "navigation": "Asosiy navigatsiya"
+    "navigation": "Asosiy navigatsiya",
+    "timetable": "Jadval"
   },
   "landing": {
     "title": "Qiyin mavzu endi to‘siq emas",
@@ -329,5 +330,21 @@
     "helper_star": "Yordam uchun yulduz",
     "booking_made": "Dars band qilindi",
     "streak_loss": "Olov uzildi"
+  },
+  "timetable": {
+    "title": "Dars jadvali",
+    "subtitle": "8-sinf jadvali. Qaysi darsda qiynalgan bo‘lsangiz, o‘sha fandan savol bering.",
+    "sample": "Jadval va davomat namuna ma’lumot. EduBridge maktab jurnalini yuritmaydi.",
+    "today": "Bugun",
+    "lesson": "{order}-dars",
+    "openQuestions": "{count} ta ochiq savolingiz",
+    "ask": "Savol berish",
+    "noLessons": "Bu kuni dars yo‘q.",
+    "attendance": "Davomat",
+    "attendanceHint": "Shu chorakdagi davomat.",
+    "overall": "Umumiy davomat",
+    "ofLessons": "{attended}/{held} dars",
+    "openTimetable": "Jadvalni ochish",
+    "todayLessons": "Bugungi darslar"
   }
 }

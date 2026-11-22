@@ -32,6 +32,11 @@ export async function UserMenu({
             {t("nav.profile")}
           </Link>
         )}
+        {!teacher && (
+          <Link className="block min-h-11 rounded-lg p-3" href="/timetable">
+            {t("nav.timetable")}
+          </Link>
+        )}
         <Link className="block min-h-11 rounded-lg p-3" href="/forum">
           {t("nav.forum")}
         </Link>
