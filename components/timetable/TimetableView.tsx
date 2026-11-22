@@ -10,15 +10,7 @@ import {
   type SchoolSubject,
 } from "@/lib/timetable";
 import type { Locale } from "@/lib/i18n";
-
-// 1 January 2024 was a Monday, so the weekday names stay the same on the
-// server and in the browser whatever clock either of them runs on.
-function weekdayName(weekday: number, locale: string) {
-  return new Intl.DateTimeFormat(locale, {
-    weekday: "long",
-    timeZone: "UTC",
-  }).format(new Date(Date.UTC(2024, 0, weekday)));
-}
+import { weekdayName } from "@/lib/date-format";
 
 export function TimetableView({
   days,

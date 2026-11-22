@@ -5,6 +5,11 @@ import { CalendarDays, Clock, MapPin, Star, Users } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Avatar, Card, StatTile, Tag } from "@/components/ui";
 import type { Locale } from "@/lib/i18n";
+import {
+  formatDateTime,
+  formatDayHeading,
+  formatTime,
+} from "@/lib/date-format";
 import type { loadTeacherDashboard } from "@/lib/teacher-dashboard";
 
 type Dashboard = Awaited<ReturnType<typeof loadTeacherDashboard>>;
@@ -105,26 +110,11 @@ export async function TeacherDashboard({
 }: Dashboard) {
   const t = await getTranslations();
   const locale = (await getLocale()) as Locale;
-  const date = new Intl.DateTimeFormat(locale, {
-    timeZone: "Asia/Tashkent",
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-  const dayLabel = new Intl.DateTimeFormat(locale, {
-    timeZone: "Asia/Tashkent",
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
-  const hour = new Intl.DateTimeFormat(locale, {
-    timeZone: "Asia/Tashkent",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+
   // The teacher thinks in days, not in a flat list of timestamps.
   const days = new Map<string, Dashboard["slots"]>();
   for (const slot of slots.slice(0, 24)) {
-    const key = dayLabel.format(new Date(slot.starts_at));
+    const key = formatDayHeading(slot.starts_at, locale);
     const day = days.get(key);
     if (day) day.push(slot);
     else days.set(key, [slot]);
@@ -217,7 +207,7 @@ export async function TeacherDashboard({
               </div>
               <p>
                 <time dateTime={lesson.starts_at}>
-                  {date.format(new Date(lesson.starts_at))}
+                  {formatDateTime(lesson.starts_at, locale)}
                 </time>{" "}
                 · {t("booking.duration")}
               </p>
@@ -263,7 +253,7 @@ export async function TeacherDashboard({
                             )}
                           >
                             <Clock aria-hidden="true" className="size-4" />
-                            {hour.format(new Date(slot.starts_at))}
+                            {formatTime(slot.starts_at)}
                             <span className="sr-only">
                               {" "}
                               {t(

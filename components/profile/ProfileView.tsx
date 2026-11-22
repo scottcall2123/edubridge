@@ -5,6 +5,8 @@ import { Card, Avatar, Tag, PageHeader } from "@/components/ui";
 import { LocaleSelect } from "./LocaleSelect";
 import { earnedBadges } from "@/lib/badges";
 import type { loadProfile } from "@/lib/profile";
+import type { Locale } from "@/lib/i18n";
+import { formatDate, formatDateTime } from "@/lib/date-format";
 export async function ProfileView({
   profile,
   events,
@@ -13,18 +15,9 @@ export async function ProfileView({
   messages,
 }: Awaited<ReturnType<typeof loadProfile>>) {
   const t = await getTranslations(),
-    locale = await getLocale();
-  const date = (value: string) =>
-      new Intl.DateTimeFormat(locale, {
-        timeZone: "Asia/Tashkent",
-        dateStyle: "medium",
-      }).format(new Date(value)),
-    time = (value: string) =>
-      new Intl.DateTimeFormat(locale, {
-        timeZone: "Asia/Tashkent",
-        dateStyle: "medium",
-        timeStyle: "short",
-      }).format(new Date(value));
+    locale = (await getLocale()) as Locale;
+  const date = (value: string) => formatDate(value, locale),
+    time = (value: string) => formatDateTime(value, locale);
   const badges = earnedBadges(profile, questions, bookings);
   return (
     <main className="container space-y-8 py-8">

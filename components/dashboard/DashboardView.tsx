@@ -12,6 +12,8 @@ import { getLocale, getTranslations, getFormatter } from "next-intl/server";
 import type { loadDashboard } from "@/lib/dashboard";
 import { Card, Tag, Avatar, PageHeader, StatTile } from "@/components/ui";
 import { todayInFergana, weekPlan } from "@/lib/timetable";
+import { formatDateTime } from "@/lib/date-format";
+import type { Locale } from "@/lib/i18n";
 export async function DashboardView({
   profile,
   recent,
@@ -96,11 +98,7 @@ export async function DashboardView({
                     <p className="text-xs text-muted">
                       <time
                         dateTime={e.created_at}
-                        title={new Intl.DateTimeFormat(locale, {
-                          timeZone: "Asia/Tashkent",
-                          dateStyle: "medium",
-                          timeStyle: "short",
-                        }).format(new Date(e.created_at))}
+                        title={formatDateTime(e.created_at, locale as Locale)}
                       >
                         {format.relativeTime(new Date(e.created_at), now)}
                       </time>
