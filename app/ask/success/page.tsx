@@ -1,3 +1,4 @@
+import { PracticeProblems } from "@/components/practice/PracticeProblems";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -58,6 +59,7 @@ export default async function Success({
           </Link>
         </div>
       </Card>
+      {question.status === "solved_by_ai" && <PracticeProblems key={question.id} questionId={question.id} />}
     </main>
   );
 }

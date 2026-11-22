@@ -380,5 +380,16 @@
     "safety": "Namoyishdagi xavfsizlik modeli: kamera o‘chiq, dars yozib olinadi va ota-ona ko‘ra oladi.",
     "preview": "Dars qanday o‘tadi?",
     "remaining": "Qolgan vaqt"
+  },
+  "practice": {
+    "title": "Endi o‘zingiz sinab ko‘ring",
+    "hint": "Shu mavzuda yangi mashqlar oling. Har bir savol uchun ko‘pi bilan 3 ta yaratish urinishi bor.",
+    "aiLabel": "AI Ustoz yaratgan mashqlar",
+    "generate": "Mashqlar yaratish",
+    "again": "Yangi mashqlar",
+    "loading": "Mashqlar tayyorlanmoqda…",
+    "error": "Mashqlarni hozir yaratib bo‘lmadi. Qayta urinib ko‘ring.",
+    "limit": "Bu savol uchun mashq yaratish limiti tugadi.",
+    "reveal": "Javobni ko‘rsatish"
   }
 }
