@@ -353,5 +353,22 @@
     "openTimetable": "Open the timetable",
     "todayLessons": "Today's lessons",
     "nextLessons": "Next school day"
+  },
+  "lesson": {
+    "title": "Live lesson",
+    "subtitle": "See what a 15-minute online lesson could look like.",
+    "disclaimer": "This is a lesson demonstration. The MVP has no real video calling, recording or parent viewing.",
+    "camera": "Camera off",
+    "recording": "Recording",
+    "parent": "Parent can view",
+    "teacher": "Teacher",
+    "you": "You",
+    "teacherName": "Dilnoza Rahimova",
+    "youName": "Aziza Karimova",
+    "board": "Whiteboard",
+    "example": "Example of solving a quadratic equation",
+    "safety": "Demonstrated safety model: camera off, lesson recorded and viewable by a parent.",
+    "preview": "How does a lesson work?",
+    "remaining": "Time remaining"
   }
 }

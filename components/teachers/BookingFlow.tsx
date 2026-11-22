@@ -53,6 +53,7 @@ export function BookingFlow({
         <p className="font-bold text-accent">{t("teachers.freeForStudents")}</p>
         <p className="text-sm text-muted">{t("teachers.fundingPlan")}</p>
         <p>{t("booking.meeting")}</p>
+        <Link href="/jonli-dars" className="button button-secondary">{t("lesson.preview")}</Link>
         <div className="rounded-xl bg-sky-50 p-4">
           <p className="mb-3 text-sm text-muted">{t("booking.offlineNotice")}</p>
           <Button variant="secondary" onClick={() => setToast(true)}>

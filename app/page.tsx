@@ -102,6 +102,7 @@ export default async function Home() {
           </section>
           <section aria-labelledby="how-title" className="space-y-6">
             <h2 id="how-title">{t("landing.how")}</h2>
+            <Link href="/jonli-dars" className="inline-flex min-h-11 items-center font-bold text-accent">{t("lesson.preview")}</Link>
             <div className="grid gap-6 md:grid-cols-3">
               {steps.map(({ n, Icon }) => (
                 <Card key={n} className="relative space-y-4">

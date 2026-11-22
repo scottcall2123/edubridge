@@ -110,6 +110,30 @@
     opacity: 0.12;
   }
 }
+/* A repeating six-second demonstration; each reveal itself lasts 240ms. */
+@keyframes lesson-line {
+  0%, 2% { opacity: 0; transform: translateY(6px); }
+  6%, 94% { opacity: 1; transform: translateY(0); }
+  98%, 100% { opacity: 0; transform: translateY(0); }
+}
+@keyframes lesson-ring {
+  0%, 52% { opacity: 0; transform: scaleX(0.9); }
+  56%, 94% { opacity: 1; transform: scaleX(1); }
+  98%, 100% { opacity: 0; transform: scaleX(1); }
+}
+.lesson-board {
+  background: repeating-linear-gradient(to bottom, var(--c-surface) 0 35px, var(--c-line) 35px 36px);
+}
+.lesson-writing > li { animation: lesson-line 6s linear infinite; }
+.lesson-writing > li:nth-child(2) { animation-name: lesson-line-2; }
+.lesson-writing > li:nth-child(3) { animation-name: lesson-line-3; }
+.lesson-writing > li:nth-child(4) { animation-name: lesson-line-4; }
+.lesson-ring { animation: lesson-ring 6s linear infinite; }
+.lesson-audio > span { animation: motion-enter 240ms ease-out; }
+.lesson-audio > span:nth-child(even) { transform: translateY(-3px); }
+@keyframes lesson-line-2 { 0%, 17% { opacity: 0; transform: translateY(6px); } 21%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
+@keyframes lesson-line-3 { 0%, 32% { opacity: 0; transform: translateY(6px); } 36%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
+@keyframes lesson-line-4 { 0%, 47% { opacity: 0; transform: translateY(6px); } 51%, 94% { opacity: 1; transform: translateY(0); } 98%, 100% { opacity: 0; transform: translateY(0); } }
 /* Raw colours live here so a single attribute on <html> can repoint them.
    The theme below maps Tailwind's tokens onto these, so every utility and
    every rule in this file follows the mode with no duplicated styles. */

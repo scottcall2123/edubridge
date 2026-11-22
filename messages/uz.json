@@ -353,5 +353,22 @@
     "openTimetable": "Jadvalni ochish",
     "todayLessons": "Bugungi darslar",
     "nextLessons": "Keyingi dars kuni"
+  },
+  "lesson": {
+    "title": "Jonli dars",
+    "subtitle": "15 daqiqalik onlayn dars qanday o‘tishini ko‘ring.",
+    "disclaimer": "Bu dars namoyishi. MVP’da haqiqiy videoaloqa, dars yozuvi va ota-ona kuzatuvi mavjud emas.",
+    "camera": "Kamera o‘chiq",
+    "recording": "Yozilmoqda",
+    "parent": "Ota-ona ko‘ra oladi",
+    "teacher": "Ustoz",
+    "you": "Siz",
+    "teacherName": "Dilnoza Rahimova",
+    "youName": "Aziza Karimova",
+    "board": "Dars doskasi",
+    "example": "Kvadrat tenglamani yechish namunasi",
+    "safety": "Namoyishdagi xavfsizlik modeli: kamera o‘chiq, dars yozib olinadi va ota-ona ko‘ra oladi.",
+    "preview": "Dars qanday o‘tadi?",
+    "remaining": "Qolgan vaqt"
   }
 }
